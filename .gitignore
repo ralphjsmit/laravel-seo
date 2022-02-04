@@ -10,5 +10,7 @@ phpunit.xml
 phpstan.neon
 testbench.yaml
 vendor
+vendor.nosync
 node_modules
+node_modules.nosync
 .php-cs-fixer.cache

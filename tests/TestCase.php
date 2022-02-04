@@ -1,10 +1,10 @@
 <?php
 
-namespace RalphJSmit\SEO\Tests;
+namespace RalphJSmit\Laravel\SEO\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use RalphJSmit\SEO\SEOServiceProvider;
+use RalphJSmit\Laravel\SEO\LaravelSEOServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -20,7 +20,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            SEOServiceProvider::class,
+            LaravelSEOServiceProvider::class,
         ];
     }
 

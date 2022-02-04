@@ -1,4 +1,4 @@
-# Never about Laravel-SEO again!
+# Never worry about Laravel-SEO again!
 
 I noticed that there weren't many SEO-packages for Laravel and that available ones are quite complex to set up and were very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically.
 
@@ -56,6 +56,8 @@ class Post extends Model
     }
 }
 ```
+
+
 
 
 

@@ -4,15 +4,15 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
 use function Pest\Laravel\get;
 
-it('can display the description tag', function () {
-    config()->set('seo.fallback_description', 'This property represents the default SEO description of a website.');
+it('can display the fallback description tag', function () {
+    config()->set('seo.description.fallback', 'This property represents the default SEO description of a website.');
 
     get(route('seo.test-plain'))
         ->assertSee('<meta name="description" content="This property represents the default SEO description of a website.">', false);
 });
 
-it('will not display the description tag if there isn\t a description', function () {
-    config()->set('seo.fallback_description', null);
+it('will not display the description tag if there isn\'t a description', function () {
+    config()->set('seo.description.fallback', null);
 
     get(route('seo.test-plain'))
         ->assertDontSee('description');

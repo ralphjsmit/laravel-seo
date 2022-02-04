@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'site_name' => null,
+
     'title' => [
         /**
          * Use this setting to let the package automatically infer a title from the url, if no other title
@@ -18,10 +20,21 @@ return [
         'suffix' => '',
     ],
 
-    /**
-     * Use this setting to specify a fallback description, which will be used on places
-     * where we don't have a description set via an associated ->seo model or via
-     * the ->getDynamicSEOData() method.
-     */
-    'fallback_description' => null,
+    'description' => [
+        /**
+         * Use this setting to specify a fallback description, which will be used on places
+         * where we don't have a description set via an associated ->seo model or via
+         * the ->getDynamicSEOData() method.
+         */
+        'fallback' => null,
+    ],
+
+    'image' => [
+        /**
+         * Use this setting to specify a fallback image, which will be used on places where you
+         * don't have an image set via an associated ->seo model or via the ->getDynamicSEOData() method.
+         * This should be a path to an image. The url to the path is generated using the `secure_url()` function (`secure_url($yourProvidedPath)`).
+         */
+        'fallback' => null,
+    ],
 ];

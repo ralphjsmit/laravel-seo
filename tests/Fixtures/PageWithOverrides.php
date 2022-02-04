@@ -20,4 +20,9 @@ class PageWithOverrides extends Model
     {
         return new SEOData(...$this::$overrides);
     }
+
+    public function getSEOImageUrl(): string
+    {
+        return secure_asset('public/storage/images/test.jpg');
+    }
 }

@@ -14,3 +14,4 @@ vendor.nosync
 node_modules
 node_modules.nosync
 .php-cs-fixer.cache
+.DS_Store

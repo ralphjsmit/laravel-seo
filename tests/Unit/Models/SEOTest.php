@@ -81,7 +81,7 @@ it('can give the title of a page a suffix it was specified', function () {
     ]);
 
     expect($seo->prepareForUsage())
-        ->title->toBe('My page title | TestCases');
+        ->enableTitleSuffix->toBeTrue();
 });
 
 it('can disable the suffix in the page model', function () {
@@ -109,15 +109,3 @@ it('can disable the suffix in the page model dynamically via a function', functi
     expect($page->seo->prepareForUsage())
         ->title->toBe('My page title');
 });
-
-it('can use the config default for a custom override', function (string $defaultSiteValueFromConfig, $input) {
-    config()->set("seo.fallback_{$defaultSiteValueFromConfig}", $input);
-
-    $seo = Page::create()->addSEO()->seo;
-
-    expect($seo->prepareForUsage())
-        ->{$defaultSiteValueFromConfig}->toBe($input);
-})->with([
-    //    ['title', 'Default Website Title'],
-    ['description', 'Default Website Description'],
-]);

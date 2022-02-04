@@ -5,19 +5,19 @@ namespace RalphJSmit\Laravel\SEO\Tags;
 use RalphJSmit\Laravel\SEO\Support\MetaTag;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-class DescriptionTag extends MetaTag
+class ImageTag extends MetaTag
 {
     public static function initialize(?SEOData $SEOData): MetaTag|null
     {
-        $description = $SEOData?->description;
+        $image = $SEOData?->image;
 
-        if ( ! $description ) {
+        if ( ! $image ) {
             return null;
         }
 
         return new MetaTag(
-            name   : 'description',
-            content: trim($description)
+            name   : 'image',
+            content: trim($image)
         );
     }
 }

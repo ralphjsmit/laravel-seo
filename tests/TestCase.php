@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RalphJSmit\Laravel\SEO\LaravelSEOServiceProvider;
 
@@ -13,7 +14,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'RalphJSmit\\SEO\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'RalphJSmit\\Laravel\\SEO\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -28,9 +29,9 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-seo_table.php.stub';
-        $migration->up();
-        */
+        Schema::enableForeignKeyConstraints();
+
+        ( include __DIR__ . '/../database/migrations/create_seo_table.php.stub' )->up();
+        ( include __DIR__ . '/../tests/Fixtures/migrations/create_pages_table.php' )->up();
     }
 }

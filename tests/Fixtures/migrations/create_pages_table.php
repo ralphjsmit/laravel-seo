@@ -8,13 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('seo', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-
-            $table->morphs('model');
-
-            $table->longText('description')->nullable();
-            $table->string('title')->nullable();
 
             $table->timestamps();
         });

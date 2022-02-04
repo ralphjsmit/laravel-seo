@@ -32,7 +32,10 @@
         "psr-4": {
             "RalphJSmit\\Laravel\\SEO\\": "src",
             "RalphJSmit\\Laravel\\SEO\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

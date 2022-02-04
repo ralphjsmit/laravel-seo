@@ -12,7 +12,7 @@ class LaravelSEOServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-seo')
             ->hasConfigFile()
-            ->hasViews()
+            ->hasViews('seo')
             ->hasMigration('create_laravel-seo_table');
     }
 }

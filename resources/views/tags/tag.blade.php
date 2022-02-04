@@ -1,0 +1,1 @@
+<{{ $tag }}@foreach($attributes as $name => $value) {{ $name }}="{{ $value }}"@endforeach>

@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Tags\DescriptionTag;
 use RalphJSmit\Laravel\SEO\Tags\RobotsTags;
+use RalphJSmit\Laravel\SEO\Tags\TitleTag;
 
 class TagCollection extends Collection
 {
@@ -17,6 +18,7 @@ class TagCollection extends Collection
         $tags = collect([
             RobotsTags::initialize(),
             DescriptionTag::initialize($SEOData),
+            TitleTag::initialize($SEOData),
         ])->reject(fn (?Renderable $item) => $item === null);
 
         foreach ($tags as $tag) {

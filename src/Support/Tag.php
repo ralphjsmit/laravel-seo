@@ -13,7 +13,8 @@ abstract class Tag implements Renderable
     {
         return view("seo::tags.tag", [
             'tag' => $this->tag,
-            'attributes' => collect(get_object_vars($this))->except(['tag']),
+            'attributes' => collect(get_object_vars($this))->except(['tag', 'inner']),
+            'inner' => $this->inner ?? null,
         ]);
     }
 }

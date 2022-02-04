@@ -1,1 +1,1 @@
-<{{ $tag }}@foreach($attributes as $name => $value) {{ $name }}="{{ $value }}"@endforeach>
+<{{ $tag }}@foreach($attributes as $name => $value) {{ $name }}="{{ $value }}"@endforeach>@if($inner){{ $inner }}</{{ $tag }}>@endif

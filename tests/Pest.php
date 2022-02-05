@@ -14,5 +14,7 @@ uses(TestCase::class)
             Route::get('/seo/test-plain', fn () => (string) seo())->name('seo.test-plain');
             Route::get('/seo/{page}', fn (Page $page) => (string) seo()->for($page))->name('seo.test-page');
         });
+
+        Page::$overrides = [];
     })
     ->in(__DIR__);

@@ -53,8 +53,6 @@ class TagManager implements Renderable
     {
         $this->model = $model;
 
-        dump($this->model);
-
         // The tags collection is already initialized when constructing the manager. Here, we'll
         // initialize the collection again, but this time we pass the model to the initializer.
         // The initializes will pass the generated SEOData to all underlying initializers, ensuring that

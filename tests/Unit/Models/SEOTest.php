@@ -5,7 +5,6 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\PageWithoutTitleSuffixFunction;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\PageWithoutTitleSuffixProperty;
-use RalphJSmit\Laravel\SEO\Tests\Fixtures\PageWithOverrides;
 
 it('can morph a model to the SEO model', function () {
     $page = Page::create();
@@ -40,7 +39,7 @@ it('can add properties to a SEO model', function (string $property, string $inpu
 ]);
 
 it('can override certain SEO Data', function (string $overriddenProperty, string $input) {
-    $page = PageWithOverrides::create()->addSEO();
+    $page = Page::create()->addSEO();
 
     $page->seo->update(
         $defaults = [

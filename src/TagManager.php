@@ -28,6 +28,7 @@ class TagManager implements Renderable
             'description' => config('seo.description.fallback'),
             'image' => config('seo.image.fallback') ? config('seo.image.fallback') : null,
             'site_name' => config('seo.site_name'),
+            'author' => config('seo.author.fallback'),
         ];
 
         foreach ($defaults as $property => $defaultValue) {

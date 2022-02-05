@@ -37,4 +37,12 @@ return [
          */
         'fallback' => null,
     ],
+
+    'author' => [
+        /**
+         * Use this setting to specify a fallback author, which will be used on places where you
+         * don't have an author set via an associated ->seo model or via the ->getDynamicSEOData() method.
+         */
+        'fallback' => null,
+    ],
 ];

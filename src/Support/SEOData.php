@@ -9,6 +9,7 @@ class SEOData
     public function __construct(
         public ?string $title = null,
         public ?string $description = null,
+        public ?string $author = null,
         public ?string $image = null,
         public bool $enableTitleSuffix = true,
         public ?string $site_name = null,

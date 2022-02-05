@@ -27,8 +27,6 @@ class SEO extends Model
             $enableTitleSuffix = $this->model->enableTitleSuffix();
         } elseif ( property_exists($this->model, 'enableTitleSuffix') ) {
             $enableTitleSuffix = $this->model->enableTitleSuffix;
-        } else {
-            $enableTitleSuffix = true;
         }
 
         if ( method_exists($this->model, 'getSEOImageUrl') ) {
@@ -38,8 +36,9 @@ class SEO extends Model
         return new SEOData(
             title            : $overrides->title ?? $this->title,
             description      : $overrides->description ?? $this->description,
+            author           : $overrides->author ?? $this->author,
             image            : $image ?? $this->image,
-            enableTitleSuffix: $enableTitleSuffix,
+            enableTitleSuffix: $enableTitleSuffix ?? true,
             type             : $overrides->type ?? null,
             published_time   : $overrides->published_time ?? $this->model?->created_at ?? null,
             modified_time    : $overrides->modified_time ?? $this->model?->updated_at ?? null,

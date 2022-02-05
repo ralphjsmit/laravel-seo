@@ -19,6 +19,7 @@ class SEOData
         public ?Carbon $modified_time = null,
         public ?string $section = null,
         public ?array $tags = null,
+        public ?string $twitter_username = null,
     ) {}
 
     public function imageMeta(): ?ImageMeta

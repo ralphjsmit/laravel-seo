@@ -45,4 +45,12 @@ return [
          */
         'fallback' => null,
     ],
+
+    'twitter' => [
+        /**
+         * Use this setting to enter your username and include that with the Twitter Card tags.
+         * Enter the username like 'yourUserName', so without the '@'.
+         */
+        '@username' => null,
+    ],
 ];

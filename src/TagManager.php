@@ -29,6 +29,7 @@ class TagManager implements Renderable
             'image' => config('seo.image.fallback') ? config('seo.image.fallback') : null,
             'site_name' => config('seo.site_name'),
             'author' => config('seo.author.fallback'),
+            'twitter_username' => Str::of(config('seo.twitter.@username'))->start('@'),
         ];
 
         foreach ($defaults as $property => $defaultValue) {

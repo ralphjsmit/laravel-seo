@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Support;
 
 use Carbon\Carbon;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
 
 class SEOData
 {
@@ -20,10 +21,15 @@ class SEOData
         public ?string $section = null,
         public ?array $tags = null,
         public ?string $twitter_username = null,
+        public ?SchemaCollection $schema = null
     ) {}
 
     public function imageMeta(): ?ImageMeta
     {
-        return $this->imageMeta ??= new ImageMeta($this->image);
+        if ( $this->image ) {
+            return $this->imageMeta ??= new ImageMeta($this->image);
+        }
+
+        return null;
     }
 }

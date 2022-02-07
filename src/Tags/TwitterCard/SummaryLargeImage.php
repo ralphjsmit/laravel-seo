@@ -16,6 +16,22 @@ class SummaryLargeImage extends Collection implements Renderable
     {
         $collection = new static();
 
+        if ( $SEOData->imageMeta->width < 300 ) {
+            return $collection;
+        }
+
+        if ( $SEOData->imageMeta->height < 157 ) {
+            return $collection;
+        }
+
+        if ( $SEOData->imageMeta->width > 4096 ) {
+            return $collection;
+        }
+
+        if ( $SEOData->imageMeta->height > 4096 ) {
+            return $collection;
+        }
+
         $collection->push(new TwitterCardTag('card', 'summary_large_image'));
 
         if ( $SEOData->image ) {

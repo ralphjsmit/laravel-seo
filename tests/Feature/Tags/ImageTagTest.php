@@ -15,8 +15,6 @@ beforeEach(function () {
 
     copy(__DIR__ . '/../../Fixtures/images/test-image.jpg', public_path('test/image.jpg'));
     copy(__DIR__ . '/../../Fixtures/images/test-image.jpg', storage_path('test/image.jpg'));
-
-    dump(public_path('test/image.jpg'));
 });
 
 it('will not render the default image if that was disabled', function () {

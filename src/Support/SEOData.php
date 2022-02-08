@@ -14,15 +14,16 @@ class SEOData
         public ?string $image = null,
         public ?string $url = null,
         public bool $enableTitleSuffix = true,
-        public ?string $site_name = null,
         public ?ImageMeta $imageMeta = null,
-        public ?string $type = 'website',
         public ?Carbon $published_time = null,
         public ?Carbon $modified_time = null,
         public ?string $section = null,
         public ?array $tags = null,
         public ?string $twitter_username = null,
         public ?SchemaCollection $schema = null,
+        public ?string $type = 'website',
+        public ?string $site_name = null,
+        public ?string $favicon = null,
     ) {}
 
     public function imageMeta(): ?ImageMeta

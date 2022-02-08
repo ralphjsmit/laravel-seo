@@ -8,6 +8,7 @@ use RalphJSmit\Laravel\SEO\Support\SchemaTagCollection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Tags\AuthorTag;
 use RalphJSmit\Laravel\SEO\Tags\DescriptionTag;
+use RalphJSmit\Laravel\SEO\Tags\FaviconTag;
 use RalphJSmit\Laravel\SEO\Tags\ImageTag;
 use RalphJSmit\Laravel\SEO\Tags\OpenGraphTags;
 use RalphJSmit\Laravel\SEO\Tags\RobotsTags;
@@ -26,6 +27,7 @@ class TagCollection extends Collection
             AuthorTag::initialize($SEOData),
             TitleTag::initialize($SEOData),
             ImageTag::initialize($SEOData),
+            FaviconTag::initialize($SEOData),
             OpenGraphTags::initialize($SEOData),
             TwitterCardTags::initialize($SEOData),
             SchemaTagCollection::initialize($SEOData, $SEOData->schema),

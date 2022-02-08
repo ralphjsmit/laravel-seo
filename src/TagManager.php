@@ -31,6 +31,7 @@ class TagManager implements Renderable
             'site_name' => config('seo.site_name'),
             'author' => config('seo.author.fallback'),
             'twitter_username' => Str::of(config('seo.twitter.@username'))->start('@'),
+            'favicon' => config('seo.favicon'),
         ];
 
         foreach ($defaults as $property => $defaultValue) {
@@ -47,6 +48,10 @@ class TagManager implements Renderable
             $SEOData->imageMeta();
 
             $SEOData->image = secure_url($SEOData->image);
+        }
+
+        if ( $SEOData->favicon && ! filter_var($SEOData->favicon, FILTER_VALIDATE_URL) ) {
+            $SEOData->favicon = secure_url($SEOData->favicon);
         }
 
         foreach (SEOManager::getSEODataTransformers() as $SEODataTransformer) {

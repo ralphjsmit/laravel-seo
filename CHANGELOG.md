@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.2.0 - 2022-02-08
+
+- Add articleBody
+
 ## 0.1.3 - 2022-02-08
 
 - Fix migration name

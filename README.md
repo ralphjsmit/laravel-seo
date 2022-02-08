@@ -2,7 +2,15 @@
 
 Currently there aren't that many SEO-packages for Laravel and the available ones are quite complex to set up and very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically and they almost do not work out of the box.
 
-This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with.
+This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with. It can generate:
+
+1. Robots tag
+2. Title tag (with site-wide suffix)
+3. Meta tags (author, description, image, etc.)
+4. OpenGraph Tags (FaceBook, LinkedIn, etc.)
+5. Twitter Tags
+6. Structured data (Article and Breadcrumbs)
+7. Favicon
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, only then for SEO. I'm sure it will be very helpful for you, as it's usually best to SEO attention right from the beginning.
 

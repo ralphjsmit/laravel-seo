@@ -245,6 +245,8 @@ This package can also **generate structured data** for you (also called schema m
 1. `Article`
 2. `BreadcrumbList`
 
+After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
+
 However, you can easily send me a (draft) PR with your requested types and I'll (most probably) add them to the package.
 
 ### Article schema markup

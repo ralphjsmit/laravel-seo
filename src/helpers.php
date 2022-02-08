@@ -1,10 +1,17 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use RalphJSmit\Laravel\SEO\TagManager;
 
 if ( ! function_exists('seo') ) {
-    function seo(): TagManager
+    function seo(Model $model = null): TagManager
     {
-        return app(TagManager::class);
+        $tagManager = app(TagManager::class);
+
+        if ( $model ) {
+            $tagManager->for($model);
+        }
+
+        return $tagManager;
     }
 }

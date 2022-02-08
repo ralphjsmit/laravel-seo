@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * Use this setting to specify the site name that will be used in OpenGraph tags.
+     */
     'site_name' => null,
 
     'title' => [

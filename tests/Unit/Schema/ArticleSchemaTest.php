@@ -77,6 +77,7 @@ it('can add multiple authors to Schema Markup: Article', function () {
             ],
             'description' => 'Description',
             'image' => 'https://example.com/image.jpg',
+            'articleBody' => '<p>Test</p>',
             'alternativeHeadline' => 'My alternative headline',
         ]) . '</script>'
     );

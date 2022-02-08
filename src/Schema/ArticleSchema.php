@@ -16,6 +16,7 @@ class ArticleSchema extends Schema
     public ?string $image = null;
     public string $type = 'Article';
     public ?string $url = null;
+    public ?string $articleBody = null;
 
     public function addAuthor(string $authorName): static
     {
@@ -49,6 +50,7 @@ class ArticleSchema extends Schema
             'image' => 'image',
             'datePublished' => 'published_time',
             'dateModified' => 'modified_time',
+            'articleBody' => 'articleBody',
         ];
 
         foreach ($properties as $markupProperty => $SEODataProperty) {
@@ -81,6 +83,7 @@ class ArticleSchema extends Schema
             ->when($this->authors, fn (Collection $collection): Collection => $collection->put('author', $this->authors))
             ->when($this->description, fn (Collection $collection): Collection => $collection->put('description', $this->description))
             ->when($this->image, fn (Collection $collection): Collection => $collection->put('image', $this->image))
+            ->when($this->articleBody, fn (Collection $collection): Collection => $collection->put('articleBody', $this->articleBody))
             ->pipeThrough($this->markupTransformers)
             ->toJson();
     }

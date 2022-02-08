@@ -40,12 +40,13 @@ class SEO extends Model
             image            : $image ?? ( $overrides->image ?? $this->image ),
             url              : $overrides->url ?? null,
             enableTitleSuffix: $enableTitleSuffix ?? true,
-            type             : $overrides->type ?? null,
             published_time   : $overrides->published_time ?? ( $this->model?->created_at ?? null ),
             modified_time    : $overrides->modified_time ?? ( $this->model?->updated_at ?? null ),
+            articleBody      : $overrides->articleBody ?? null,
             section          : $overrides->section ?? null,
             tags             : $overrides->tags ?? null,
             schema           : $overrides->schema ?? null,
+            type             : $overrides->type ?? null,
         );
     }
 }

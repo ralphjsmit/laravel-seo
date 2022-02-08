@@ -17,6 +17,7 @@ class SEOData
         public ?ImageMeta $imageMeta = null,
         public ?Carbon $published_time = null,
         public ?Carbon $modified_time = null,
+        public ?string $articleBody = null,
         public ?string $section = null,
         public ?array $tags = null,
         public ?string $twitter_username = null,

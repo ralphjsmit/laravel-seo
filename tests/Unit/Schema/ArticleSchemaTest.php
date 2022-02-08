@@ -13,6 +13,7 @@ beforeEach(function () {
         url           : 'https://example.com/test',
         published_time: now()->subDays(3),
         modified_time : now(),
+        articleBody   : '<p>Test</p>',
     );
 });
 
@@ -38,6 +39,7 @@ it('can construct Schema Markup: Article', function () {
                     ],
                     'description' => 'Description',
                     'image' => 'https://example.com/image.jpg',
+                    'articleBody' => '<p>Test</p>',
                 ]) . '</script>'
         );
 });

@@ -87,6 +87,8 @@ return [
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
      * so make sure to make the favicon accessibly from the `public` folder.
+     *
+     * You can use the following file-types: ico, png, gif, jpeg, svg.
      */
     'favicon' => null,
 

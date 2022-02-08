@@ -4,6 +4,7 @@ namespace RalphJSmit\Laravel\SEO\Support;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 
 abstract class Tag implements Renderable
 {
@@ -20,11 +21,10 @@ abstract class Tag implements Renderable
         ]);
     }
 
-    public function collectAttributes(): array
+    public function collectAttributes(): Collection
     {
         return collect($this->attributes ?? get_object_vars($this))
             ->except(['tag', 'inner', 'attributesPipeline'])
-            ->pipeThrough($this->attributesPipeline)
-            ->all();
+            ->pipeThrough($this->attributesPipeline);
     }
 }

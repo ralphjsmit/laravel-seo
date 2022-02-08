@@ -34,8 +34,6 @@ class BreadcrumbListSchema extends Schema
             '@type' => $this->type,
             'itemListElement' => $this->breadcrumbs
                 ->reduce(function (Collection $carry, string $url, string $pagename): Collection {
-                    dump($url);
-
                     return $carry->push([
                         '@type' => 'ListItem',
                         'position' => $carry->count() + 1,

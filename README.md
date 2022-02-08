@@ -1,8 +1,8 @@
 # Never worry about SEO in Laravel again!
 
-I noticed that there weren't many SEO-packages for Laravel and that available ones are quite complex to set up and were very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically.
+Currently there aren't that many SEO-packages for Laravel and the available ones are quite complex to set up and very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically and they almost do not work out of the box.
 
-I wanted to provide a solution that allows generates valid and useful meta tags straight out-of-the-box, with limited initial configuration, whilst still providing a simple, but powerful API to work with.
+This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with.
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, only then for SEO. I'm sure it will be very helpful for you, as it's usually best to SEO attention right from the beginning.
 
@@ -31,7 +31,7 @@ It will render the SEO tags directly on your page:
 </head>
 ```
 
-It even allows you to dynamically retrieve SEO data from your Model, without having to save it manually to the SEO model. The below code will require zero additional work from you or from your users:
+It even allows you to **dynamically retrieve SEO data from your model**, without having to save it manually to the SEO model. The below code will require zero additional work from you or from your users:
 
 ```php
 class Post extends Model
@@ -67,15 +67,17 @@ php artisan vendor:publish --tag="seo-config"
 
 Next, go to the newly published config file in `config/seo.php` and make sure that all the settings are correct. Those settings are all sort of default values, which you'll only need to set once.
 
-Now, add the following Blade-code on every page where you want the SEO-tags to appear:
+Now, add the following **Blade-code on every page** where you want the SEO-tags to appear:
 
 ```blade
 {{ seo() }}
 ```
 
-This will render a lot of sensible tags by default, already greatly improving your SEO. It will also render things like the `<title>` tag, so you don't have to render that manually.
+This will render a **lot of sensible tags by default**, already **greatly improving your SEO**. It will also render things like the `<title>` tag, so you don't have to render that manually.
 
-To really profit from this package, you can associate an Eloquent model with a SEO-model. This will allow you to dynamically retrieve SEO data from your model and this package will generate as much tags as possible for you. To associate an Eloquent model with a SEO-model, add the `HasSEO` trait to your model:
+To really profit from this package, you can **associate an Eloquent model with a SEO-model**. This will allow you to **dynamically fetch SEO data from your model** and this package will generate as much tags as possible for you, based on that data.
+
+To associate an Eloquent model with a SEO-model, add the `HasSEO` trait to your model:
 
 ```php
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
@@ -97,7 +99,7 @@ $post = Post::find(1);
 $seo = $post->seo;
 ```
 
-On the SEO model, you may update the following properties:
+On the SEO model, you may **update the following properties**:
 
 1. `title`: this will be used for the `<title>` tag and all the related tags (OpenGraph, Twitter, etc.)
 2. `description`: this will be used for the `<meta>` description tag and all the related tags (OpenGraph, Twitter, etc.)
@@ -113,7 +115,7 @@ $post->seo->update([
 ]);
 ```
 
-However, it can be a bit cumbersome to manually update the SEO-model every time you make a change. That's why I provided the `getDynamicSEOData()` method, which you can use to dynamically fetch the correct data from your own model and pass it to the SEO model:
+However, it can be a **bit cumbersome to manually update** the SEO-model every time you make a change. That's why I provided the `getDynamicSEOData()` method, which you can use to dynamically fetch the correct data from your own model and pass it to the SEO model:
 
 ```php
 public function getDynamicSEOData(): SEOData
@@ -149,9 +151,21 @@ Finally, you should update your Blade file, so that it can receive your model wh
 {{ seo($page ?? null) }}
 ```
 
+The following order is used when generating the tags (higher overwrites the lower):
+
+1. Any overwrites from the `SEOManager::SEODataTransformer($closure)` (see below)
+2. Data from the `getDynamicSEOData()` method
+3. Data from the associated SEO model (`$post->seo`)
+4. Default data from the `config/seo.php` file
+
 ## Generating JSON-LD structured data
 
-This package can also generate structured data for your. At the moment only the `Article` and `BreadcrumbList` types are supported. However, you can easily send me a (draft) PR with your requested types and I'll probably add them to the package.
+This package can also **generate structured data** for you (also called schema markup). At the moment we support the following types:
+
+1. `Article`
+2. `BreadcrumbList`
+
+However, you can easily send me a (draft) PR with your requested types and I'll (most probably) add them to the package.
 
 ### Article schema markup
 
@@ -183,13 +197,11 @@ You can completely customize the schema markup by using the `->markup()` method 
 ```php
 use Illuminate\Support\Collection;
 
-SchemaCollection::initialize()->addArticle(
-    function(ArticleSchema $article): ArticleSchema {
-        return $article->markup(function(Collection $markup): Collection {
-            return $markup->put('alternativeHeadline', $this->tagline);
-        });
-    }
-);
+SchemaCollection::initialize()->addArticle(function(ArticleSchema $article): ArticleSchema {
+    return $article->markup(function(Collection $markup): Collection {
+        return $markup->put('alternativeHeadline', $this->tagline);
+    });
+});
 ```
 
 At this point, I'm just unable to fluently support every possible version of the structured, so this is the perfect way to add an additional property to the output!
@@ -222,21 +234,23 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 
 ## Advanced usage
 
-Sometimes you may have advanced needs, that require you apply your own logic to the `SEOData` class, just before it is used to generate the tags. To accomplish this, you can use the `SEODataTransformer()` function on the `SEOManager` facade to register one or multiple closures that will be able to modify the `SEOData` instance at the last moment:
+Sometimes you may have advanced needs, that require you to apply your own logic to the `SEOData` class, just before it is used to generate the tags.
+
+To accomplish this, you can use the `SEODataTransformer()` function on the `SEOManager` facade to register one or multiple closures that will be able to modify the `SEOData` instance at the last moment:
 
 ```php
 // In the `boot()` method of a service provider somewhere
 use RalphJSmit\Laravel\SEO\Facades\SEOManager;
 
 SEOManager::SEODataTransformer(function (SEOData $SEOData): void {
-    // This will change the title on every page. Do any logic you want here.
+    // This will change the title on *EVERY* page. Do any logic you want here, e.g. based on the current request.
     $SEOData->title = 'Transformed Title';
 });
 ```
 
 ### Modifying tags before they are rendered
 
-You can also register closures that can modify the collection of generated tags, right before they are rendered. This is useful if you want to add custom tags to the output, or if you want to modify the output of the tags.
+You can also **register closures that can modify the final collection of generated tags**, right before they are rendered. This is useful if you want to add custom tags to the output, or if you want to modify the output of the tags.
 
 ```php
 SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {
@@ -248,6 +262,12 @@ SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {
     return $tags;
 });
 ```
+
+## Roadmap
+
+I hope this package will be usefull to you! If you have any ideas or suggestions on how to make it more useful, please let me know (rjs@ralphjsmit.com) or via the issues.
+
+PRs are welcome, so feel free to fork and submit a pull request. I'll be happy to review your changes, think along and add them to the package.
 
 ## General
 

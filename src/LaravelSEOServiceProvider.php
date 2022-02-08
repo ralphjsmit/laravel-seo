@@ -15,4 +15,9 @@ class LaravelSEOServiceProvider extends PackageServiceProvider
             ->hasViews('seo')
             ->hasMigration('create_laravel-seo_table');
     }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton(SEOManager::class);
+    }
 }

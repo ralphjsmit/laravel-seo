@@ -59,7 +59,7 @@
                 "RalphJSmit\\SEO\\SEOServiceProvider"
             ],
             "aliases": {
-                "SEO": "RalphJSmit\\Laravel\\SEO\\Facades\\SEO"
+                "SEOManager": "RalphJSmit\\Laravel\\SEO\\Facades\\SEOManager"
             }
         }
     },

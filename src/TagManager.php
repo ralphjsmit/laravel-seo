@@ -5,6 +5,7 @@ namespace RalphJSmit\Laravel\SEO;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use RalphJSmit\Laravel\SEO\Facades\SEOManager;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class TagManager implements Renderable
@@ -48,6 +49,10 @@ class TagManager implements Renderable
             $SEOData->image = secure_url($SEOData->image);
         }
 
+        foreach (SEOManager::getSEODataTransformers() as $SEODataTransformer) {
+            $SEODataTransformer($SEOData);
+        }
+
         return $SEOData;
     }
 
@@ -75,9 +80,11 @@ class TagManager implements Renderable
 
     public function render(): string
     {
-        return $this->tags->reduce(function (string $carry, Renderable $item) {
-            return $carry .= Str::of($item->render())->trim()->trim(PHP_EOL);
-        }, '');
+        return $this->tags
+            ->pipeThrough(SEOManager::getTagTransformers())
+            ->reduce(function (string $carry, Renderable $item) {
+                return $carry .= Str::of($item->render())->trim()->trim(PHP_EOL);
+            }, '');
     }
 
     public function __toString(): string

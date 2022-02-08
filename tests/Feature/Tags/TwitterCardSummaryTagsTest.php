@@ -33,7 +33,6 @@ it('can correctly render the Twitter Card summary without the image', function (
 it('can correctly render the Twitter Card summary with the image on a Page', function (string $expectedCard, string $imagePath) {
     config()->set('seo.title.suffix', ' | Laravel SEO');
     config()->set('seo.description.fallback', 'Fallback description');
-    config()->set('seo.twitter.@username', 'ralphjsmit');
 
     $page = Page::create()->addSEO();
 
@@ -47,7 +46,7 @@ it('can correctly render the Twitter Card summary with the image on a Page', fun
         ->assertSee('<meta name="twitter:title" content="Test Page | Laravel SEO">', false)
         ->assertSee('<meta name="twitter:description" content="Fallback description">', false)
         ->assertSee('<meta name="twitter:image" content="' . secure_url($imagePath) . '">', false)
-        ->assertSee('<meta name="twitter:site" content="@ralphjsmit">', false);
+        ->assertDontSee('twitter:site'); // We should not display an empty '@' username.
 })->with([
     ['summary', 'images/twitter-1743x1743.jpg'],
     ['summary_large_image', 'images/twitter-3597x1799.jpg'],

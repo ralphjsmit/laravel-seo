@@ -12,6 +12,7 @@ class SEOData
         public ?string $description = null,
         public ?string $author = null,
         public ?string $image = null,
+        public ?string $url = null,
         public bool $enableTitleSuffix = true,
         public ?string $site_name = null,
         public ?ImageMeta $imageMeta = null,
@@ -21,7 +22,7 @@ class SEOData
         public ?string $section = null,
         public ?array $tags = null,
         public ?string $twitter_username = null,
-        public ?SchemaCollection $schema = null
+        public ?SchemaCollection $schema = null,
     ) {}
 
     public function imageMeta(): ?ImageMeta

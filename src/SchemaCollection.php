@@ -2,23 +2,38 @@
 
 namespace RalphJSmit\Laravel\SEO;
 
+use Closure;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
-use RalphJSmit\Laravel\SEO\Support\RenderableCollection;
+use RalphJSmit\Laravel\SEO\Schema\BreadcrumbList;
+use RalphJSmit\Laravel\SEO\Schema\BreadcrumbListSchema;
+use RalphJSmit\Laravel\SEO\Schema\Schema;
 
 class SchemaCollection extends Collection
 {
-    use RenderableCollection;
+    protected array $dictionary = [
+        'article' => ArticleSchema::class,
+        'breadcrumbs' => BreadcrumbListSchema::class,
+    ];
 
-    public function addArticle(): static
+    public array $markup = [];
+
+    public function addArticle(Closure $builder = null): static
     {
-        return $this->push(new ArticleSchema());
+        $this->markup[$this->dictionary['article']][] = $builder ?: fn (Schema $schema): Schema => $schema;
+
+        return $this;
+    }
+
+    public function addBreadcrumbs(Closure $builder = null): static
+    {
+        $this->markup[$this->dictionary['breadcrumbs']][] = $builder ?: fn (Schema $schema): Schema => $schema;
+
+        return $this;
     }
 
     public static function initialize(): static
     {
-        $collection = new static();
-
-        return $collection;
+        return new static();
     }
-}
+}                                  

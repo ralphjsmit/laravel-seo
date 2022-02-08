@@ -15,10 +15,16 @@ abstract class Tag implements Renderable
     {
         return view("seo::tags.tag", [
             'tag' => $this->tag,
-            'attributes' => collect(get_object_vars($this))
-                ->except(['tag', 'inner', 'attributesPipeline'])
-                ->pipeThrough($this->attributesPipeline),
+            'attributes' => $this->collectAttributes(),
             'inner' => $this->inner ?? null,
         ]);
+    }
+
+    public function collectAttributes(): array
+    {
+        return collect($this->attributes ?? get_object_vars($this))
+            ->except(['tag', 'inner', 'attributesPipeline'])
+            ->pipeThrough($this->attributesPipeline)
+            ->all();
     }
 }

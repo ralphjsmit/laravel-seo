@@ -5,9 +5,9 @@ Currently there aren't that many SEO-packages for Laravel and the available ones
 This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with. It can generate:
 
 1. Robots tag
-2. Title tag (with site-wide suffix)
+2. Title tag (with sitewide suffix)
 3. Meta tags (author, description, image, etc.)
-4. OpenGraph Tags (FaceBook, LinkedIn, etc.)
+4. OpenGraph Tags (Facebook, LinkedIn, etc.)
 5. Twitter Tags
 6. Structured data (Article and Breadcrumbs)
 7. Favicon

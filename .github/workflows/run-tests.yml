@@ -2,7 +2,7 @@ name: run-tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, laravel-9.x ]
   pull_request:
     branches: [ main ]
 

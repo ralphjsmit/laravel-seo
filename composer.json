@@ -56,7 +56,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RalphJSmit\\Laravel\\SEO\\SEOServiceProvider"
+                "RalphJSmit\\Laravel\\SEO\\LaravelSEOServiceProvider"
             ],
             "aliases": {
                 "SEOManager": "RalphJSmit\\Laravel\\SEO\\Facades\\SEOManager"

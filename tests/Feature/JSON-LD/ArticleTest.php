@@ -25,7 +25,7 @@ it('does not render by default the JSON-LD Schema markup: Article', function () 
 it('can correctly render the JSON-LD Schema markup: Article', function () {
     $page = Page::create([
         'created_at' => now()->subDays(2),
-    ])->addSeo();
+    ]);
 
     $page::$overrides = [
         'title' => 'Test title',

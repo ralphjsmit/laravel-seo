@@ -19,7 +19,7 @@ it('will not display the description tag if there isn\'t a description', functio
 });
 
 it('will display the description if the associated SEO model has a description', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'description' => 'My great description, set by a model on a per-page basis. ', // <-- Notice the space at the end, that one should be trimmed.

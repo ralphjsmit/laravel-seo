@@ -41,7 +41,7 @@ it('can correctly render OpenGraph tags for a post or page', function () {
 
     testTime()->freeze();
 
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'description' => 'My great description, set by the SEO model.',
@@ -76,7 +76,7 @@ it('can correctly render OpenGraph tags for a post or page with a few additional
 
     testTime()->freeze();
 
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'description' => 'My great description, set by the SEO model.',

@@ -34,7 +34,7 @@ it('can correctly render the Twitter Card summary with the image on a Page', fun
     config()->set('seo.title.suffix', ' | Laravel SEO');
     config()->set('seo.description.fallback', 'Fallback description');
 
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page::$overrides = [
         'title' => 'Test Page',
@@ -53,7 +53,7 @@ it('can correctly render the Twitter Card summary with the image on a Page', fun
 ]);
 
 it('will not render the Twitter Card summary_large_image for too large or small images', function (string $imagePath) {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page::$overrides = [
         'title' => 'Test Page',

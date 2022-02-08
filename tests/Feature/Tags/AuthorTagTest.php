@@ -19,7 +19,7 @@ it('will not display the author tag if there isn\'t a author', function () {
 });
 
 it('will display the author if the associated SEO model has a author', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'author' => 'Article Author ', // <-- Notice the space at the end, that one should be trimmed.
@@ -32,7 +32,7 @@ it('will display the author if the associated SEO model has a author', function 
 });
 
 it('can override the author', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'author' => 'Article Author ', // <-- Notice the space at the end, that one should be trimmed.

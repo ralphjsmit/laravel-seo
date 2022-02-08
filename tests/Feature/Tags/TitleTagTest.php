@@ -20,7 +20,7 @@ it('will infer the title from the url if that is allowed', function () {
 });
 
 it('will display the title if the associated SEO model has a title', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'title' => 'My great title, set by a model on a per-page basis. ', // <-- Notice the space at the end, that one should be trimmed.
@@ -36,7 +36,7 @@ it('will infer the title from the url if that is allowed and the model doesn\'t 
     config()->set('seo.title.infer_title_from_url', true);
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'title' => null,

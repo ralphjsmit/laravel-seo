@@ -18,7 +18,7 @@ it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function ()
 
     $page = Page::create([
         'created_at' => now()->subDays(2),
-    ])->addSeo();
+    ]);
 
     $page::$overrides = [
         'title' => 'Test article',

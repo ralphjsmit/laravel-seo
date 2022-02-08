@@ -9,13 +9,13 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\PageWithoutTitleSuffixProperty;
 it('can morph a model to the SEO model', function () {
     $page = Page::create();
 
-    $page->addSEO();
+    $page;
 
     expect($page->seo)->toBeInstanceOf(SEO::class);
 });
 
 it('can prepare the SEO for use on a page', function () {
-    $seo = Page::create()->addSEO()->seo;
+    $seo = Page::create()->seo;
 
     $export = $seo->prepareForUsage();
 
@@ -23,7 +23,7 @@ it('can prepare the SEO for use on a page', function () {
 });
 
 it('can add properties to a SEO model', function (string $property, string $input) {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->{$property} = $input;
     $page->push();
@@ -39,7 +39,7 @@ it('can add properties to a SEO model', function (string $property, string $inpu
 ]);
 
 it('can override certain SEO Data', function (string $overriddenProperty, string $input) {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update(
         $defaults = [
@@ -73,7 +73,7 @@ it('can override certain SEO Data', function (string $overriddenProperty, string
 it('can give the title of a page a suffix it was specified', function () {
     config()->set('seo.title.suffix', ' | TestCases');
 
-    $seo = Page::create()->addSEO()->seo;
+    $seo = Page::create()->seo;
 
     $seo->update([
         'title' => 'My page title',
@@ -86,7 +86,7 @@ it('can give the title of a page a suffix it was specified', function () {
 it('can disable the suffix in the page model', function () {
     config()->set('seo.title.suffix', ' | TestCases');
 
-    $page = PageWithoutTitleSuffixProperty::create()->addSEO();
+    $page = PageWithoutTitleSuffixProperty::create();
 
     $page->seo->update([
         'title' => 'My page title',
@@ -99,7 +99,7 @@ it('can disable the suffix in the page model', function () {
 it('can disable the suffix in the page model dynamically via a function', function () {
     config()->set('seo.title.suffix', ' | TestCases');
 
-    $page = PageWithoutTitleSuffixFunction::create()->addSEO();
+    $page = PageWithoutTitleSuffixFunction::create();
 
     $page->seo->update([
         'title' => 'My page title',

@@ -7,7 +7,7 @@ beforeEach(function () {
 });
 
 it('can determine the size of an image', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'image' => 'test-image.jpg',

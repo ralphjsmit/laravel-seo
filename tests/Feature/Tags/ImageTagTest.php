@@ -35,14 +35,14 @@ it('will render the default image', function (string $imagePath) {
 ]);
 
 it('will display the image url from a model', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     get(route('seo.test-page-image', ['imagepage' => $page]))
         ->assertSee('<meta name="image" content="' . secure_url('public/storage/test/image.jpg') . '">', false);
 })->skip('Currently almost not testable.');
 
 it('will display the image url if it came from a model', function () {
-    $page = Page::create()->addSEO();
+    $page = Page::create();
 
     $page->seo->update([
         'image' => 'test/image.jpg',

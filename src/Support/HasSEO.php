@@ -14,6 +14,11 @@ trait HasSEO
         return $this;
     }
 
+    protected static function bootHasSEO(): void
+    {
+        static::created(fn (self $model): self => $model->addSEO());
+    }
+
     public function seo(): MorphOne
     {
         return $this->morphOne(SEO::class, 'model');

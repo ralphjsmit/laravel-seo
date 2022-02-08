@@ -35,7 +35,7 @@ It will render the SEO tags directly on your page:
 <!DOCTYPE html>
 <html>
 <head>
-    {{ seo()->for($page) }}
+    {!! seo()->for($page) !!}
     
     {{-- No need to separately render a <title> tag or any other meta tags! --}}
 </head>
@@ -150,7 +150,7 @@ return [
 Now, add the following **Blade-code on every page** where you want the SEO-tags to appear:
 
 ```blade
-{{ seo() }}
+{!! seo() !!}
 ```
 
 This will render a **lot of sensible tags by default**, already **greatly improving your SEO**. It will also render things like the `<title>` tag, so you don't have to render that manually.
@@ -226,9 +226,9 @@ You are allowed to only override the properties you want and omit the other prop
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 
 ```blade
-{{ seo()->for($page) }}
+{!! seo()->for($page) !!}
 {{-- Or pass it directly to the `seo()` method: --}}
-{{ seo($page ?? null) }}
+{!! seo($page ?? null) !!}
 ```
 
 The following order is used when generating the tags (higher overwrites the lower):

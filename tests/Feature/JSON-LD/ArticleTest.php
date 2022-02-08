@@ -1,5 +1,6 @@
 <?php
 
+use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
@@ -29,7 +30,7 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
 
     $page::$overrides = [
         'title' => 'Test title',
-        'schema' => SchemaCollection::initialize()->addArticle(),
+        'schema' => SchemaCollection::initialize()->addArticle(fn (ArticleSchema $article): ArticleSchema => $article->addAuthor('Second author')),
         'image' => 'images/twitter-1743x1743.jpg',
         'author' => 'Ralph J. Smit',
     ];
@@ -49,8 +50,14 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
                 'dateUpdated' => now()->toIso8601String(),
                 'headline' => 'Test title',
                 'author' => [
-                    '@type' => 'Person',
-                    'name' => 'Ralph J. Smit',
+                    [
+                        '@type' => 'Person',
+                        'name' => 'Ralph J. Smit',
+                    ],
+                    [
+                        '@type' => 'Person',
+                        'name' => 'Second author',
+                    ],
                 ],
                 'image' => secure_url('images/twitter-1743x1743.jpg'),
             ]) . '</script>',

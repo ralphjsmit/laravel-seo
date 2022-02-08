@@ -1,3 +1,5 @@
+![laravel-seo](https://github.com/ralphjsmit/laravel-seo/blob/main/docs/images/seo.jpg)
+
 # Never worry about SEO in Laravel again!
 
 Currently there aren't that many SEO-packages for Laravel and the available ones are quite complex to set up and very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically and they almost do not work out of the box.

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.3.0 - 2022-02-10
+
+- Feat: separate title for the homepage.
+
 ## 0.2.0 - 2022-02-08
 
 - Add articleBody

@@ -7,5 +7,10 @@ test('the SEOManager singleton works as expected', function () {
     $managerB = app(SEOManager::class);
     $managerC = app(SEOManager::class);
 
-    expect($managerA)->toBe($managerB)->toBe($managerC);
+    expect($managerA)
+        ->toBe($managerB)
+        ->toBe($managerC);
+
+    $this->assertSame($managerA, $managerB);
+    $this->assertSame($managerA, $managerC);
 });

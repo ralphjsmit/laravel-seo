@@ -21,8 +21,6 @@ Here are a few examples of what you can do:
 ```php
 $post = Post::find(1);
 
-$post->addSEO();
-
 $post->seo->update([
    'title' => 'My great post',
    'description' => 'This great post will enhance your live.',
@@ -35,7 +33,7 @@ It will render the SEO tags directly on your page:
 <!DOCTYPE html>
 <html>
 <head>
-    {!! seo()->for($page) !!}
+    {!! seo()->for($post) !!}
     
     {{-- No need to separately render a <title> tag or any other meta tags! --}}
 </head>

@@ -10,7 +10,4 @@ test('the SEOManager singleton works as expected', function () {
     expect($managerA)
         ->toBe($managerB)
         ->toBe($managerC);
-
-    $this->assertSame($managerA, $managerB);
-    $this->assertSame($managerA, $managerC);
 });

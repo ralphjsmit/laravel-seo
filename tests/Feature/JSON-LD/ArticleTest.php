@@ -40,7 +40,7 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
         ->assertSee(
             '<script type="application/ld+json">' .
             json_encode([
-                '@context' => 'http://schema.org',
+                '@context' => 'https://schema.org',
                 '@type' => 'Article',
                 'mainEntityOfPage' => [
                     '@type' => 'WebPage',

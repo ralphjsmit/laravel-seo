@@ -13,7 +13,7 @@ abstract class Schema extends Tag
         'type' => 'application/ld+json',
     ];
 
-    public string $context = 'http://schema.org/';
+    public string $context = 'https://schema.org/';
 
     public Collection $markup;
     public array $markupTransformers = [];

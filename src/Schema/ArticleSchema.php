@@ -70,7 +70,7 @@ class ArticleSchema extends Schema
     public function generateInner(): string
     {
         return collect([
-            '@context' => 'http://schema.org',
+            '@context' => 'https://schema.org',
             '@type' => $this->type,
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',

@@ -39,7 +39,7 @@ it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function ()
         ->assertSee(
             '<script type="application/ld+json">' .
             json_encode([
-                '@context' => 'http://schema.org',
+                '@context' => 'https://schema.org',
                 '@type' => 'BreadcrumbList',
                 'itemListElement' => [
                     [

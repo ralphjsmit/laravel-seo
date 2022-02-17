@@ -30,7 +30,7 @@ class BreadcrumbListSchema extends Schema
     public function generateInner(): string
     {
         return collect([
-            '@context' => 'http://schema.org',
+            '@context' => 'https://schema.org',
             '@type' => $this->type,
             'itemListElement' => $this->breadcrumbs
                 ->reduce(function (Collection $carry, string $url, string $pagename): Collection {

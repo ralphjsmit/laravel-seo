@@ -24,7 +24,7 @@ it('can construct Schema Markup: BreadcrumbList', function () {
     expect((string) $articleSchema->render())->toBe(
         '<script type="application/ld+json">' .
         json_encode([
-            '@context' => 'http://schema.org',
+            '@context' => 'https://schema.org',
             '@type' => 'BreadcrumbList',
             'itemListElement' => [
                 [

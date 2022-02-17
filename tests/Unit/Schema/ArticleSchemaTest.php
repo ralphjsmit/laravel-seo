@@ -24,7 +24,7 @@ it('can construct Schema Markup: Article', function () {
         ->toBe(
             '<script type="application/ld+json">' .
             $string = json_encode([
-                    '@context' => 'http://schema.org',
+                    '@context' => 'https://schema.org',
                     '@type' => 'Article',
                     'mainEntityOfPage' => [
                         '@type' => 'WebPage',
@@ -56,7 +56,7 @@ it('can add multiple authors to Schema Markup: Article', function () {
     expect((string) $articleSchema->render())->toBe(
         '<script type="application/ld+json">' .
         json_encode([
-            '@context' => 'http://schema.org',
+            '@context' => 'https://schema.org',
             '@type' => 'Article',
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.4.0 - 2022-03-04
+
+- Add support for automatic `og:locale`
+
 ## 0.3.1 - 2022-02-17
 
 - Use `https` for `@context` reference to schema.org.

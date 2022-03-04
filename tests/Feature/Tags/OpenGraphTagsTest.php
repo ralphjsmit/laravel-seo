@@ -52,6 +52,7 @@ it('can correctly render OpenGraph tags for a post or page', function () {
         'title' => 'My great title',
         'description' => 'My great description, set by a model on a per-page basis.',
         'type' => 'article',
+        'locale' => 'nl',
     ];
 
     $page->refresh();
@@ -65,6 +66,7 @@ it('can correctly render OpenGraph tags for a post or page', function () {
         ->assertSee('<meta name="og:url" content="' . $url . '">', false)
         ->assertSee('<meta name="og:site_name" content="My Sitename">', false)
         ->assertSee('<meta name="og:type" content="article">', false)
+        ->assertSee('<meta name="og:locale" content="nl">', false)
         ->assertSee('<meta name="article:published_time" content="' . $page->created_at->toIso8601String() . '">', false)
         ->assertSee('<meta name="article:modified_time" content="' . $page->updated_at->toIso8601String() . '">', false);
 });

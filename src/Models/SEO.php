@@ -47,6 +47,7 @@ class SEO extends Model
             tags             : $overrides->tags ?? null,
             schema           : $overrides->schema ?? null,
             type             : $overrides->type ?? null,
+            locale           : $overrides->locale ?? null,
         );
     }
 }

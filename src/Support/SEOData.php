@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Support;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 
 class SEOData
@@ -25,7 +26,12 @@ class SEOData
         public ?string $type = 'website',
         public ?string $site_name = null,
         public ?string $favicon = null,
-    ) {}
+        public ?string $locale = null,
+    ) {
+        if ( $this->locale === null ) {
+            $this->locale = Str::of(app()->getLocale())->lower()->kebab();
+        }
+    }
 
     public function imageMeta(): ?ImageMeta
     {

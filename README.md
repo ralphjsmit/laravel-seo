@@ -227,6 +227,7 @@ You are allowed to only override the properties you want and omit the other prop
 10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
 12. 'schema' (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
+13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 

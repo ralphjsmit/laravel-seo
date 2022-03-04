@@ -4,6 +4,7 @@ namespace RalphJSmit\Laravel\SEO\Tags;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Support\MetaTag;
 use RalphJSmit\Laravel\SEO\Support\OpenGraphTag;
 use RalphJSmit\Laravel\SEO\Support\RenderableCollection;
@@ -24,6 +25,8 @@ class OpenGraphTags extends Collection implements Renderable
         if ( $SEOData->description ) {
             $collection->push(new OpenGraphTag('description', $SEOData->description));
         }
+
+        $collection->push(new OpenGraphTag('locale', Str::of(app()->getLocale())->lower()->kebab()));
 
         if ( $SEOData->image ) {
             $collection->push(new OpenGraphTag('image', $SEOData->image));

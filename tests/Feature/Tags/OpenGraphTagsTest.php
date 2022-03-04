@@ -28,6 +28,7 @@ it('can correctly render OpenGraph tags', function () {
         ->assertSee('<meta name="og:url" content="' . $url . '">', false)
         ->assertSee('<meta name="og:site_name" content="My Sitename">', false)
         ->assertSee('<meta name="og:type" content="website">', false)
+        ->assertSee('<meta name="og:locale" content="en">', false)
         ->assertDontSee('og:updated_time')
         ->assertDontSee('article:published_time')
         ->assertDontSee('article:modified_time');

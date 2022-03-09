@@ -32,10 +32,10 @@ class OpenGraphTags extends Collection implements Renderable
         if ( $SEOData->image ) {
             $collection->push(new OpenGraphTag('image', $SEOData->image));
 
-            if ( $meta = $SEOData->imageMeta() ) {
+            if ( $SEOData->imageMeta ) {
                 $collection
-                    ->when($meta->width, fn (self $collection): self => $collection->push(new OpenGraphTag('image:width', $meta->width)))
-                    ->when($meta->height, fn (self $collection): self => $collection->push(new OpenGraphTag('image:height', $meta->height)));
+                    ->when($SEOData->imageMeta->width, fn (self $collection): self => $collection->push(new OpenGraphTag('image:width', $SEOData->imageMeta->width)))
+                    ->when($SEOData->imageMeta->height, fn (self $collection): self => $collection->push(new OpenGraphTag('image:height', $SEOData->imageMeta->height)));
             }
         }
 

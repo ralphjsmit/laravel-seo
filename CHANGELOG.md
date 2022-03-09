@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.5.0 - 2022-03-09
+
+- Update implementation for handling of image paths: we now only accept public paths.
+
 ## 0.4.0 - 2022-03-04
 
 - Add support for automatic `og:locale`

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.5.2 - 2022-03-09
+
+- Add support for image sizes on Twitter cards
+
 ## 0.5.1 - 2022-03-09
 
 - Fix case where image size wasn't retrieved when it could be retrieved

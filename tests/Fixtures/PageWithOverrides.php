@@ -14,9 +14,4 @@ class PageWithOverrides extends Model
     protected $table = 'pages';
 
     public static array $overrides = [];
-
-    public function getSEOImageUrl(): string
-    {
-        return secure_asset('public/storage/images/test.jpg');
-    }
 }

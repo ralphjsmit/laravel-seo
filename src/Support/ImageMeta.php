@@ -2,15 +2,24 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use Illuminate\Support\Str;
+use PHPUnit\Runner\Exception;
 
 class ImageMeta
 {
-    public function __construct(string $imagePath)
-    {
-        $path = public_path(Str::of($imagePath)->after('public')->trim('/'));
+    public ?int $width = null;
+    public ?int $height = null;
 
-        [$width, $height] = getimagesize($path);
+    public function __construct(string $path)
+    {
+        $publicPath = public_path($path);
+
+        if ( ! is_file($publicPath) ) {
+            report(new Exception("Path {$publicPath} is not a file."));
+
+            return;
+        }
+
+        [$width, $height] = getimagesize($publicPath);
 
         $this->width = $width;
         $this->height = $height;

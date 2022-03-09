@@ -29,10 +29,6 @@ class SEO extends Model
             $enableTitleSuffix = $this->model->enableTitleSuffix;
         }
 
-        if ( method_exists($this->model, 'getSEOImageUrl') ) {
-            $image = $this->model->getSEOImageUrl();
-        }
-
         return new SEOData(
             title            : $overrides->title ?? $this->title,
             description      : $overrides->description ?? $this->description,

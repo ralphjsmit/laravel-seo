@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.5.3 - 2022-03-09
+
+- Add support for canonical URLs.
+- Refactor `$SEOData->url` resolution if we should get it from the current url.
+
 ## 0.5.2 - 2022-03-09
 
 - Add support for image sizes on Twitter cards

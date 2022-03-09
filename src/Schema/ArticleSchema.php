@@ -42,7 +42,7 @@ class ArticleSchema extends Schema
 
     public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
     {
-        $this->url = $SEOData->url ?? url()->current();
+        $this->url = $SEOData->url;
 
         $properties = [
             'headline' => 'title',

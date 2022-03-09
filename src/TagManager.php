@@ -54,7 +54,11 @@ class TagManager implements Renderable
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
 
-        if ( url()->current() === url('/') && ( $homepageTitle = config('seo.title.homepage_title') ) ) {
+        if ( ! $SEOData->url ) {
+            $SEOData->url = url()->current();
+        }
+
+        if ( $SEOData->url === url('/') && ( $homepageTitle = config('seo.title.homepage_title') ) ) {
             $SEOData->title = $homepageTitle;
         }
 

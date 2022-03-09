@@ -39,7 +39,7 @@ class OpenGraphTags extends Collection implements Renderable
             }
         }
 
-        $collection->push(new OpenGraphTag('url', url()->current()));
+        $collection->push(new OpenGraphTag('url', $SEOData->url));
 
         if ( $SEOData->site_name ) {
             $collection->push(new OpenGraphTag('site_name', $SEOData->site_name));

@@ -8,8 +8,6 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class FaviconTag extends LinkTag
 {
-    public string $rel = 'shortcut icon';
-
     public static function initialize(?SEOData $SEOData): static|null
     {
         $favicon = $SEOData?->favicon;
@@ -19,6 +17,7 @@ class FaviconTag extends LinkTag
         }
 
         return new static(
+            rel : 'shortcut icon',
             href: $favicon,
         );
     }

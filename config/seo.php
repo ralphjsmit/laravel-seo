@@ -7,6 +7,14 @@ return [
     'site_name' => null,
 
     /**
+     * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
+     * be added to the head of every page. There has been some debate whether this a good practice, but experts
+     * from Google and Yoast say that this is the best strategy.
+     * See https://yoast.com/rel-canonical/.
+     */
+    'canonical_link' => true,
+
+    /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
      * so make sure to make the favicon accessibly from the `public` folder.
      *

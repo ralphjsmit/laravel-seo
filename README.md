@@ -48,11 +48,13 @@ class Post extends Model
     
     public function getDynamicSEOData(): SEOData
     {
+        $pathToFeaturedImageRelativeToPublicPath = // ..;
+        
         // Override only the properties you want:
         return new SEOData(
             title: $this->title,
             description: $this->excerpt,
-            image: $this->getMedia('featured_image')->first()->getPath(),
+            image: $pathToFeaturedImageRelativeToPublicPath,
         );
     }
 }
@@ -83,6 +85,14 @@ return [
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
     'site_name' => null,
+    
+    /**
+     * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
+     * be added to the head of every page. There has been some debate whether this a good practice, but experts
+     * from Google and Yoast say that this is the best strategy.
+     * See https://yoast.com/rel-canonical/.
+     */
+    'canonical_link' => true,
 
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
@@ -152,7 +162,7 @@ return [
 ];
 ```
 
-Now, add the following **Blade-code on every page** where you want the SEO-tags to appear:
+Now, add the following **Blade-code on every page** where you want your SEO-tags to appear:
 
 ```blade
 {!! seo() !!}
@@ -196,7 +206,7 @@ $post = Post::find(1);
 
 $post->seo->update([
    'title' => 'My title for the SEO tag',
-   'image' => 'images/posts/1.jpg', // Will point to `/public/images/posts/1.jpg
+   'image' => 'images/posts/1.jpg', // Will point to `public_path('images/posts/1.jpg')`
 ]);
 ```
 
@@ -218,7 +228,7 @@ You are allowed to only override the properties you want and omit the other prop
 1. `title`
 2. `description`
 3. `author` (should be the author's name)
-4. `image` (should be the image path)
+4. `image` (should be the image path and be compatible with `$url = public_path($path)`)
 5. `url` (by default it will be `url()->current()`)
 6. `enableTitleSuffix` (should be `true` or `false`, this allows you to set a suffix in the `config/seo.php` file, which will be appended to every title)
 7. `site_name`

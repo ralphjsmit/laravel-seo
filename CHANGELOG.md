@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.6.0 - 2022-03-16
+
+- Add support for sitemap tags.
+
 ## 0.5.3 - 2022-03-09
 
 - Add support for canonical URLs.

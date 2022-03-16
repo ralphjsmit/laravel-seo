@@ -7,6 +7,17 @@ return [
     'site_name' => null,
 
     /**
+     * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
+     * you can use both a hardcoded url and a relative path. We recommend the later.
+     *
+     * Example: '/storage/sitemap.xml'
+     * Do not forget the slash at the start. This will tell the search engine that the path is relative
+     * to the root domain and not relative to the current URL. The `spatie/laravel-sitemap` package
+     * is a great package to generate sitemaps for your application.
+     */
+    'sitemap' => null,
+
+    /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
      * be added to the head of every page. There has been some debate whether this a good practice, but experts
      * from Google and Yoast say that this is the best strategy.

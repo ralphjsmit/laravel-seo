@@ -85,7 +85,18 @@ return [
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
     'site_name' => null,
-    
+
+    /**
+     * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
+     * you can use both a hardcoded url and a relative path. We recommend the later.
+     *
+     * Example: '/storage/sitemap.xml'
+     * Do not forget the slash at the start. This will tell the search engine that the path is relative
+     * to the root domain and not relative to the current URL. The `spatie/laravel-sitemap` package
+     * is a great package to generate sitemaps for your application.
+     */
+    'sitemap' => null,
+
     /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
      * be added to the head of every page. There has been some debate whether this a good practice, but experts
@@ -98,7 +109,7 @@ return [
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
      * so make sure to make the favicon accessibly from the `public` folder.
      *
-     * You can use the following file-types: ico, png, gif, jpeg, svg.
+     * You can use the following filetypes: ico, png, gif, jpeg, svg.
      */
     'favicon' => null,
 
@@ -117,7 +128,7 @@ return [
          * If you don't want a suffix, you should specify an empty string.
          */
         'suffix' => '',
-        
+
         /**
          * Use this setting to provide a custom title for the homepage. We will not use the suffix on the homepage,
          * so you'll need to add the suffix manually if you want that. If set to null, we'll determine the title

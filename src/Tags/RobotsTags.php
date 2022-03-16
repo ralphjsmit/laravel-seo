@@ -8,6 +8,7 @@ use RalphJSmit\Laravel\SEO\Support\LinkTag;
 use RalphJSmit\Laravel\SEO\Support\MetaTag;
 use RalphJSmit\Laravel\SEO\Support\RenderableCollection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
+use RalphJSmit\Laravel\SEO\Support\SitemapTag;
 
 class RobotsTags extends Collection implements Renderable
 {
@@ -21,6 +22,10 @@ class RobotsTags extends Collection implements Renderable
 
         if ( config('seo.canonical_link') ) {
             $collection->push(new LinkTag('canonical', $SEOData->url));
+        }
+
+        if ( $sitemap = config('seo.sitemap') ) {
+            $collection->push(new SitemapTag($sitemap));
         }
 
         return $collection;

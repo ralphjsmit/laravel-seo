@@ -78,7 +78,7 @@ class TagManager implements Renderable
         // The initializes will pass the generated SEOData to all underlying initializers, ensuring that
         // the tags are always fully up-to-date and no remnants from previous initializations are present.
         $this->tags = TagCollection::initialize(
-            $this->fillSEOData($this->model->seo->prepareForUsage())
+            $this->fillSEOData($this->model->seo?->prepareForUsage() ?? new SEOData())
         );
 
         return $this;

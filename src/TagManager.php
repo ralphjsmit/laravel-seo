@@ -78,7 +78,7 @@ class TagManager implements Renderable
         // The initializes will pass the generated SEOData to all underlying initializers, ensuring that
         // the tags are always fully up-to-date and no remnants from previous initializations are present.
         $this->tags = TagCollection::initialize(
-            $this->fillSEOData($this->model->seo?->prepareForUsage() ?? new SEOData())
+            $this->fillSEOData($this->prepareForUsage($this->model))
         );
 
         return $this;
@@ -103,5 +103,35 @@ class TagManager implements Renderable
     public function __toString(): string
     {
         return $this->render();
+    }
+
+    public function prepareForUsage(Model $model): SEOData
+    {
+        if ( method_exists($model, 'getDynamicSEOData') ) {
+            $overrides = $this->model->getDynamicSEOData();
+        }
+
+        if ( method_exists($model, 'enableTitleSuffix') ) {
+            $enableTitleSuffix = $model->enableTitleSuffix();
+        } elseif ( property_exists($model, 'enableTitleSuffix') ) {
+            $enableTitleSuffix = $model->enableTitleSuffix;
+        }
+
+        return new SEOData(
+            title            : $overrides->title ?? $model->seo?->title,
+            description      : $overrides->description ?? $model->seo?->description,
+            author           : $overrides->author ?? $model->seo?->author,
+            image            : $image ?? ( $overrides->image ?? $model->seo?->image ),
+            url              : $overrides->url ?? null,
+            enableTitleSuffix: $enableTitleSuffix ?? true,
+            published_time   : $overrides->published_time ?? ( $model->seo?->model?->created_at ?? null ),
+            modified_time    : $overrides->modified_time ?? ( $model->seo?->model?->updated_at ?? null ),
+            articleBody      : $overrides->articleBody ?? null,
+            section          : $overrides->section ?? null,
+            tags             : $overrides->tags ?? null,
+            schema           : $overrides->schema ?? null,
+            type             : $overrides->type ?? null,
+            locale           : $overrides->locale ?? null,
+        );
     }
 }

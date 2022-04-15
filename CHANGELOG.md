@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 0.6.1 - 2022-04-06
+
+- Fallback for models without ->seo.
+
 ## 0.6.0 - 2022-03-16
 
 - Add support for sitemap tags.

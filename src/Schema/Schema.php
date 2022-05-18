@@ -16,6 +16,7 @@ abstract class Schema extends Tag
     public string $context = 'https://schema.org/';
 
     public Collection $markup;
+
     public array $markupTransformers = [];
 
     public string $tag = 'script';

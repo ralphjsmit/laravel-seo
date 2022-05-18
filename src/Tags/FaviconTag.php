@@ -17,7 +17,7 @@ class FaviconTag extends LinkTag
         }
 
         return new static(
-            rel : 'shortcut icon',
+            rel: 'shortcut icon',
             href: $favicon,
         );
     }

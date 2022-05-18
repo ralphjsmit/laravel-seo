@@ -9,13 +9,21 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 class ArticleSchema extends Schema
 {
     public array $authors = [];
+
     public ?Carbon $datePublished = null;
+
     public ?Carbon $dateModified = null;
+
     public ?string $description = null;
+
     public ?string $headline = null;
+
     public ?string $image = null;
+
     public string $type = 'Article';
+
     public ?string $url = null;
+
     public ?string $articleBody = null;
 
     public function addAuthor(string $authorName): static

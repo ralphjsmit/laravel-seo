@@ -9,7 +9,7 @@ tab_width = 4
 ij_continuation_indent_size = 8
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
-ij_formatter_tags_enabled = false
+ij_formatter_tags_enabled = true
 ij_smart_tabs = false
 ij_visual_guides = none
 ij_wrap_on_typing = true
@@ -339,7 +339,7 @@ ij_shell_redirect_followed_by_space = false
 ij_shell_switch_cases_indented = false
 ij_shell_use_unix_line_separator = true
 
-[{*.cjs,*.js}]
+[{*.browsersync,*.cjs,*.js}]
 ij_continuation_indent_size = 4
 ij_smart_tabs = true
 ij_javascript_align_imports = false
@@ -604,7 +604,7 @@ ij_coffeescript_use_public_modifier = false
 ij_coffeescript_use_semicolon_after_statement = false
 ij_coffeescript_var_declaration_wrap = normal
 
-[{*.ctp,*.hphp,*.inc,*.module,*.php,*.php4,*.php5,*.phtml,FileTypeNotFound,php}]
+[{*.ctp,*.hphp,*.inc,*.module,*.php,*.php.stub,*.php4,*.php5,*.phtml,FileTypeNotFound,php}]
 max_line_length = 999
 ij_continuation_indent_size = 4
 ij_wrap_on_typing = false
@@ -622,7 +622,7 @@ ij_php_align_multiline_for = true
 ij_php_align_multiline_parameters = false
 ij_php_align_multiline_parameters_in_calls = false
 ij_php_align_multiline_ternary_operation = true
-ij_php_align_named_arguments = true
+ij_php_align_named_arguments = false
 ij_php_align_phpdoc_comments = false
 ij_php_align_phpdoc_param_names = false
 ij_php_anonymous_brace_style = next_line
@@ -638,11 +638,11 @@ ij_php_binary_operation_wrap = off
 ij_php_blank_lines_after_class_header = 0
 ij_php_blank_lines_after_function = 1
 ij_php_blank_lines_after_imports = 1
-ij_php_blank_lines_after_opening_tag = 0
+ij_php_blank_lines_after_opening_tag = 1
 ij_php_blank_lines_after_package = 1
 ij_php_blank_lines_around_class = 1
 ij_php_blank_lines_around_constants = 0
-ij_php_blank_lines_around_field = 0
+ij_php_blank_lines_around_field = 1
 ij_php_blank_lines_around_method = 1
 ij_php_blank_lines_before_class_end = 0
 ij_php_blank_lines_before_imports = 1
@@ -826,8 +826,8 @@ ij_php_version_weight = 28
 ij_php_while_brace_force = never
 ij_php_while_on_new_line = false
 
-[{*.har,*.jsb2,*.jsb3,*.json,.babelrc,.eslintrc,.stylelintrc,bowerrc,composer.lock,jest.config}]
-indent_size = 4
+[{*.har,*.jsb2,*.jsb3,*.json,.babelrc,.eslintrc,.prettierrc,.stylelintrc,bowerrc,composer.lock,jest.config}]
+ij_continuation_indent_size = 4
 ij_json_keep_blank_lines_in_code = 0
 ij_json_keep_indents_on_empty_lines = false
 ij_json_keep_line_breaks = true

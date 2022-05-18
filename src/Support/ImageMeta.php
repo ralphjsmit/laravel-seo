@@ -7,6 +7,7 @@ use PHPUnit\Runner\Exception;
 class ImageMeta
 {
     public ?int $width = null;
+
     public ?int $height = null;
 
     public function __construct(string $path)

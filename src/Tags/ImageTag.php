@@ -16,7 +16,7 @@ class ImageTag extends MetaTag
         }
 
         return new MetaTag(
-            name   : 'image',
+            name: 'image',
             content: trim($image)
         );
     }

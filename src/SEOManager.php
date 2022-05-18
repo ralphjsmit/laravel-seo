@@ -7,6 +7,7 @@ use Closure;
 class SEOManager
 {
     protected array $tagTransformers = [];
+
     protected array $SEODataTransformers = [];
 
     public function SEODataTransformer(Closure $transformer): static

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.0.1 - 2022-05-24
+
+– Fix incorrect import #9.
+
 ## 0.7.0 - 2022-04-15
 
 - Dynamic SEO model.

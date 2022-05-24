@@ -2,7 +2,6 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use PHPUnit\Runner\Exception;
 
 class ImageMeta
 {
@@ -15,7 +14,7 @@ class ImageMeta
         $publicPath = public_path($path);
 
         if ( ! is_file($publicPath) ) {
-            report(new Exception("Path {$publicPath} is not a file."));
+            report(new \Exception("Path {$publicPath} is not a file."));
 
             return;
         }

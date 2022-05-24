@@ -2,7 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use PHPUnit\Runner\Exception;
+use Exception;
 
 class ImageMeta
 {

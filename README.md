@@ -374,7 +374,7 @@ SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {
 
 ## Roadmap
 
-I hope this package will be usefull to you! If you have any ideas or suggestions on how to make it more useful, please let me know (rjs@ralphjsmit.com) or via the issues.
+I hope this package will be useful to you! If you have any ideas or suggestions on how to make it more useful, please let me know (rjs@ralphjsmit.com) or via the issues.
 
 PRs are welcome, so feel free to fork and submit a pull request. I'll be happy to review your changes, think along and add them to the package.
 

@@ -20,6 +20,6 @@ trait HasSEO
 
     public function seo(): MorphOne
     {
-        return $this->morphOne(config('seo.model'), 'model');
+        return $this->morphOne(config('seo.model'), 'model')->withDefault();
     }
 }

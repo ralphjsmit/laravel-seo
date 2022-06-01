@@ -11,6 +11,7 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 class TagManager implements Renderable
 {
     public Model $model;
+
     public TagCollection $tags;
 
     public function __construct()
@@ -27,7 +28,7 @@ class TagManager implements Renderable
         $defaults = [
             'title' => config('seo.title.infer_title_from_url') ? $this->inferTitleFromUrl() : null,
             'description' => config('seo.description.fallback'),
-            'image' => config('seo.image.fallback') ? config('seo.image.fallback') : null,
+            'image' => config('seo.image.fallback'),
             'site_name' => config('seo.site_name'),
             'author' => config('seo.author.fallback'),
             'twitter_username' => Str::of(config('seo.twitter.@username'))->start('@'),
@@ -62,11 +63,9 @@ class TagManager implements Renderable
             $SEOData->title = $homepageTitle;
         }
 
-        foreach (SEOManager::getSEODataTransformers() as $SEODataTransformer) {
-            $SEODataTransformer($SEOData);
-        }
-
-        return $SEOData;
+        return $SEOData->pipethrough(
+            SEOManager::getSEODataTransformers()
+        );
     }
 
     public function for(Model $model): static

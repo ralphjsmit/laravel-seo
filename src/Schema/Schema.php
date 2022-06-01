@@ -4,11 +4,14 @@ namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Closure;
 use Illuminate\Support\Collection;
+use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
 
 abstract class Schema extends Tag
 {
+    use Pipeable;
+
     public array $attributes = [
         'type' => 'application/ld+json',
     ];
@@ -27,9 +30,7 @@ abstract class Schema extends Tag
     ) {
         $this->initializeMarkup($SEOData, $markupBuilders);
 
-        foreach ($markupBuilders as $markupBuilder) {
-            $markupBuilder($this);
-        }
+        $this->pipeThrough($markupBuilders);
 
         $this->inner = $this->generateInner();
     }

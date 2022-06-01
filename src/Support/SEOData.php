@@ -4,10 +4,13 @@ namespace RalphJSmit\Laravel\SEO\Support;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 
 class SEOData
 {
+    use Pipeable;
+
     public function __construct(
         public ?string $title = null,
         public ?string $description = null,

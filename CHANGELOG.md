@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.0.4 - 2022-06-01
+
+– Fix: remove accidental `dump()`.
+
 ## 1.0.3 - 2022-06-01
 
 – Feat: support use of models without the related SEO-model in the database (#5).

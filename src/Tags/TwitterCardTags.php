@@ -20,11 +20,11 @@ class TwitterCardTags extends Collection implements Renderable
 
         // No generic image that spans multiple pages
         if ( $SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback')) ) {
-            if ( $SEOData->imageMeta->width - $SEOData->imageMeta->height - 20 < 0 ) {
+            if ( $SEOData->imageMeta?->width - $SEOData->imageMeta?->height - 20 < 0 ) {
                 $collection->push(Summary::initialize($SEOData));
             }
 
-            if ( $SEOData->imageMeta->width - 2 * $SEOData->imageMeta->height - 20 < 0 ) {
+            if ( $SEOData->imageMeta?->width - 2 * $SEOData->imageMeta?->height - 20 < 0 ) {
                 $collection->push(SummaryLargeImage::initialize($SEOData));
             }
         } else {

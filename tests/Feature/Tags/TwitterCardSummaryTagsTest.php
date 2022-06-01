@@ -54,6 +54,30 @@ it('can correctly render the Twitter Card summary with the image on a Page', fun
     ['summary_large_image', 'images/twitter-3597x1799.jpg', '3597', '1799'],
 ]);
 
+it('will not include the widths and heights of Twitter images if the image was overridden using a URL', function (string $expectedCard, string $imagePath, string $expectedWidth, string $expectedHeight) {
+    config()->set('seo.title.suffix', ' | Laravel SEO');
+    config()->set('seo.description.fallback', 'Fallback description');
+
+    $page = Page::create();
+
+    $page::$overrides = [
+        'title' => 'Test Page',
+        'image' => secure_url($imagePath),
+    ];
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta name="twitter:card" content="' . $expectedCard . '">', false)
+        ->assertSee('<meta name="twitter:title" content="Test Page | Laravel SEO">', false)
+        ->assertSee('<meta name="twitter:description" content="Fallback description">', false)
+        ->assertSee('<meta name="twitter:image" content="' . secure_url($imagePath) . '">', false)
+        ->assertDontSee('<meta name="twitter:image:width" content="' . $expectedWidth . '">', false)
+        ->assertDontSee('<meta name="twitter:image:height" content="' . $expectedHeight . '">', false)
+        ->assertDontSee('twitter:site'); // We should not display an empty '@' username.
+})->with([
+    ['summary', 'images/twitter-1743x1743.jpg', '1743', '1743'],
+    ['summary_large_image', 'images/twitter-3597x1799.jpg', '3597', '1799'],
+]);
+
 it('will not render the Twitter Card summary_large_image for too large or small images', function (string $imagePath) {
     $page = Page::create();
 

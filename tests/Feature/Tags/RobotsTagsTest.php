@@ -11,7 +11,7 @@ it('can display the Google robots tag, canonical URL and sitemap if allowed', fu
     get($url = route('seo.test-plain', ['name' => 'robots']))
         ->assertSee('<meta name="robots" content="max-snippet:-1,max-image-preview:large,max-video-preview:-1">', false)
         ->assertSee('<link rel="canonical" href="' . Str::before($url, '?name') . '">', false)
-        ->assertSee('<link rel="sitemap" href="/storage/sitemap.xml" type="application/xml" title="Sitemap">', false);
+        ->assertSee('<link rel="sitemap" href="/storage/sitemap.xml" title="Sitemap" type="application/xml">', false);
 });
 
 it('cannot display the canonical url if not allowed', function () {

@@ -31,6 +31,11 @@ abstract class Tag implements Renderable
     {
         return collect($this->attributes ?? get_object_vars($this))
             ->except(static::$reservedAttributes)
+            ->pipe(function (Collection $attributes) {
+                $reservedAttributes = $attributes->only('property', 'name', 'rel');
+
+                return $reservedAttributes->merge($attributes->except('property', 'name', 'rel')->sortKeys());
+            })
             ->pipeThrough($this->attributesPipeline);
     }
 }

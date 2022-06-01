@@ -24,10 +24,8 @@ abstract class Schema extends Tag
 
     public string $tag = 'script';
 
-    public function __construct(
-        SEOData $SEOData,
-        array $markupBuilders = [],
-    ) {
+    public function __construct(SEOData $SEOData, array $markupBuilders = [])
+    {
         $this->initializeMarkup($SEOData, $markupBuilders);
 
         $this->pipeThrough($markupBuilders);

@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.0.2 - 2022-06-01
+
+– Fix: OpenGraph specification
+– Fix: using the ->imageMeta with a custom override URL.
+
 ## 1.0.1 - 2022-05-24
 
 – Fix incorrect import #9.

@@ -13,7 +13,7 @@ class OpenGraphTag extends Tag
         public string $content,
     ) {
         $this->attributesPipeline[] = function (Collection $collection) {
-            return $collection->dump()->mapWithKeys(function ($value, $key) {
+            return $collection->mapWithKeys(function ($value, $key) {
                 if ( $key === 'property' ) {
                     $value = 'og:' . $value;
                 }

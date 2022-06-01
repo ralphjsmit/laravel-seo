@@ -8,6 +8,12 @@ use Illuminate\Support\Collection;
 
 abstract class Tag implements Renderable
 {
+    protected static array $reservedAttributes = [
+        'tag',
+        'inner',
+        'attributesPipeline',
+    ];
+
     public string $tag;
 
     public array $attributesPipeline = [];
@@ -24,7 +30,7 @@ abstract class Tag implements Renderable
     public function collectAttributes(): Collection
     {
         return collect($this->attributes ?? get_object_vars($this))
-            ->except(['tag', 'inner', 'attributesPipeline'])
+            ->except(static::$reservedAttributes)
             ->pipeThrough($this->attributesPipeline);
     }
 }

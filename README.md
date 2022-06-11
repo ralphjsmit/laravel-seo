@@ -351,11 +351,15 @@ To accomplish this, you can use the `SEODataTransformer()` function on the `SEOM
 // In the `boot()` method of a service provider somewhere
 use RalphJSmit\Laravel\SEO\Facades\SEOManager;
 
-SEOManager::SEODataTransformer(function (SEOData $SEOData): void {
+SEOManager::SEODataTransformer(function (SEOData $SEOData): SEOData {
     // This will change the title on *EVERY* page. Do any logic you want here, e.g. based on the current request.
     $SEOData->title = 'Transformed Title';
+    
+    return $SEOData;
 });
 ```
+
+> Make sure to return the `$SEOData` object in each closure.
 
 ### Modifying tags before they are rendered
 

@@ -265,6 +265,31 @@ The following order is used when generating the tags (higher overwrites the lowe
 3. Data from the associated SEO model (`$post->seo`)
 4. Default data from the `config/seo.php` file
 
+### Passing SEOData directly from the controller
+
+Another option is to pass a SEOData-object directly from the controller to the layout file, into the `seo()` function.
+
+```php
+use Illuminate\Contracts\View\View;
+
+class Homepage extends Controller
+{
+    public function index(): View
+    {
+        return view('project.frontend.page.homepage.index', [
+            'SEOData' => new SEOData(
+                title: 'Awesome News - My Project',
+                description: 'Lorem Ipsum',
+            ),
+        ]);
+    }
+}
+```
+
+```blade
+{!! seo($SEOData) !!}
+```
+
 ## Generating JSON-LD structured data
 
 This package can also **generate structured data** for you (also called schema markup). At the moment we support the following types:

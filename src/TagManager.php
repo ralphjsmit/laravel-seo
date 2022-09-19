@@ -12,6 +12,8 @@ class TagManager implements Renderable
 {
     public Model $model;
 
+    public SEOData $SEOData;
+
     public TagCollection $tags;
 
     public function __construct()
@@ -68,16 +70,26 @@ class TagManager implements Renderable
         );
     }
 
-    public function for(Model $model): static
+    public function for(Model|SEOData $source): static
     {
-        $this->model = $model;
+        if ( $source instanceof Model ) {
+            $this->model = $source;
+            unset($this->SEOData);
+        } elseif ( $source instanceof SEOData ) {
+            unset($this->model);
+            $this->SEOData = $source;
+        }
 
         // The tags collection is already initialized when constructing the manager. Here, we'll
         // initialize the collection again, but this time we pass the model to the initializer.
         // The initializes will pass the generated SEOData to all underlying initializers, ensuring that
         // the tags are always fully up-to-date and no remnants from previous initializations are present.
+        $SEOData = isset($this->model)
+            ? $this->model->seo?->prepareForUsage()
+            : $this->SEOData;
+
         $this->tags = TagCollection::initialize(
-            $this->fillSEOData($this->model->seo?->prepareForUsage() ?? new SEOData())
+            $this->fillSEOData($SEOData ?? new SEOData())
         );
 
         return $this;

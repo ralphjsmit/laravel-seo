@@ -18,6 +18,16 @@ it('can replace the title if we\'re on the homepage', function (?string $homepag
     ['Custom homepage title', 'Custom homepage title'],
 ]);
 
+test('can render the SEOData from an object that\'s directly passed in', function () {
+    $SEOData = new SEOData(
+        title: 'Awesome News - My Project',
+    );
+
+    $output = seo()->for($SEOData)->render();
+
+    expect($output)->toContain('Awesome News - My Project');
+});
+
 it('can pipe the SEOData through the transformer before putting it into the collection', function () {
     config()->set('seo.title.infer_title_from_url', true);
 

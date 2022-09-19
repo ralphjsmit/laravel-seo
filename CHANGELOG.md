@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.1.0 - 2022-09-19
+
+– Support passing SEOData directly from the controller to the layout file.
+
 ## 1.0.4 - 2022-06-01
 
 – Fix: remove accidental `dump()`.

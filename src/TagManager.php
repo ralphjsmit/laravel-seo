@@ -107,12 +107,17 @@ class TagManager implements Renderable
         return $this->tags
             ->pipeThrough(SEOManager::getTagTransformers())
             ->reduce(function (string $carry, Renderable $item) {
-                return $carry .= Str::of($item->render())->trim()->trim(PHP_EOL);
+                return $carry .= Str::of($item->render())->trim().PHP_EOL;
             }, '');
     }
 
     public function __toString(): string
     {
         return $this->render();
+    }
+
+    public function debug(): string
+    {
+        return nl2br(e($this->render()));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use RalphJSmit\Laravel\SEO\Tests\TestCase;

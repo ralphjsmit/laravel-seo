@@ -44,6 +44,7 @@ class SEO extends Model
             schema: $overrides->schema ?? null,
             type: $overrides->type ?? null,
             locale: $overrides->locale ?? null,
+            robots: $overrides->robots ?? $this->robots,
         );
     }
 }

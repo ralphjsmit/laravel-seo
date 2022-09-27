@@ -45,4 +45,11 @@ class SEOData
 
         return null;
     }
+
+    public function markAsNoindex(): static
+    {
+        $this->robots = 'noindex, nofollow';
+
+        return $this;
+    }
 }

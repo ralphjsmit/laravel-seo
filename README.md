@@ -12,6 +12,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 4. Twitter Tags
 5. Structured data (Article and Breadcrumbs)
 6. Favicon
+7. Robots tag
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, only then for SEO. I'm sure it will be very helpful for you, as it's usually best to SEO attention right from the beginning.
 
@@ -231,8 +232,8 @@ On the SEO model, you may **update the following properties**:
 3. `author`: this should be the name of the author and it will be used for the `<meta>` author tag and all the related tags (OpenGraph, Twitter, etc.)
 4. `image`: this should be the path to the image you want to use for the `<meta>` image tag and all the related tags (OpenGraph, Twitter, etc.). The url to the image is generated via the `secure_url()` function, so be sure to check that the image is publicly available and that you provide the right path.
 5. `robots`
-   - Overwrites the default robots value, which is set in the config. (See `'seo.robots.default'`).
-   - String like `noindex,nofollow` [(Specifications)](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag), which is added to `<meta name="robots">`
+    - Overwrites the default robots value, which is set in the config. (See `'seo.robots.default'`).
+    - String like `noindex,nofollow` [(Specifications)](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag), which is added to `<meta name="robots">`
 
 ```php
 $post = Post::find(1);
@@ -269,9 +270,9 @@ You are allowed to only override the properties you want and omit the other prop
 9. `modified_time` (should be a `Carbon` instance with the published time. By default this will be the `updated_at` property of your model)
 10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
-12. 'schema' (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
+12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
 13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
-14. `robots` (should be a string with the content value of the robots meta tag `nofollow,noindex`)
+14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 

@@ -33,6 +33,26 @@ return [
      */
     'canonical_link' => true,
 
+    'robots' => [
+        /**
+         * Use this setting to specify the default value of the robots meta tag. `<meta name="robots" content="noindex">`
+         * Overwrite it with the robots attribute of the SEOData object. `SEOData->robots = 'noindex, nofollow'`
+         * "max-snippet:-1" Use n chars (-1: Search engine chooses) as a search result snippet.
+         * "max-image-preview:large" Max size of a preview in search results.
+         * "max-video-preview:-1" Use max seconds (-1: There is no limit) as a video snippet in search results.
+         * See https://developers.google.com/search/docs/advanced/robots/robots_meta_tag
+         * Default: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+         */
+        'default' => 'max-snippet:-1,max-image-preview:large,max-video-preview:-1',
+
+        /**
+         * Force set the robots `default` value and make it impossible to overwrite it. (e.g. via SEOData->robots)
+         * Use case: You need to set `noindex, nofollow` for the entire website without exception.
+         * Default: false
+         */
+        'force_default' => false,
+    ],
+
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
      * so make sure to make the favicon accessibly from the `public` folder.

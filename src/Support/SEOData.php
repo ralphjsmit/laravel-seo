@@ -30,6 +30,7 @@ class SEOData
         public ?string $site_name = null,
         public ?string $favicon = null,
         public ?string $locale = null,
+        public ?string $robots = null,
     ) {
         if ( $this->locale === null ) {
             $this->locale = Str::of(app()->getLocale())->lower()->kebab();
@@ -43,5 +44,12 @@ class SEOData
         }
 
         return null;
+    }
+
+    public function markAsNoindex(): static
+    {
+        $this->robots = 'noindex, nofollow';
+
+        return $this;
     }
 }

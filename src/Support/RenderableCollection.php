@@ -12,7 +12,7 @@ trait RenderableCollection
         return $this->reduce(function (string $carry, Renderable $item): string {
             return $carry .= Str::of(
                 $item->render()
-            )->trim()->trim(PHP_EOL);
+            )->trim().PHP_EOL;;
         }, '');
     }
 }

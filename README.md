@@ -6,13 +6,13 @@ Currently there aren't that many SEO-packages for Laravel and the available ones
 
 This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with. It can generate:
 
-1. Robots tag
-2. Title tag (with sitewide suffix)
-3. Meta tags (author, description, image, etc.)
-4. OpenGraph Tags (Facebook, LinkedIn, etc.)
-5. Twitter Tags
-6. Structured data (Article and Breadcrumbs)
-7. Favicon
+1. Title tag (with sitewide suffix)
+2. Meta tags (author, description, image, robots, etc.)
+3. OpenGraph Tags (Facebook, LinkedIn, etc.)
+4. Twitter Tags
+5. Structured data (Article and Breadcrumbs)
+6. Favicon
+7. Robots tag
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, only then for SEO. I'm sure it will be very helpful for you, as it's usually best to SEO attention right from the beginning.
 
@@ -104,6 +104,26 @@ return [
      * See https://yoast.com/rel-canonical/.
      */
     'canonical_link' => true,
+
+    'robots' => [
+        /**
+         * Use this setting to specify the default value of the robots meta tag. `<meta name="robots" content="noindex">`
+         * Overwrite it with the robots attribute of the SEOData object. `SEOData->robots = 'noindex, nofollow'`
+         * "max-snippet:-1" Use n chars (-1: Search engine chooses) as a search result snippet.
+         * "max-image-preview:large" Max size of a preview in search results.
+         * "max-video-preview:-1" Use max seconds (-1: There is no limit) as a video snippet in search results.
+         * See https://developers.google.com/search/docs/advanced/robots/robots_meta_tag
+         * Default: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+         */
+        'default' => 'max-snippet:-1,max-image-preview:large,max-video-preview:-1',
+
+        /**
+         * Force set the robots `default` value and make it impossible to overwrite it. (e.g. via SEOData->robots)
+         * Use case: You need to set `noindex, nofollow` for the entire website without exception.
+         * Default: false
+         */
+        'force_default' => false,
+    ],
 
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
@@ -211,6 +231,9 @@ On the SEO model, you may **update the following properties**:
 2. `description`: this will be used for the `<meta>` description tag and all the related tags (OpenGraph, Twitter, etc.)
 3. `author`: this should be the name of the author and it will be used for the `<meta>` author tag and all the related tags (OpenGraph, Twitter, etc.)
 4. `image`: this should be the path to the image you want to use for the `<meta>` image tag and all the related tags (OpenGraph, Twitter, etc.). The url to the image is generated via the `secure_url()` function, so be sure to check that the image is publicly available and that you provide the right path.
+5. `robots`
+    - Overwrites the default robots value, which is set in the config. (See `'seo.robots.default'`).
+    - String like `noindex,nofollow` [(Specifications)](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag), which is added to `<meta name="robots">`
 
 ```php
 $post = Post::find(1);
@@ -247,8 +270,9 @@ You are allowed to only override the properties you want and omit the other prop
 9. `modified_time` (should be a `Carbon` instance with the published time. By default this will be the `updated_at` property of your model)
 10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
-12. 'schema' (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
+12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
 13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
+14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 

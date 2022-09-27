@@ -20,7 +20,6 @@ it('can overwrite the robots tag "default" value with the robots attribute (SEOD
     $SEOData = new SEOData(
         robots: 'noindex,nofollow',
     );
-
     $SEODataOutput = (string) seo($SEOData);
 
     $this->assertStringContainsString('<meta name="robots" content="noindex,nofollow">', $SEODataOutput);
@@ -33,7 +32,6 @@ it('cannot overwrite the robots tag "default" value with the robots attribute if
     $SEOData = new SEOData(
         robots: 'noindex,nofollow',
     );
-
     $SEODataOutput = (string) seo($SEOData);
 
     $this->assertStringContainsString('<meta name="robots" content="max-snippet:-1">', $SEODataOutput);

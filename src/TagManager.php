@@ -115,9 +115,4 @@ class TagManager implements Renderable
     {
         return $this->render();
     }
-
-    public function debug(): string
-    {
-        return nl2br(e($this->render()));
-    }
 }

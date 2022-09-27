@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.2.0 - 2022-09-27
+
+– Add full support for robots tags.
+
 ## 1.1.0 - 2022-09-19
 
 – Support passing SEOData directly from the controller to the layout file.

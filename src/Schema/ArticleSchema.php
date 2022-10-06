@@ -85,7 +85,7 @@ class ArticleSchema extends Schema
                 '@id' => $this->url,
             ],
             'datePublished' => $this->datePublished->toIso8601String(),
-            'dateUpdated' => $this->dateModified->toIso8601String(),
+            'dateModified' => $this->dateModified->toIso8601String(),
             'headline' => $this->headline,
         ])
             ->when($this->authors, fn (Collection $collection): Collection => $collection->put('author', $this->authors))

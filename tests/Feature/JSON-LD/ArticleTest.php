@@ -47,7 +47,7 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
                     '@id' => route('seo.test-page', ['page' => $page]),
                 ],
                 'datePublished' => now()->subDays(2)->toIso8601String(),
-                'dateUpdated' => now()->toIso8601String(),
+                'dateModified' => now()->toIso8601String(),
                 'headline' => 'Test title',
                 'author' => [
                     [

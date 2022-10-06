@@ -6,14 +6,14 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 beforeEach(function () {
     $this->SEOData = new SEOData(
-        title         : 'Test',
-        description   : 'Description',
-        author        : 'Ralph J. Smit',
-        image         : 'https://example.com/image.jpg',
-        url           : 'https://example.com/test',
+        title: 'Test',
+        description: 'Description',
+        author: 'Ralph J. Smit',
+        image: 'https://example.com/image.jpg',
+        url: 'https://example.com/test',
         published_time: now()->subDays(3),
-        modified_time : now(),
-        articleBody   : '<p>Test</p>',
+        modified_time: now(),
+        articleBody: '<p>Test</p>',
     );
 });
 
@@ -31,7 +31,7 @@ it('can construct Schema Markup: Article', function () {
                         '@id' => 'https://example.com/test',
                     ],
                     'datePublished' => now()->subDays(3)->toIso8601String(),
-                    'dateUpdated' => now()->toIso8601String(),
+                    'dateModified' => now()->toIso8601String(),
                     'headline' => 'Test',
                     'author' => [
                         '@type' => 'Person',
@@ -63,7 +63,7 @@ it('can add multiple authors to Schema Markup: Article', function () {
                 '@id' => 'https://example.com/test',
             ],
             'datePublished' => now()->subDays(3)->toIso8601String(),
-            'dateUpdated' => now()->toIso8601String(),
+            'dateModified' => now()->toIso8601String(),
             'headline' => 'Test',
             'author' => [
                 [

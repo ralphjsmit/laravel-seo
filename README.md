@@ -14,7 +14,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 6. Favicon
 7. Robots tag
 
-If you're familiar with Spatie's media-library package, this package works in almost the same way, only then for SEO. I'm sure it will be very helpful for you, as it's usually best to SEO attention right from the beginning.
+If you're familiar with Spatie's media-library package, this package works in almost the same way, but then only for SEO. I'm sure it will be very helpful for you, as it's usually best for a website to have attention for SEO right from the beginning.
 
 Here are a few examples of what you can do:
 

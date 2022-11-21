@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.2.2 - 2022-11-21
+
+- Add `down()` method to migration.
+
 ## 1.2.1 - 2022-10-06
 
 – Fix issue with incorrect key in ArticleSchema.

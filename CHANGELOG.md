@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.2.1 - 2022-10-06
+
+– Fix issue with incorrect key in ArticleSchema.
+
 ## 1.2.0 - 2022-09-27
 
 – Add full support for robots tags.

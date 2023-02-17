@@ -34,7 +34,7 @@ It will render the SEO tags directly on your page:
 <html>
 <head>
     {!! seo()->for($post) !!}
-    
+
     {{-- No need to separately render a <title> tag or any other meta tags! --}}
 </head>
 ```
@@ -45,11 +45,11 @@ It even allows you to **dynamically retrieve SEO data from your model**, without
 class Post extends Model
 {
     use HasSEO;
-    
+
     public function getDynamicSEOData(): SEOData
     {
         $pathToFeaturedImageRelativeToPublicPath = // ..;
-        
+
         // Override only the properties you want:
         return new SEOData(
             title: $this->title,
@@ -70,7 +70,7 @@ composer require ralphjsmit/laravel-seo
 
 Publish the migration and configuration file:
 
-```
+```sh
 php artisan vendor:publish --tag="seo-migrations"
 php artisan vendor:publish --tag="seo-config"
 ```
@@ -211,7 +211,7 @@ use RalphJSmit\Laravel\SEO\Support\HasSEO;
 class Post extends Model
 {
     use HasSEO;
-    
+
     // ...
 ```
 
@@ -381,7 +381,7 @@ SchemaCollection::initialize()->addBreadcrumbs(
         });
     }
 );
-```          
+```
 
 This code will generate `BreadcrumbList` JSON-LD structured data with the following four pages:
 
@@ -403,7 +403,7 @@ use RalphJSmit\Laravel\SEO\Facades\SEOManager;
 SEOManager::SEODataTransformer(function (SEOData $SEOData): SEOData {
     // This will change the title on *EVERY* page. Do any logic you want here, e.g. based on the current request.
     $SEOData->title = 'Transformed Title';
-    
+
     return $SEOData;
 });
 ```
@@ -417,10 +417,10 @@ You can also **register closures that can modify the final collection of generat
 ```php
 SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {
     $tags = $tags->reject(fn(Tag $tag) => $tag instanceof OpenGraphTag);
-    
+
     $tags->push(new MetaTag(name: 'custom-tag', content: 'My custom content'));
     // Will render: <meta name="custom-tag" content="My custom content">
-    
+
     return $tags;
 });
 ```
@@ -440,9 +440,3 @@ PRs are welcome, so feel free to fork and submit a pull request. I'll be happy t
 🙌 If you want to contribute, please submit a pull request. All PRs will be fully credited. If you're unsure whether I'd accept your idea, feel free to contact me!
 
 🙋‍♂️ [Ralph J. Smit](https://ralphjsmit.com)
-
-
-
-
-
-

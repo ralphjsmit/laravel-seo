@@ -1,69 +1,70 @@
 {
-    "name": "ralphjsmit/laravel-seo",
-    "description": "A package to handle the SEO in any Laravel application, big or small.",
-    "keywords": [
+    "name" : "ralphjsmit/laravel-seo",
+    "description" : "A package to handle the SEO in any Laravel application, big or small.",
+    "keywords" : [
         "ralphjsmit",
         "laravel",
         "laravel-seo"
     ],
-    "homepage": "https://github.com/ralphjsmit/laravel-seo",
-    "license": "MIT",
-    "authors": [
+    "homepage" : "https://github.com/ralphjsmit/laravel-seo",
+    "license" : "MIT",
+    "authors" : [
         {
-            "name": "Ralph J. Smit",
-            "email": "rjs@ralphjsmit.com",
-            "role": "Developer"
+            "name" : "Ralph J. Smit",
+            "email" : "rjs@ralphjsmit.com",
+            "role" : "Developer"
         }
     ],
-    "require": {
-        "php": "^8.0",
-        "illuminate/contracts": "^8.79|^9.0",
-        "ralphjsmit/laravel-helpers": "^1.5",
-        "spatie/laravel-package-tools": "^1.9.2"
+    "require" : {
+        "php" : "^8.0",
+        "illuminate/contracts" : "^9.0|^10.0",
+        "ralphjsmit/laravel-helpers" : "^1.5",
+        "spatie/laravel-package-tools" : "^1.9.2"
     },
-    "require-dev": {
-        "nunomaduro/collision": "^5.10|^6.0",
-        "orchestra/testbench": "^6.22|^7.0",
-        "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-laravel": "^1.1",
-        "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ray": "^1.26",
-        "spatie/pest-plugin-test-time": "^1.0"
+    "require-dev" : {
+        "nesbot/carbon" : "^2.66",
+        "nunomaduro/collision" : "^5.10|^6.0",
+        "orchestra/testbench" : "^7.0|^8.0",
+        "pestphp/pest" : "^1.21",
+        "pestphp/pest-plugin-laravel" : "^1.1",
+        "phpunit/phpunit" : "^9.5",
+        "spatie/laravel-ray" : "^1.26",
+        "spatie/pest-plugin-test-time" : "^1.0"
     },
-    "autoload": {
-        "psr-4": {
-            "RalphJSmit\\Laravel\\SEO\\": "src",
-            "RalphJSmit\\Laravel\\SEO\\Database\\Factories\\": "database/factories"
+    "autoload" : {
+        "psr-4" : {
+            "RalphJSmit\\Laravel\\SEO\\" : "src",
+            "RalphJSmit\\Laravel\\SEO\\Database\\Factories\\" : "database/factories"
         },
-        "files": [
+        "files" : [
             "src/helpers.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "RalphJSmit\\Laravel\\SEO\\Tests\\": "tests"
+    "autoload-dev" : {
+        "psr-4" : {
+            "RalphJSmit\\Laravel\\SEO\\Tests\\" : "tests"
         }
     },
-    "scripts": {
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage"
+    "scripts" : {
+        "test" : "vendor/bin/pest",
+        "test-coverage" : "vendor/bin/pest --coverage"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
+    "config" : {
+        "sort-packages" : true,
+        "allow-plugins" : {
+            "pestphp/pest-plugin" : true
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
+    "extra" : {
+        "laravel" : {
+            "providers" : [
                 "RalphJSmit\\Laravel\\SEO\\LaravelSEOServiceProvider"
             ],
-            "aliases": {
-                "SEOManager": "RalphJSmit\\Laravel\\SEO\\Facades\\SEOManager"
+            "aliases" : {
+                "SEOManager" : "RalphJSmit\\Laravel\\SEO\\Facades\\SEOManager"
             }
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
 }

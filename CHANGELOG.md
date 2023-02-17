@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.3.0 - 2023-02-17
+
+- Add Laravel 10 support in #30
+
 ## 1.2.2 - 2022-11-21
 
 - Add `down()` method to migration.

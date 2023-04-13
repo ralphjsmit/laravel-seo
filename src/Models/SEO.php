@@ -45,6 +45,7 @@ class SEO extends Model
             type: $overrides->type ?? null,
             locale: $overrides->locale ?? null,
             robots: $overrides->robots ?? $this->robots,
+            canonical_url: $overrides->canonical_url ?? $this->url,
         );
     }
 }

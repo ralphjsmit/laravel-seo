@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Str;
-
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
 use function Pest\Laravel\get;
@@ -20,7 +19,22 @@ it('cannot display the canonical url if not allowed', function () {
         ->assertDontSee('rel="canonical"', false);
 });
 
-it('can display the model level canonical url if set', function () {
+it('can display the model level canonical url if set in database', function () {
+    config()->set('seo.canonical_link', true);
+
+    $page = Page::create();
+
+    $page->seo->update([
+        'canonical_url' => 'https://example.com/canonical/url/test',
+    ]);
+
+    $page->refresh();
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<link rel="canonical" href="https://example.com/canonical/url/test">', false);
+});
+
+it('can display the model level canonical url if set on override', function () {
     config()->set('seo.canonical_link', true);
 
     $page = Page::create();

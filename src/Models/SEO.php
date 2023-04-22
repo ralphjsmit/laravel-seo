@@ -20,6 +20,7 @@ class SEO extends Model
     public function prepareForUsage(): SEOData
     {
         if ( method_exists($this->model, 'getDynamicSEOData') ) {
+            /** @var SEOData $overrides */
             $overrides = $this->model->getDynamicSEOData();
         }
 

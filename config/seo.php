@@ -67,7 +67,7 @@ return [
          * was given. This will be very useful on pages where you don't have an Eloquent model for, or where you
          * don't want to hardcode the title.
          *
-         * For example, if you have a with the url '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
+         * For example, if you have a page with the url '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
          */
         'infer_title_from_url' => true,
 
@@ -98,7 +98,8 @@ return [
         /**
          * Use this setting to specify a fallback image, which will be used on places where you
          * don't have an image set via an associated ->seo model or via the ->getDynamicSEOData() method.
-         * This should be a path to an image. The url to the path is generated using the `secure_url()` function (`secure_url($yourProvidedPath)`).
+         * This should be a path to an image. The url to the path is generated using the `secure_url()` function
+         * (`secure_url($yourProvidedPath)`), so make sure the image is accessible from the public folder.
          */
         'fallback' => null,
     ],

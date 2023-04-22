@@ -20,6 +20,7 @@ class SEO extends Model
     public function prepareForUsage(): SEOData
     {
         if ( method_exists($this->model, 'getDynamicSEOData') ) {
+            /** @var SEOData $overrides */
             $overrides = $this->model->getDynamicSEOData();
         }
 
@@ -45,6 +46,7 @@ class SEO extends Model
             type: $overrides->type ?? null,
             locale: $overrides->locale ?? null,
             robots: $overrides->robots ?? $this->robots,
+            canonical_url: $overrides->canonical_url ?? $this->canonical_url,
         );
     }
 }

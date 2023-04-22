@@ -31,6 +31,7 @@ class SEOData
         public ?string $favicon = null,
         public ?string $locale = null,
         public ?string $robots = null,
+        public ?string $canonical_url = null,
     ) {
         if ( $this->locale === null ) {
             $this->locale = Str::of(app()->getLocale())->lower()->kebab();

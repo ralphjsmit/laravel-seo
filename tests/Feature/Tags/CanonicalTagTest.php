@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
@@ -47,4 +49,26 @@ it('can display the model level canonical url if set on override', function () {
 
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<link rel="canonical" href="https://example.com/canonical/url/test">', false);
+});
+
+it('will not break if no canonical_url column exists in seo table', function () {
+    // New seo.canonical_url column was added in https://github.com/ralphjsmit/laravel-seo/pull/35.
+    config()->set('seo.canonical_link', true);
+
+    $page = Page::create();
+
+    expect(Schema::hasColumn('seo', 'canonical_url'))
+        ->toBeTrue();
+
+    Schema::table('seo', function (Blueprint $table) {
+        $table->dropColumn('canonical_url');
+    });
+
+    expect(Schema::hasColumn('seo', 'canonical_url'))
+        ->toBeFalse();
+
+    $page->refresh();
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertOk();
 });

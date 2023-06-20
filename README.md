@@ -88,7 +88,7 @@ return [
 
     /**
      * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
-     * you can use both a hardcoded url and a relative path. We recommend the later.
+     * you can use both a hardcoded url and a relative path. We recommend the latter.
      *
      * Example: '/storage/sitemap.xml'
      * Do not forget the slash at the start. This will tell the search engine that the path is relative

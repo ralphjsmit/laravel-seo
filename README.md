@@ -295,6 +295,7 @@ Another option is to pass a SEOData-object directly from the controller to the l
 
 ```php
 use Illuminate\Contracts\View\View;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class Homepage extends Controller
 {

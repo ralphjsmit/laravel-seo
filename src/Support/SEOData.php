@@ -2,7 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Str;
 use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
@@ -19,8 +19,8 @@ class SEOData
         public ?string $url = null,
         public bool $enableTitleSuffix = true,
         public ?ImageMeta $imageMeta = null,
-        public ?Carbon $published_time = null,
-        public ?Carbon $modified_time = null,
+        public ?CarbonInterface $published_time = null,
+        public ?CarbonInterface $modified_time = null,
         public ?string $articleBody = null,
         public ?string $section = null,
         public ?array $tags = null,

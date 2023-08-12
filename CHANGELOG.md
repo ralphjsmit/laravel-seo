@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.4.1 - 2023-08-12
+
+- Add support for immutable timestamps in #43 by @standaniels
+
 ## 1.3.0 - 2023-02-17
 
 - Add Laravel 10 support in #30

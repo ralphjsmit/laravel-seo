@@ -2,7 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Schema;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
@@ -10,9 +10,9 @@ class ArticleSchema extends Schema
 {
     public array $authors = [];
 
-    public ?Carbon $datePublished = null;
+    public ?CarbonInterface $datePublished = null;
 
-    public ?Carbon $dateModified = null;
+    public ?CarbonInterface $dateModified = null;
 
     public ?string $description = null;
 

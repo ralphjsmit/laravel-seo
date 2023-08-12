@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Date;
 use RalphJSmit\Laravel\SEO\Models\SEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
@@ -15,6 +17,16 @@ it('can morph a model to the SEO model', function () {
 });
 
 it('can prepare the SEO for use on a page', function () {
+    $seo = Page::create()->seo;
+
+    $export = $seo->prepareForUsage();
+
+    expect($export)->toBeInstanceOf(SEOData::class);
+});
+
+it('can have immutable timestamps', function () {
+    Date::useClass(CarbonImmutable::class);
+
     $seo = Page::create()->seo;
 
     $export = $seo->prepareForUsage();

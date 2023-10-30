@@ -115,3 +115,10 @@ it('can correctly render OpenGraph tags for a post or page with a few additional
         ->assertSee('<meta property="article:tag" content="PHP">', false)
         ->assertSee('<meta property="article:tag" content="Laravel">', false);
 });
+
+it('can correctly render locale tags', function () {
+    config()->set('app.locale', 'en_GB');
+
+    get(route('seo.test-plain'))
+        ->assertSee('<meta property="og:locale" content="en_GB">', false);
+});

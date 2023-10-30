@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.4.2 - 2023-10-30
+
+- Fix locale casing in cases of locales like `en_US`.
+
 ## 1.4.1 - 2023-08-12
 
 - Add support for immutable timestamps in #43 by @standaniels

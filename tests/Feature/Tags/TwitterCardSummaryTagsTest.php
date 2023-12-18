@@ -92,3 +92,20 @@ it('will not render the Twitter Card summary_large_image for too large or small 
     ['images/twitter-72x72.jpg'],
     ['images/twitter-4721x4721.jpg'],
 ]);
+
+
+
+it('uses opengraph_title over title', function() {
+    config()->set('seo.title.suffix', ' | Laravel SEO');
+
+    $page = Page::create();
+    $page->seo->update([
+        'opengraph_title' => 'My OG title',
+        'title' => 'My page title',
+    ]);
+
+    $page->refresh();
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta name="twitter:title" content="My OG title | Laravel SEO">', false);
+});

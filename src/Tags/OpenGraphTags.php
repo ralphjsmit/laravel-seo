@@ -17,7 +17,9 @@ class OpenGraphTags extends Collection implements Renderable
     {
         $collection = new static();
 
-        if ( $SEOData->title ) {
+        if ( $SEOData->openGraphTitle ) {
+            $collection->push(new OpenGraphTag('title', $SEOData->openGraphTitle));
+        } else if ( $SEOData->title ) {
             $collection->push(new OpenGraphTag('title', $SEOData->title));
         }
 

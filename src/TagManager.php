@@ -45,6 +45,10 @@ class TagManager implements Renderable
 
         if ( $SEOData->enableTitleSuffix ) {
             $SEOData->title .= config('seo.title.suffix');
+
+            if ($SEOData->openGraphTitle) {
+                $SEOData->openGraphTitle .= config('seo.title.suffix');
+            }
         }
 
         if ( $SEOData->image && ! filter_var($SEOData->image, FILTER_VALIDATE_URL) ) {

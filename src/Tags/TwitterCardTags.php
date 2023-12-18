@@ -31,7 +31,9 @@ class TwitterCardTags extends Collection implements Renderable
             $collection->push(new TwitterCardTag('card', 'summary'));
         }
 
-        if ( $SEOData->title ) {
+        if ( $SEOData->openGraphTitle ) {
+            $collection->push(new TwitterCardTag('title', $SEOData->openGraphTitle));
+        } else if ( $SEOData->title ) {
             $collection->push(new TwitterCardTag('title', $SEOData->title));
         }
 

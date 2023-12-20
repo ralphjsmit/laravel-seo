@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.4.3 - 2023-12-20
+
+- Allow overriding custom OpenGraph titles in #53.
+
 ## 1.4.2 - 2023-10-30
 
 - Fix locale casing in cases of locales like `en_US`.

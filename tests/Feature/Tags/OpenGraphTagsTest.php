@@ -123,12 +123,14 @@ it('can correctly render locale tags', function () {
         ->assertSee('<meta property="og:locale" content="en_GB">', false);
 });
 
-it('uses opengraph_title over title', function() {
+it('uses openGraphTitle over title', function() {
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
     $page = Page::create();
+    $page::$overrides = [
+        'openGraphTitle' => 'My OG title',
+    ];
     $page->seo->update([
-        'opengraph_title' => 'My OG title',
         'title' => 'My page title',
     ]);
 

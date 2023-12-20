@@ -95,12 +95,14 @@ it('will not render the Twitter Card summary_large_image for too large or small 
 
 
 
-it('uses opengraph_title over title', function() {
+it('uses openGraphTitle over title', function() {
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
     $page = Page::create();
+    $page::$overrides = [
+        'openGraphTitle' => 'My OG title',
+    ];
     $page->seo->update([
-        'opengraph_title' => 'My OG title',
         'title' => 'My page title',
     ]);
 

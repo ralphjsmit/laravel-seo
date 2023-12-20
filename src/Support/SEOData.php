@@ -32,6 +32,7 @@ class SEOData
         public ?string $locale = null,
         public ?string $robots = null,
         public ?string $canonical_url = null,
+        public ?string $openGraphTitle = null,
     ) {
         if ( $this->locale === null ) {
             $this->locale = app()->getLocale();

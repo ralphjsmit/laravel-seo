@@ -122,3 +122,20 @@ it('can correctly render locale tags', function () {
     get(route('seo.test-plain'))
         ->assertSee('<meta property="og:locale" content="en_GB">', false);
 });
+
+it('uses openGraphTitle over title', function() {
+    config()->set('seo.title.suffix', ' | Laravel SEO');
+
+    $page = Page::create();
+    $page::$overrides = [
+        'openGraphTitle' => 'My OG title',
+    ];
+    $page->seo->update([
+        'title' => 'My page title',
+    ]);
+
+    $page->refresh();
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta property="og:title" content="My OG title | Laravel SEO">', false);
+});

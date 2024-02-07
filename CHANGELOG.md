@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.4.4 - 2024-02-07
+
+- Fix: issue with Livewire morph markers.
+
 ## 1.4.3 - 2023-12-20
 
 - Allow overriding custom OpenGraph titles in #53.

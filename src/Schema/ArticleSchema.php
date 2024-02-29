@@ -84,10 +84,10 @@ class ArticleSchema extends Schema
                 '@type' => 'WebPage',
                 '@id' => $this->url,
             ],
-            'headline' => $this->headline,
         ])
 	        ->when($this->datePublished, fn (Collection $collection): Collection => $collection->put('datePublished', $this->datePublished->toIso8601String()))
             ->when($this->dateModified, fn (Collection $collection): Collection => $collection->put('dateModified', $this->dateModified->toIso8601String()))
+	        ->put('headline', $this->headline)
             ->when($this->authors, fn (Collection $collection): Collection => $collection->put('author', $this->authors))
             ->when($this->description, fn (Collection $collection): Collection => $collection->put('description', $this->description))
             ->when($this->image, fn (Collection $collection): Collection => $collection->put('image', $this->image))

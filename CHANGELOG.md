@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.4.5 - 2024-02-29
+
+- Update: make article `datePublished` and `dateModified` optional, since it's only recommended properties.
+
 ## 1.4.4 - 2024-02-07
 
 - Fix: issue with Livewire morph markers.

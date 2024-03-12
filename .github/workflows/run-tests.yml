@@ -23,6 +23,9 @@ jobs:
             testbench: ^8.0
           - laravel: 11.*
             testbench: ^8.0
+        exclude:
+          - php: 8.1
+            laravel: 11.*
 
     continue-on-error: ${{ matrix.laravel == '9.*' && matrix.stability == 'prefer-lowest' }}
 

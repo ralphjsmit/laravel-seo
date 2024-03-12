@@ -15,10 +15,16 @@
             "role" : "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/laravel-helpers.git"
+        }
+    ],
     "require" : {
         "php" : "^8.0",
         "illuminate/contracts" : "^9.0|^10.0|^11.0",
-        "ralphjsmit/laravel-helpers" : "^1.5",
+        "ralphjsmit/laravel-helpers" : "^1.5|dev-l11-compatibility",
         "spatie/laravel-package-tools" : "^1.9.2"
     },
     "require-dev" : {

@@ -30,7 +30,7 @@
     "require-dev" : {
         "nesbot/carbon" : "^2.66|^3.0",
         "nunomaduro/collision" : "^5.10|^6.0|^7.0|^8.0",
-        "orchestra/testbench" : "^7.0|^8.0",
+        "orchestra/testbench" : "^7.0|^8.0|^9.0",
         "pestphp/pest" : "^1.21|^2.0",
         "pestphp/pest-plugin-laravel" : "^1.1|^2.0",
         "phpunit/phpunit" : "^9.5|^10.5",

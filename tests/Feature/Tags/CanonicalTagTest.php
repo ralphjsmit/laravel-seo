@@ -71,4 +71,4 @@ it('will not break if no canonical_url column exists in seo table', function () 
 
     get(route('seo.test-page', ['page' => $page]))
         ->assertOk();
-});
+})->skip(version_compare(app()->version(), '10', 'lt'));

@@ -27,8 +27,6 @@ jobs:
           - php: 8.1
             laravel: 11.*
 
-    continue-on-error: ${{ matrix.laravel == '9.*' && matrix.stability == 'prefer-lowest' }}
-
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.5.0 - 2024-03-14
+
+- Laravel 11 compatibility.
+
 ## 1.4.5 - 2024-02-29
 
 - Update: make article `datePublished` and `dateModified` optional, since it's only recommended properties.

@@ -5,11 +5,11 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    if ( ! file_exists($dir = public_path('test')) ) {
+    if (! file_exists($dir = public_path('test'))) {
         mkdir($dir, 0777, true);
     }
 
-    if ( ! file_exists($dir = storage_path('test')) ) {
+    if (! file_exists($dir = storage_path('test'))) {
         mkdir($dir, 0777, true);
     }
 
@@ -55,4 +55,3 @@ it('will display the image url if it came from a model', function () {
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<meta name="image" content="' . secure_url('test/image.jpg') . '">', false);
 });
-

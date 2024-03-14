@@ -19,14 +19,14 @@ class SEO extends Model
 
     public function prepareForUsage(): SEOData
     {
-        if ( method_exists($this->model, 'getDynamicSEOData') ) {
+        if (method_exists($this->model, 'getDynamicSEOData')) {
             /** @var SEOData $overrides */
             $overrides = $this->model->getDynamicSEOData();
         }
 
-        if ( method_exists($this->model, 'enableTitleSuffix') ) {
+        if (method_exists($this->model, 'enableTitleSuffix')) {
             $enableTitleSuffix = $this->model->enableTitleSuffix();
-        } elseif ( property_exists($this->model, 'enableTitleSuffix') ) {
+        } elseif (property_exists($this->model, 'enableTitleSuffix')) {
             $enableTitleSuffix = $this->model->enableTitleSuffix;
         }
 
@@ -37,8 +37,8 @@ class SEO extends Model
             image: $overrides->image ?? $this->image,
             url: $overrides->url ?? null,
             enableTitleSuffix: $enableTitleSuffix ?? true,
-            published_time: $overrides->published_time ?? ( $this->model?->created_at ?? null ),
-            modified_time: $overrides->modified_time ?? ( $this->model?->updated_at ?? null ),
+            published_time: $overrides->published_time ?? ($this->model?->created_at ?? null),
+            modified_time: $overrides->modified_time ?? ($this->model?->updated_at ?? null),
             articleBody: $overrides->articleBody ?? null,
             section: $overrides->section ?? null,
             tags: $overrides->tags ?? null,

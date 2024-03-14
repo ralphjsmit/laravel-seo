@@ -9,5 +9,6 @@ class LinkTag extends Tag
     public function __construct(
         public string $rel,
         public string $href,
-    ) {}
+    ) {
+    }
 }

@@ -7,11 +7,11 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class AuthorTag extends MetaTag
 {
-    public static function initialize(?SEOData $SEOData): MetaTag|null
+    public static function initialize(?SEOData $SEOData): ?MetaTag
     {
         $author = $SEOData?->author;
 
-        if ( ! $author ) {
+        if (! $author) {
             return null;
         }
 

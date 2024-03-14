@@ -1,0 +1,23 @@
+{
+  "preset": "laravel",
+  "rules": {
+    "no_superfluous_phpdoc_tags": true,
+    "concat_space": {
+      "spacing": "one"
+    },
+    "single_quote": true,
+    "combine_consecutive_issets": true,
+    "combine_consecutive_unsets": true,
+    "explicit_string_variable": true,
+    "global_namespace_import": true,
+    "single_trait_insert_per_statement": true,
+    "ordered_traits": true,
+    "types_spaces": {
+      "space": "single"
+    }
+  },
+  "exclude": [
+    "lang",
+    "vendor.nosync"
+  ]
+}

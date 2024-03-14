@@ -14,7 +14,7 @@ class TwitterCardTag extends Tag
     ) {
         $this->attributesPipeline[] = function (Collection $collection) {
             return $collection->mapWithKeys(function ($value, $key) {
-                if ( $key === 'name' ) {
+                if ($key === 'name') {
                     $value = 'twitter:' . $value;
                 }
 

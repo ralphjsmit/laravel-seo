@@ -11,13 +11,14 @@ class TitleTag extends Tag
 
     public function __construct(
         public string $inner,
-    ) {}
+    ) {
+    }
 
-    public static function initialize(?SEOData $SEOData): Tag|null
+    public static function initialize(?SEOData $SEOData): ?Tag
     {
         $title = $SEOData?->title;
 
-        if ( ! $title ) {
+        if (! $title) {
             return null;
         }
 

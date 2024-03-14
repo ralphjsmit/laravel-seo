@@ -24,23 +24,23 @@ it('can construct Schema Markup: Article', function () {
         ->toBe(
             '<script type="application/ld+json">' .
             $string = json_encode([
-                    '@context' => 'https://schema.org',
-                    '@type' => 'Article',
-                    'mainEntityOfPage' => [
-                        '@type' => 'WebPage',
-                        '@id' => 'https://example.com/test',
-                    ],
-                    'datePublished' => now()->subDays(3)->toIso8601String(),
-                    'dateModified' => now()->toIso8601String(),
-                    'headline' => 'Test',
-                    'author' => [
-                        '@type' => 'Person',
-                        'name' => 'Ralph J. Smit',
-                    ],
-                    'description' => 'Description',
-                    'image' => 'https://example.com/image.jpg',
-                    'articleBody' => '<p>Test</p>',
-                ]) . '</script>'
+                '@context' => 'https://schema.org',
+                '@type' => 'Article',
+                'mainEntityOfPage' => [
+                    '@type' => 'WebPage',
+                    '@id' => 'https://example.com/test',
+                ],
+                'datePublished' => now()->subDays(3)->toIso8601String(),
+                'dateModified' => now()->toIso8601String(),
+                'headline' => 'Test',
+                'author' => [
+                    '@type' => 'Person',
+                    'name' => 'Ralph J. Smit',
+                ],
+                'description' => 'Description',
+                'image' => 'https://example.com/image.jpg',
+                'articleBody' => '<p>Test</p>',
+            ]) . '</script>'
         );
 });
 

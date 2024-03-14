@@ -12,5 +12,6 @@ class SitemapTag extends LinkTag
 
     public function __construct(
         public string $href
-    ) {}
+    ) {
+    }
 }

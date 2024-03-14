@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 use function Pest\Laravel\get;
 
 it('can display the sitemap if path is set', function () {

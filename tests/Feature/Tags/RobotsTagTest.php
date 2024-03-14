@@ -4,7 +4,6 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
 use function Pest\Laravel\get;
-use function Pest\Laravel\post;
 
 it('can output the robots tag "default" value', function () {
     config()->set('seo.robots.default', 'max-snippet:-1');

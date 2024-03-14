@@ -19,7 +19,7 @@ use RalphJSmit\Laravel\SEO\Tags\TwitterCardTags;
 
 class TagCollection extends Collection
 {
-    public static function initialize(SEOData $SEOData = null): static
+    public static function initialize(?SEOData $SEOData = null): static
     {
         $collection = new static();
 

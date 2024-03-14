@@ -31,7 +31,7 @@ class TestCase extends Orchestra
 
         Schema::enableForeignKeyConstraints();
 
-        ( include __DIR__ . '/../database/migrations/create_seo_table.php.stub' )->up();
-        ( include __DIR__ . '/../tests/Fixtures/migrations/create_pages_table.php' )->up();
+        (include __DIR__ . '/../database/migrations/create_seo_table.php.stub')->up();
+        (include __DIR__ . '/../tests/Fixtures/migrations/create_pages_table.php')->up();
     }
 }

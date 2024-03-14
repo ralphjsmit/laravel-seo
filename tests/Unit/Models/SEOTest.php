@@ -11,8 +11,6 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\PageWithoutTitleSuffixProperty;
 it('can morph a model to the SEO model', function () {
     $page = Page::create();
 
-    $page;
-
     expect($page->seo)->toBeInstanceOf(SEO::class);
 });
 

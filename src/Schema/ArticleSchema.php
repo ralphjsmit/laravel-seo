@@ -28,7 +28,7 @@ class ArticleSchema extends Schema
 
     public function addAuthor(string $authorName): static
     {
-        if ( empty($this->authors) ) {
+        if (empty($this->authors)) {
             $this->authors = [
                 '@type' => 'Person',
                 'name' => $authorName,
@@ -62,12 +62,12 @@ class ArticleSchema extends Schema
         ];
 
         foreach ($properties as $markupProperty => $SEODataProperty) {
-            if ( $SEOData->{$SEODataProperty} ) {
+            if ($SEOData->{$SEODataProperty}) {
                 $this->{$markupProperty} = $SEOData->{$SEODataProperty};
             }
         }
 
-        if ( $SEOData->author ) {
+        if ($SEOData->author) {
             $this->authors = [
                 '@type' => 'Person',
                 'name' => $SEOData->author,
@@ -85,9 +85,9 @@ class ArticleSchema extends Schema
                 '@id' => $this->url,
             ],
         ])
-	        ->when($this->datePublished, fn (Collection $collection): Collection => $collection->put('datePublished', $this->datePublished->toIso8601String()))
+            ->when($this->datePublished, fn (Collection $collection): Collection => $collection->put('datePublished', $this->datePublished->toIso8601String()))
             ->when($this->dateModified, fn (Collection $collection): Collection => $collection->put('dateModified', $this->dateModified->toIso8601String()))
-	        ->put('headline', $this->headline)
+            ->put('headline', $this->headline)
             ->when($this->authors, fn (Collection $collection): Collection => $collection->put('author', $this->authors))
             ->when($this->description, fn (Collection $collection): Collection => $collection->put('description', $this->description))
             ->when($this->image, fn (Collection $collection): Collection => $collection->put('image', $this->image))

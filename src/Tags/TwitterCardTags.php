@@ -19,29 +19,29 @@ class TwitterCardTags extends Collection implements Renderable
         $collection = new static();
 
         // No generic image that spans multiple pages
-        if ( $SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback')) ) {
-            if ( $SEOData->imageMeta?->width - $SEOData->imageMeta?->height - 20 < 0 ) {
+        if ($SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback'))) {
+            if ($SEOData->imageMeta?->width - $SEOData->imageMeta?->height - 20 < 0) {
                 $collection->push(Summary::initialize($SEOData));
             }
 
-            if ( $SEOData->imageMeta?->width - 2 * $SEOData->imageMeta?->height - 20 < 0 ) {
+            if ($SEOData->imageMeta?->width - 2 * $SEOData->imageMeta?->height - 20 < 0) {
                 $collection->push(SummaryLargeImage::initialize($SEOData));
             }
         } else {
             $collection->push(new TwitterCardTag('card', 'summary'));
         }
 
-        if ( $SEOData->openGraphTitle ) {
+        if ($SEOData->openGraphTitle) {
             $collection->push(new TwitterCardTag('title', $SEOData->openGraphTitle));
-        } else if ( $SEOData->title ) {
+        } elseif ($SEOData->title) {
             $collection->push(new TwitterCardTag('title', $SEOData->title));
         }
 
-        if ( $SEOData->description ) {
+        if ($SEOData->description) {
             $collection->push(new TwitterCardTag('description', $SEOData->description));
         }
 
-        if ( $SEOData->twitter_username && $SEOData->twitter_username !== '@' ) {
+        if ($SEOData->twitter_username && $SEOData->twitter_username !== '@') {
             $collection->push(new TwitterCardTag('site', $SEOData->twitter_username));
         }
 

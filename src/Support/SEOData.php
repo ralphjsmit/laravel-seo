@@ -3,7 +3,6 @@
 namespace RalphJSmit\Laravel\SEO\Support;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Str;
 use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 
@@ -34,14 +33,14 @@ class SEOData
         public ?string $canonical_url = null,
         public ?string $openGraphTitle = null,
     ) {
-        if ( $this->locale === null ) {
+        if ($this->locale === null) {
             $this->locale = app()->getLocale();
         }
     }
 
     public function imageMeta(): ?ImageMeta
     {
-        if ( $this->image ) {
+        if ($this->image) {
             return $this->imageMeta ??= new ImageMeta($this->image);
         }
 

@@ -7,7 +7,7 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    if ( ! file_exists($dir = public_path('images')) ) {
+    if (! file_exists($dir = public_path('images'))) {
         mkdir($dir, 0777, true);
     }
 
@@ -64,4 +64,3 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
             false
         );
 });
-

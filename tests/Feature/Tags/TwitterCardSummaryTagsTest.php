@@ -5,7 +5,7 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    if ( ! file_exists($dir = public_path('images')) ) {
+    if (! file_exists($dir = public_path('images'))) {
         mkdir($dir, 0777, true);
     }
 
@@ -93,9 +93,7 @@ it('will not render the Twitter Card summary_large_image for too large or small 
     ['images/twitter-4721x4721.jpg'],
 ]);
 
-
-
-it('uses openGraphTitle over title', function() {
+it('uses openGraphTitle over title', function () {
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
     $page = Page::create();

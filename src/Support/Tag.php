@@ -20,7 +20,7 @@ abstract class Tag implements Renderable
 
     public function render(): View
     {
-        return view("seo::tags.tag", [
+        return view('seo::tags.tag', [
             'tag' => $this->tag,
             'attributes' => $this->collectAttributes(),
             'inner' => $this->inner ?? null,

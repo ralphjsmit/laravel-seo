@@ -14,7 +14,7 @@ class ImageMeta
     {
         $publicPath = public_path($path);
 
-        if ( ! is_file($publicPath) ) {
+        if (! is_file($publicPath)) {
             report(new Exception("Path {$publicPath} is not a file."));
 
             return;

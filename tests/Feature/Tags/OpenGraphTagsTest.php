@@ -6,7 +6,7 @@ use function Pest\Laravel\get;
 use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
-    if ( ! file_exists($dir = public_path('images/foo')) ) {
+    if (! file_exists($dir = public_path('images/foo'))) {
         mkdir($dir, 0777, true);
     }
 
@@ -123,7 +123,7 @@ it('can correctly render locale tags', function () {
         ->assertSee('<meta property="og:locale" content="en_GB">', false);
 });
 
-it('uses openGraphTitle over title', function() {
+it('uses openGraphTitle over title', function () {
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
     $page = Page::create();

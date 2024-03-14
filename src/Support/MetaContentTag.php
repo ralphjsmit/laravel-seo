@@ -9,5 +9,6 @@ class MetaContentTag extends Tag
     public function __construct(
         public string $property,
         public string $content,
-    ) {}
+    ) {
+    }
 }

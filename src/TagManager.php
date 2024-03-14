@@ -23,7 +23,7 @@ class TagManager implements Renderable
         );
     }
 
-    public function fillSEOData(SEOData $SEOData = null): SEOData
+    public function fillSEOData(?SEOData $SEOData = null): SEOData
     {
         $SEOData ??= new SEOData();
 
@@ -38,12 +38,12 @@ class TagManager implements Renderable
         ];
 
         foreach ($defaults as $property => $defaultValue) {
-            if ( $SEOData->{$property} === null ) {
+            if ($SEOData->{$property} === null) {
                 $SEOData->{$property} = $defaultValue;
             }
         }
 
-        if ( $SEOData->enableTitleSuffix ) {
+        if ($SEOData->enableTitleSuffix) {
             $SEOData->title .= config('seo.title.suffix');
 
             if ($SEOData->openGraphTitle) {
@@ -51,21 +51,21 @@ class TagManager implements Renderable
             }
         }
 
-        if ( $SEOData->image && ! filter_var($SEOData->image, FILTER_VALIDATE_URL) ) {
+        if ($SEOData->image && ! filter_var($SEOData->image, FILTER_VALIDATE_URL)) {
             $SEOData->imageMeta();
 
             $SEOData->image = secure_url($SEOData->image);
         }
 
-        if ( $SEOData->favicon && ! filter_var($SEOData->favicon, FILTER_VALIDATE_URL) ) {
+        if ($SEOData->favicon && ! filter_var($SEOData->favicon, FILTER_VALIDATE_URL)) {
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
 
-        if ( ! $SEOData->url ) {
+        if (! $SEOData->url) {
             $SEOData->url = url()->current();
         }
 
-        if ( $SEOData->url === url('/') && ( $homepageTitle = config('seo.title.homepage_title') ) ) {
+        if ($SEOData->url === url('/') && ($homepageTitle = config('seo.title.homepage_title'))) {
             $SEOData->title = $homepageTitle;
         }
 
@@ -74,12 +74,12 @@ class TagManager implements Renderable
         );
     }
 
-    public function for(Model|SEOData $source): static
+    public function for(Model | SEOData $source): static
     {
-        if ( $source instanceof Model ) {
+        if ($source instanceof Model) {
             $this->model = $source;
             unset($this->SEOData);
-        } elseif ( $source instanceof SEOData ) {
+        } elseif ($source instanceof SEOData) {
             unset($this->model);
             $this->SEOData = $source;
         }
@@ -111,7 +111,7 @@ class TagManager implements Renderable
         return $this->tags
             ->pipeThrough(SEOManager::getTagTransformers())
             ->reduce(function (string $carry, Renderable $item) {
-                return $carry .= Str::of($item->render())->trim().PHP_EOL;
+                return $carry .= Str::of($item->render())->trim() . PHP_EOL;
             }, '');
     }
 

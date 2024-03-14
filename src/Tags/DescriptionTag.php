@@ -7,11 +7,11 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class DescriptionTag extends MetaTag
 {
-    public static function initialize(?SEOData $SEOData): MetaTag|null
+    public static function initialize(?SEOData $SEOData): ?MetaTag
     {
         $description = $SEOData?->description;
 
-        if ( ! $description ) {
+        if (! $description) {
             return null;
         }
 

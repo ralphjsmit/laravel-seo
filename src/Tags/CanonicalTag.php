@@ -12,11 +12,11 @@ class CanonicalTag extends Collection implements Renderable
 {
     use RenderableCollection;
 
-    public static function initialize(SEOData $SEOData = null): static
+    public static function initialize(?SEOData $SEOData = null): static
     {
         $collection = new static();
 
-        if ( config('seo.canonical_link') ) {
+        if (config('seo.canonical_link')) {
             $collection->push(new LinkTag('canonical', $SEOData->canonical_url ?? $SEOData->url));
         }
 

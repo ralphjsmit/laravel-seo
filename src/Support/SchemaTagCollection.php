@@ -10,11 +10,11 @@ class SchemaTagCollection extends Collection implements Renderable
 {
     use RenderableCollection;
 
-    public static function initialize(SEOData $SEOData, SchemaCollection $schema = null): ?static
+    public static function initialize(SEOData $SEOData, ?SchemaCollection $schema = null): ?static
     {
         $collection = new static();
 
-        if ( ! $schema ) {
+        if (! $schema) {
             return null;
         }
 

@@ -8,11 +8,11 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class FaviconTag extends LinkTag
 {
-    public static function initialize(?SEOData $SEOData): static|null
+    public static function initialize(?SEOData $SEOData): ?static
     {
         $favicon = $SEOData?->favicon;
 
-        if ( ! $favicon ) {
+        if (! $favicon) {
             return null;
         }
 

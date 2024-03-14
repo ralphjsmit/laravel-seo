@@ -72,5 +72,5 @@ it('will not break if no canonical_url column exists in seo table', function () 
     get(route('seo.test-page', ['page' => $page]))
         ->assertOk();
 })
-	// Skip tests on Laravel 9, so we don't need to install Doctrine for this test only.
-	->skip(version_compare(Illuminate\Foundation\Application::VERSION, '10', 'lt'));
+    // Skip tests on Laravel 9, so we don't need to install Doctrine for this test only.
+    ->skip(version_compare(Illuminate\Foundation\Application::VERSION, '10', 'lt'));

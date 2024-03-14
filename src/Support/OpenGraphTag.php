@@ -14,7 +14,7 @@ class OpenGraphTag extends Tag
     ) {
         $this->attributesPipeline[] = function (Collection $collection) {
             return $collection->mapWithKeys(function ($value, $key) {
-                if ( $key === 'property' ) {
+                if ($key === 'property') {
                     $value = 'og:' . $value;
                 }
 

@@ -1,6 +1,5 @@
 <?php
 
-use RalphJSmit\Laravel\SEO\Schema\BreadcrumbList;
 use RalphJSmit\Laravel\SEO\Schema\BreadcrumbListSchema;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
@@ -71,4 +70,3 @@ it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function ()
             false
         );
 });
-

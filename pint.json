@@ -15,9 +15,5 @@
     "types_spaces": {
       "space": "single"
     }
-  },
-  "exclude": [
-    "lang",
-    "vendor.nosync"
-  ]
+  }
 }

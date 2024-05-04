@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.5.1 - 2024-05-04
+
+- Fix: inconsistency with escaping.
+
 ## 1.5.0 - 2024-03-14
 
 - Laravel 11 compatibility.

@@ -95,7 +95,7 @@ class ArticleSchema extends Schema
             ->when($this->articleBody, fn (Collection $collection): Collection => $collection->put('articleBody', $this->articleBody))
             ->pipeThrough($this->markupTransformers)
             ->toJson();
-		
-		return new HtmlString($inner);
+
+        return new HtmlString($inner);
     }
 }

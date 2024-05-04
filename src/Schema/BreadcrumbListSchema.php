@@ -45,8 +45,8 @@ class BreadcrumbListSchema extends Schema
         ])
             ->pipeThrough($this->markupTransformers)
             ->toJson();
-		
-		return new HtmlString($inner);
+
+        return new HtmlString($inner);
     }
 
     public function prependBreadcrumbs(array $breadcrumbs): static

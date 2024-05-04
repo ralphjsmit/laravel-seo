@@ -142,8 +142,8 @@ it('uses openGraphTitle over title', function () {
 
 it('will escape the title', function () {
     config()->set('seo.title.suffix', ' - A & B');
-	
-	$page = Page::create();
+
+    $page = Page::create();
     $page->seo->update([
         'title' => 'My page title',
     ]);

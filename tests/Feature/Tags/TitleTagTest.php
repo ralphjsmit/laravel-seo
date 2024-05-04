@@ -47,9 +47,9 @@ it('will infer the title from the url if that is allowed and the model doesn\'t 
 });
 
 it('will escape the title', function () {
-	config()->set('seo.title.infer_title_from_url', true);
-	config()->set('seo.title.suffix', ' - A & B');
-	
-	get(route('seo.test-plain'))
-		->assertSee('<title>Test Plain - A &amp; B</title>', false);
+    config()->set('seo.title.infer_title_from_url', true);
+    config()->set('seo.title.suffix', ' - A & B');
+
+    get(route('seo.test-plain'))
+        ->assertSee('<title>Test Plain - A &amp; B</title>', false);
 });

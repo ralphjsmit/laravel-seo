@@ -1,1 +1,1 @@
-<{{ $tag }}<?php foreach($attributes as $name => $value) : ?> {{ $name }}="{{ $value }}"<?php endforeach ?>><?php if ($inner) : ?>{!! $inner !!}</{{ $tag }}><?php endif ?>
+<{{ $tag }}<?php foreach($attributes as $name => $value) : ?> {{ $name }}="{{ $value }}"<?php endforeach ?>><?php if ($inner) : ?>{{ $inner }}</{{ $tag }}><?php endif ?>

@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class BreadcrumbListSchema extends Schema
@@ -27,9 +28,9 @@ class BreadcrumbListSchema extends Schema
         ]);
     }
 
-    public function generateInner(): string
+    public function generateInner(): HtmlString
     {
-        return collect([
+        $inner = collect([
             '@context' => 'https://schema.org',
             '@type' => $this->type,
             'itemListElement' => $this->breadcrumbs
@@ -44,6 +45,8 @@ class BreadcrumbListSchema extends Schema
         ])
             ->pipeThrough($this->markupTransformers)
             ->toJson();
+		
+		return new HtmlString($inner);
     }
 
     public function prependBreadcrumbs(array $breadcrumbs): static

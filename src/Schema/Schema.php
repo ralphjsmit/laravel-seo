@@ -4,6 +4,7 @@ namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Closure;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
@@ -23,6 +24,8 @@ abstract class Schema extends Tag
     public array $markupTransformers = [];
 
     public string $tag = 'script';
+	
+	public HtmlString $inner;
 
     public function __construct(SEOData $SEOData, array $markupBuilders = [])
     {
@@ -33,7 +36,7 @@ abstract class Schema extends Tag
         $this->inner = $this->generateInner();
     }
 
-    abstract public function generateInner(): string;
+    abstract public function generateInner(): HtmlString;
 
     abstract public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void;
 

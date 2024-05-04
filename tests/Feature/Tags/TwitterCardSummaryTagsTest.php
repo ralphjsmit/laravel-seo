@@ -109,3 +109,18 @@ it('uses openGraphTitle over title', function () {
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<meta name="twitter:title" content="My OG title | Laravel SEO">', false);
 });
+
+
+it('will escape the title', function () {
+	config()->set('seo.title.suffix', ' - A & B');
+	
+	$page = Page::create();
+	$page->seo->update([
+		'title' => 'My page title',
+	]);
+	
+	$page->refresh();
+	
+	get(route('seo.test-page', ['page' => $page]))
+		->assertSee('<meta name="twitter:title" content="My page title - A &amp; B">', false);
+});

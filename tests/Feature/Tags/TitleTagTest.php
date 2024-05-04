@@ -45,3 +45,11 @@ it('will infer the title from the url if that is allowed and the model doesn\'t 
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<title>1 | Laravel SEO</title>', false);
 });
+
+it('will escape the title', function () {
+    config()->set('seo.title.infer_title_from_url', true);
+    config()->set('seo.title.suffix', ' - A & B');
+
+    get(route('seo.test-plain'))
+        ->assertSee('<title>Test Plain - A &amp; B</title>', false);
+});

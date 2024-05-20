@@ -321,6 +321,7 @@ This package can also **generate structured data** for you (also called schema m
 
 1. `Article`
 2. `BreadcrumbList`
+3. `FAQPage`
 
 After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
 
@@ -390,6 +391,25 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 2. Category
 3. [Current page]
 4. Subarticle
+
+### FAQPage schema markup
+
+You can also add `FAQPage` schema markup by using the `->addFaqPage()` function on the `SchemaCollection`:
+
+```php
+use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+
+SchemaCollection::initialize()->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
+    return $faqPage->addQuestion(
+        name: "Can this package add FaqPage to the schema?",
+        acceptedAnswer: "Yes!"
+    )->addQuestion(
+        name: "Does it support multiple questions?",
+        acceptedAnswer: "Of course."
+    );
+});
+```
 
 ## Advanced usage
 

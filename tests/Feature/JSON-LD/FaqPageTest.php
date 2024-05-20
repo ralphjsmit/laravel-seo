@@ -21,8 +21,8 @@ it('can correctly render the JSON-LD Schema markup: FaqPageTest', function () {
         'title' => 'Test FAQ',
         'enableTitleSuffix' => true,
         'url' => 'https://example.com/test/faq',
-        'schema' => SchemaCollection::initialize()->addFaqPage(function (FaqPageSchema $breadcrumbList): FaqPageSchema {
-            return $breadcrumbList->addQuestion(
+        'schema' => SchemaCollection::initialize()->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
+            return $faqPage->addQuestion(
                 name: "Can this package add FaqPage to the schema?",
                 acceptedAnswer: "Yes!"
             )->addQuestion(

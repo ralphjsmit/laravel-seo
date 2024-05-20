@@ -10,7 +10,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 2. Meta tags (author, description, image, robots, etc.)
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
-5. Structured data (Article and Breadcrumbs)
+5. Structured data (Article, Breadcrumbs and FAQPage)
 6. Favicon
 7. Robots tag
 

@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
 use RalphJSmit\Laravel\SEO\Schema\BreadcrumbListSchema;
+use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
 use RalphJSmit\Laravel\SEO\Schema\Schema;
 
 class SchemaCollection extends Collection
@@ -13,6 +14,7 @@ class SchemaCollection extends Collection
     protected array $dictionary = [
         'article' => ArticleSchema::class,
         'breadcrumbs' => BreadcrumbListSchema::class,
+        'faqPage' => FaqPageSchema::class,
     ];
 
     public array $markup = [];
@@ -27,6 +29,13 @@ class SchemaCollection extends Collection
     public function addBreadcrumbs(?Closure $builder = null): static
     {
         $this->markup[$this->dictionary['breadcrumbs']][] = $builder ?: fn (Schema $schema): Schema => $schema;
+
+        return $this;
+    }
+
+    public function addFaqPage(?Closure $builder = null): static
+    {
+        $this->markup[$this->dictionary['faqPage']][] = $builder ?: fn (Schema $schema): Schema => $schema;
 
         return $this;
     }

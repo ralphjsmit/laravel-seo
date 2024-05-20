@@ -13,6 +13,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 5. Structured data (Article and Breadcrumbs)
 6. Favicon
 7. Robots tag
+8. Alternates links tag
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, but then only for SEO. I'm sure it will be very helpful for you, as it's usually best for a website to have attention for SEO right from the beginning.
 
@@ -273,6 +274,7 @@ You are allowed to only override the properties you want and omit the other prop
 12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
 13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
 14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
+15. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 

@@ -10,6 +10,9 @@ class SEOData
 {
     use Pipeable;
 
+    /**
+     * @param null|(AlternateTag[]) $alternates
+     */
     public function __construct(
         public ?string $title = null,
         public ?string $description = null,
@@ -32,6 +35,7 @@ class SEOData
         public ?string $robots = null,
         public ?string $canonical_url = null,
         public ?string $openGraphTitle = null,
+        public ?array $alternates = null,
     ) {
         if ($this->locale === null) {
             $this->locale = app()->getLocale();

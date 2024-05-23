@@ -17,11 +17,11 @@ it('will display the alternates links if the associated SEO model has alternates
         'alternates' => [
             new AlternateTag(
                 hreflang: 'en',
-                href: "https://example.com/en",
+                href: 'https://example.com/en',
             ),
             new AlternateTag(
                 hreflang: 'fr',
-                href: "https://example.com/fr",
+                href: 'https://example.com/fr',
             ),
         ],
     ];

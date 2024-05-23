@@ -8,6 +8,6 @@ class AlternateTag extends LinkTag
         public string $hreflang,
         string $href,
     ) {
-		parent::__construct('alternate', $href);
+        parent::__construct('alternate', $href);
     }
 }

@@ -254,6 +254,16 @@ public function getDynamicSEOData(): SEOData
         title: $this->title,
         description: $this->excerpt,
         author: $this->author->fullName,
+        alternates: [
+            new AlternateTag(
+                hreflang: 'en',
+                href: "https://example.com/en",
+            ),
+            new AlternateTag(
+                hreflang: 'fr',
+                href: "https://example.com/fr",
+            ),
+        ],
     );
 }
 ```

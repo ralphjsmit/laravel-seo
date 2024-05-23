@@ -27,5 +27,6 @@ it('will display the alternates links if the associated SEO model has alternates
     ];
 
     get(route('seo.test-page', ['page' => $page]))
-        ->assertSee('<link rel="alternate" href="https://example.com/en" hreflang="en">', false);
+        ->assertSee('<link rel="alternate" href="https://example.com/en" hreflang="en">', false)
+        ->assertSee('<link rel="alternate" href="https://example.com/fr" hreflang="fr">', false);
 });

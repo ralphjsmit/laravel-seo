@@ -13,7 +13,7 @@ class AlternateTags extends Collection implements Renderable
 
     public static function initialize(SEOData $SEOData): ?static
     {
-        if (empty($SEOData->alternates)) {
+        if (! $SEOData->alternates) {
             return null;
         }
 

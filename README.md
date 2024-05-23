@@ -357,7 +357,7 @@ You can completely customize the schema markup by using the `->markup()` method 
 ```php
 use Illuminate\Support\Collection;
 
-SchemaCollection::initialize()->addArticle(function(ArticleSchema $article): ArticleSchema {
+SchemaCollection::initialize()->addArticle(function (ArticleSchema $article): ArticleSchema {
     return $article->markup(function(Collection $markup): Collection {
         return $markup->put('alternativeHeadline', $this->tagline);
     });
@@ -372,7 +372,7 @@ You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbs()
 
 ```php
 SchemaCollection::initialize()
-   ->addBreadcrumbs(function(BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
+   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
         return $breadcrumbs
             ->prependBreadcrumbs([
                'Homepage' => 'https://example.com',

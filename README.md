@@ -405,8 +405,8 @@ use RalphJSmit\Laravel\SEO\SchemaCollection;
 SchemaCollection::initialize()
     ->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
         return $faqPage
-           ->addQuestion( name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!" )
-           ->addQuestion( name: "Does it support multiple questions?", acceptedAnswer: "Of course." );
+           ->addQuestion(name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!")
+           ->addQuestion(name: "Does it support multiple questions?", acceptedAnswer: "Of course.");
    });
 ```
 

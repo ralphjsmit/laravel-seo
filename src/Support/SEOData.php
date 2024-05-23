@@ -11,7 +11,7 @@ class SEOData
     use Pipeable;
 
     /**
-     * @param null|(AlternateTag[]) $alternates
+     * @param null|array<array-key, AlternateTag> $alternates
      */
     public function __construct(
         public ?string $title = null,

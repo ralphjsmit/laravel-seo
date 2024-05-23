@@ -371,18 +371,20 @@ At this point, I'm just unable to fluently support every possible version of the
 You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbs()` function on the `SchemaCollection`:
 
 ```php
-SchemaCollection::initialize()->addBreadcrumbs(
-    function(BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
-        return $breadcrumbs->prependBreadcrumbs([
-            'Homepage' => 'https://example.com',
-            'Category' => 'https://example.com/test',
-        ])->appendBreadcrumbs([
-            'Subarticle' => 'https://example.com/test/article/2',
-        ])->markup(function(Collection $markup): Collection {
-            // ...
-        });
-    }
-);
+SchemaCollection::initialize()
+   ->addBreadcrumbs(function(BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
+        return $breadcrumbs
+            ->prependBreadcrumbs([
+               'Homepage' => 'https://example.com',
+               'Category' => 'https://example.com/test',
+            ])
+            ->appendBreadcrumbs([
+                'Subarticle' => 'https://example.com/test/article/2',
+            ])
+            ->markup(function(Collection $markup): Collection {
+               // ...
+            });
+    });
 ```
 
 This code will generate `BreadcrumbList` JSON-LD structured data with the following four pages:
@@ -400,15 +402,12 @@ You can also add `FAQPage` schema markup by using the `->addFaqPage()` function 
 use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 
-SchemaCollection::initialize()->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
-    return $faqPage->addQuestion(
-        name: "Can this package add FaqPage to the schema?",
-        acceptedAnswer: "Yes!"
-    )->addQuestion(
-        name: "Does it support multiple questions?",
-        acceptedAnswer: "Of course."
-    );
-});
+SchemaCollection::initialize()
+    ->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
+        return $faqPage
+           ->addQuestion( name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!" )
+           ->addQuestion( name: "Does it support multiple questions?", acceptedAnswer: "Of course." );
+   });
 ```
 
 ## Advanced usage

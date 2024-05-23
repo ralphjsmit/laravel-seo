@@ -19,12 +19,12 @@ class FaqPageSchema extends Schema
         string $acceptedAnswer
     ): static {
         $this->questions[] = [
-            "@type" => "Question",
-            "name" => $name,
-            "acceptedAnswer" => [
-                "@type" => "Answer",
-                "text" => $acceptedAnswer
-            ]
+            '@type' => 'Question',
+            'name' => $name,
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $acceptedAnswer,
+            ],
         ];
 
         return $this;
@@ -32,7 +32,7 @@ class FaqPageSchema extends Schema
 
     public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
     {
-        // 
+        //
     }
 
     public function generateInner(): HtmlString

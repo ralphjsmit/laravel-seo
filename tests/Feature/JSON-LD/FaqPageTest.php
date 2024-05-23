@@ -23,11 +23,11 @@ it('can correctly render the JSON-LD Schema markup: FaqPageTest', function () {
         'url' => 'https://example.com/test/faq',
         'schema' => SchemaCollection::initialize()->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
             return $faqPage->addQuestion(
-                name: "Can this package add FaqPage to the schema?",
-                acceptedAnswer: "Yes!"
+                name: 'Can this package add FaqPage to the schema?',
+                acceptedAnswer: 'Yes!'
             )->addQuestion(
-                name: "Does it support multiple questions?",
-                acceptedAnswer: "Of course."
+                name: 'Does it support multiple questions?',
+                acceptedAnswer: 'Of course.'
             );
         }),
     ];

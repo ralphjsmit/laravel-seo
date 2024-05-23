@@ -48,6 +48,7 @@ class SEO extends Model
             robots: $overrides->robots ?? $this->robots,
             canonical_url: $overrides->canonical_url ?? $this->canonical_url,
             openGraphTitle: $overrides->openGraphTitle ?? null,
+            alternates: $overrides->alternates ?? null,
         );
     }
 }

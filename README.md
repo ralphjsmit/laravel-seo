@@ -10,7 +10,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 2. Meta tags (author, description, image, robots, etc.)
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
-5. Structured data (Article and Breadcrumbs)
+5. Structured data (Article, Breadcrumbs and FAQPage)
 6. Favicon
 7. Robots tag
 8. Alternates links tag
@@ -333,6 +333,7 @@ This package can also **generate structured data** for you (also called schema m
 
 1. `Article`
 2. `BreadcrumbList`
+3. `FAQPage`
 
 After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
 
@@ -368,7 +369,7 @@ You can completely customize the schema markup by using the `->markup()` method 
 ```php
 use Illuminate\Support\Collection;
 
-SchemaCollection::initialize()->addArticle(function(ArticleSchema $article): ArticleSchema {
+SchemaCollection::initialize()->addArticle(function (ArticleSchema $article): ArticleSchema {
     return $article->markup(function(Collection $markup): Collection {
         return $markup->put('alternativeHeadline', $this->tagline);
     });
@@ -382,18 +383,20 @@ At this point, I'm just unable to fluently support every possible version of the
 You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbs()` function on the `SchemaCollection`:
 
 ```php
-SchemaCollection::initialize()->addBreadcrumbs(
-    function(BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
-        return $breadcrumbs->prependBreadcrumbs([
-            'Homepage' => 'https://example.com',
-            'Category' => 'https://example.com/test',
-        ])->appendBreadcrumbs([
-            'Subarticle' => 'https://example.com/test/article/2',
-        ])->markup(function(Collection $markup): Collection {
-            // ...
-        });
-    }
-);
+SchemaCollection::initialize()
+   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
+        return $breadcrumbs
+            ->prependBreadcrumbs([
+               'Homepage' => 'https://example.com',
+               'Category' => 'https://example.com/test',
+            ])
+            ->appendBreadcrumbs([
+                'Subarticle' => 'https://example.com/test/article/2',
+            ])
+            ->markup(function(Collection $markup): Collection {
+               // ...
+            });
+    });
 ```
 
 This code will generate `BreadcrumbList` JSON-LD structured data with the following four pages:
@@ -402,6 +405,22 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 2. Category
 3. [Current page]
 4. Subarticle
+
+### FAQPage schema markup
+
+You can also add `FAQPage` schema markup by using the `->addFaqPage()` function on the `SchemaCollection`:
+
+```php
+use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+
+SchemaCollection::initialize()
+    ->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
+        return $faqPage
+           ->addQuestion(name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!")
+           ->addQuestion(name: "Does it support multiple questions?", acceptedAnswer: "Of course.");
+   });
+```
 
 ## Advanced usage
 

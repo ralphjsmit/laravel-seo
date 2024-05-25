@@ -11,13 +11,13 @@ class DescriptionTag extends MetaTag
     {
         $description = $SEOData?->description;
 
-        if (! $description) {
+        if (!$description) {
             return null;
         }
 
         return new MetaTag(
             name: 'description',
-            content: trim($description)
+            content: $description
         );
     }
 }

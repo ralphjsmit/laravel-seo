@@ -7,7 +7,7 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    if (! file_exists($dir = public_path('images'))) {
+    if (!file_exists($dir = public_path('images'))) {
         mkdir($dir, 0777, true);
     }
 
@@ -39,28 +39,28 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
         ->assertSee('"application/ld+json"', false)
         ->assertSee(
             '<script type="application/ld+json">' .
-            json_encode([
-                '@context' => 'https://schema.org',
-                '@type' => 'Article',
-                'mainEntityOfPage' => [
-                    '@type' => 'WebPage',
-                    '@id' => route('seo.test-page', ['page' => $page]),
-                ],
-                'datePublished' => now()->subDays(2)->toIso8601String(),
-                'dateModified' => now()->toIso8601String(),
-                'headline' => 'Test title',
-                'author' => [
-                    [
-                        '@type' => 'Person',
-                        'name' => 'Ralph J. Smit',
+                json_encode([
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Article',
+                    'mainEntityOfPage' => [
+                        '@type' => 'WebPage',
+                        '@id' => route('seo.test-page', ['page' => $page]),
                     ],
-                    [
-                        '@type' => 'Person',
-                        'name' => 'Second author',
+                    'datePublished' => now()->subDays(2)->toIso8601String(),
+                    'dateModified' => now()->toIso8601String(),
+                    'headline' => 'Test title',
+                    'author' => [
+                        [
+                            '@type' => 'Person',
+                            'name' => 'Ralph J. Smit',
+                        ],
+                        [
+                            '@type' => 'Person',
+                            'name' => 'Second author',
+                        ],
                     ],
-                ],
-                'image' => secure_url('images/twitter-1743x1743.jpg'),
-            ]) . '</script>',
+                    'image' => secure_url('images/twitter-1743x1743.jpg'),
+                ]) . '</script>',
             false
         );
 });

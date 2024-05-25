@@ -9,23 +9,22 @@ use RalphJSmit\Helpers\Laravel\Pipe\Pipeable;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
 
+/**
+ * @deprecated Use CustomSchema paradigm
+ */
 abstract class Schema extends Tag
 {
     use Pipeable;
+
+    public string $tag = 'script';
 
     public array $attributes = [
         'type' => 'application/ld+json',
     ];
 
-    public string $context = 'https://schema.org/';
-
     public Collection $markup;
 
     public array $markupTransformers = [];
-
-    public string $tag = 'script';
-
-    public HtmlString $inner;
 
     public function __construct(SEOData $SEOData, array $markupBuilders = [])
     {

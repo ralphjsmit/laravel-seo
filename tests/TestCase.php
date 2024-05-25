@@ -9,6 +9,27 @@ use RalphJSmit\Laravel\SEO\LaravelSEOServiceProvider;
 
 class TestCase extends Orchestra
 {
+    public array $faqTestSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            '@type' => 'Question',
+            'name' => 'Can this package add FaqPage to the schema?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Yes!',
+            ],
+        ],
+        [
+            '@type' => 'Question',
+            'name' => 'Does it support multiple questions?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Of course.',
+            ],
+        ],
+    ];
+
     protected function setUp(): void
     {
         parent::setUp();

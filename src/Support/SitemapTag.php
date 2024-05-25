@@ -4,14 +4,16 @@ namespace RalphJSmit\Laravel\SEO\Support;
 
 class SitemapTag extends LinkTag
 {
-    public string $rel = 'sitemap';
+    public array $attributes = [
+        'type' => 'application/xml',
+        'rel' => 'sitemap',
+        'title' => 'Sitemap',
+    ];
 
-    public string $type = 'application/xml';
-
-    public string $title = 'Sitemap';
 
     public function __construct(
-        public string $href
+        string $href
     ) {
+        $this->attributes['href'] = $href;
     }
 }

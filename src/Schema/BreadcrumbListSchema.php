@@ -6,6 +6,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
+/**
+ * @deprecated Use CustomSchema paradigm
+ */
 class BreadcrumbListSchema extends Schema
 {
     public Collection $breadcrumbs;

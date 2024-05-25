@@ -37,36 +37,36 @@ it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function ()
         ->assertSee('"application/ld+json"', false)
         ->assertSee(
             '<script type="application/ld+json">' .
-            json_encode([
-                '@context' => 'https://schema.org',
-                '@type' => 'BreadcrumbList',
-                'itemListElement' => [
-                    [
-                        '@type' => 'ListItem',
-                        'position' => 1,
-                        'name' => 'Homepage',
-                        'item' => 'https://example.com',
+                json_encode([
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'Homepage',
+                            'item' => 'https://example.com',
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => 'Category',
+                            'item' => 'https://example.com/test',
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 3,
+                            'name' => 'Test article | Laravel SEO',
+                            'item' => 'https://example.com/test/article',
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 4,
+                            'name' => 'Subarticle',
+                            'item' => 'https://example.com/test/article/2',
+                        ],
                     ],
-                    [
-                        '@type' => 'ListItem',
-                        'position' => 2,
-                        'name' => 'Category',
-                        'item' => 'https://example.com/test',
-                    ],
-                    [
-                        '@type' => 'ListItem',
-                        'position' => 3,
-                        'name' => 'Test article | Laravel SEO',
-                        'item' => 'https://example.com/test/article',
-                    ],
-                    [
-                        '@type' => 'ListItem',
-                        'position' => 4,
-                        'name' => 'Subarticle',
-                        'item' => 'https://example.com/test/article/2',
-                    ],
-                ],
-            ]) . '</script>',
+                ]) . '</script>',
             false
         );
 });

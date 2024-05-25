@@ -20,8 +20,6 @@ class CustomSchema extends Tag
         'type' => 'application/ld+json',
     ];
 
-    public null|string|HtmlString $inner;
-
     function __construct(iterable|Arrayable $inner)
     {
         $this->inner = new HtmlString(

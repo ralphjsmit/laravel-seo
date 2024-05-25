@@ -10,7 +10,7 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 2. Meta tags (author, description, image, robots, etc.)
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
-5. Structured data (Article, Breadcrumbs, FAQPage or any custom schema)
+5. Structured data (Article, Breadcrumbs, FAQPage, or any custom schema)
 6. Favicon
 7. Robots tag
 8. Alternates links tag
@@ -100,7 +100,7 @@ return [
 
     /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
-     * be added to the head of every page. There has been some debate whether this a good practice, but experts
+     * be added to the head of every page. There has been some debate whether this is a good practice, but experts
      * from Google and Yoast say that this is the best strategy.
      * See https://yoast.com/rel-canonical/.
      */
@@ -128,7 +128,7 @@ return [
 
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
-     * so make sure to make the favicon accessibly from the `public` folder.
+     * so make sure to make the favicon accessible from the `public` folder.
      *
      * You can use the following filetypes: ico, png, gif, jpeg, svg.
      */
@@ -140,7 +140,7 @@ return [
          * was given. This will be very useful on pages where you don't have an Eloquent model for, or where you
          * don't want to hardcode the title.
          *
-         * For example, if you have a with the url '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
+         * For example, if you have an url with the path '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
          */
         'infer_title_from_url' => true,
 
@@ -277,12 +277,12 @@ You are allowed to only override the properties you want and omit the other prop
 5. `url` (by default it will be `url()->current()`)
 6. `enableTitleSuffix` (should be `true` or `false`, this allows you to set a suffix in the `config/seo.php` file, which will be appended to every title)
 7. `site_name`
-8. `published_time` (should be a `Carbon` instance with the published time. By default this will be the `created_at` property of your model)
-9. `modified_time` (should be a `Carbon` instance with the published time. By default this will be the `updated_at` property of your model)
+8. `published_time` (should be a `Carbon` instance with the published time. By default, this will be the `created_at` property of your model)
+9. `modified_time` (should be a `Carbon` instance with the published time. By default, this will be the `updated_at` property of your model)
 10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
 12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
-13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
+13. `locale` (this should be the locale of the page. By default, this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
 14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
 15. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
 
@@ -330,7 +330,7 @@ class Homepage extends Controller
 ## Generating JSON-LD structured data
 
 This package can also **generate any structured data** for you (also called schema markup).
-Structured data is a very vast subject so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
+Structured data is a very vast subject, so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
 
 ### Adding your first schema
 
@@ -363,11 +363,11 @@ public function getDynamicSEOData(): SEOData
 > When adding a new schema, you can check the [documentation here](https://developers.google.com/search/docs/appearance/structured-data/faqpage) to know what keys to add.
 
 > [!TIP]
-> After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
+> After generating the structured data, it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
 
 ### Pre-configured Schema: Article and BreadcrumbList
 
-To help you getting started with structured data, we added 2 preconfigured schema:
+To help you get started with structured data, we added 2 preconfigured schema:
 
 1. `Article`
 2. `BreadcrumbList`
@@ -423,7 +423,7 @@ public function getDynamicSEOData(): SEOData
 
 You can also add `BreadcrumbList` schema markup by using the `->withBreadcrumbList()` function on the `SchemaCollection`.
 
-By default the schema will only contain the current url from `$SEOData->url`.
+By default, the schema will only contain the current url from `$SEOData->url`.
 
 ```php
 use RalphJSmit\Laravel\SEO\SchemaCollection;
@@ -469,7 +469,7 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 
 ## Advanced usage
 
-Sometimes you may have advanced needs, that require you to apply your own logic to the `SEOData` class, just before it is used to generate the tags.
+Sometimes you may have advanced needs that require you to apply your own logic to the `SEOData` class, just before it is used to generate the tags.
 
 To accomplish this, you can use the `SEODataTransformer()` function on the `SEOManager` facade to register one or multiple closures that will be able to modify the `SEOData` instance at the last moment:
 
@@ -489,7 +489,7 @@ SEOManager::SEODataTransformer(function (SEOData $SEOData): SEOData {
 
 ### Modifying tags before they are rendered
 
-You can also **register closures that can modify the final collection of generated tags**, right before they are rendered. This is useful if you want to add custom tags to the output, or if you want to modify the output of the tags.
+You can also **register closures that can modify the final collection of generated tags**, right before they are rendered. This is useful if you want to add custom tags to the output or if you want to modify the output of the tags.
 
 ```php
 SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {

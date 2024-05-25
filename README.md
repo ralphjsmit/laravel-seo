@@ -330,7 +330,7 @@ class Homepage extends Controller
 ## Generating JSON-LD structured data
 
 This package can also **generate any structured data** for you (also called schema markup).
-Structered data is a very vast subject so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
+Structured data is a very vast subject so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
 
 ### Adding your first schema
 

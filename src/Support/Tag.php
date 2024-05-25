@@ -12,6 +12,8 @@ use Illuminate\Support\HtmlString;
  */
 abstract class Tag implements Renderable
 {
+    const ATTRIBUTES_ORDER = ['rel', 'hreflang', 'title', 'name', 'href', 'property', 'description', 'content'];
+
     /**
      * The HTML tag
      */
@@ -42,7 +44,17 @@ abstract class Tag implements Renderable
     {
         return collect($this->attributes)
             ->map(fn ($attribute) => trim($attribute))
-            ->sortKeysUsing(fn ($key) => -array_search($key, ['rel', 'hreflang', 'title', 'name', 'href', 'property', 'description', 'content']))
+            ->sortKeysUsing(function ($a, $b) {
+                $indexA = array_search($a, static::ATTRIBUTES_ORDER);
+                $indexB = array_search($b, static::ATTRIBUTES_ORDER);
+
+                return match (true) {
+                    $indexB === $indexA => 0, // keep the order defined in $attributes if neither $a or $b are in ATTRIBUTES_ORDER
+                    $indexA === false => 1,
+                    $indexB === false => -1,
+                    default => $indexA - $indexB
+                };
+            })
             ->pipeThrough($this->attributesPipeline);
     }
 }

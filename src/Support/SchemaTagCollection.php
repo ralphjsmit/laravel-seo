@@ -2,7 +2,6 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use Closure;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Schema\CustomSchema;
@@ -15,7 +14,7 @@ class SchemaTagCollection extends Collection implements Renderable
     {
         $schemas = $SEOData?->schema;
 
-        if (!$schemas) {
+        if (! $schemas) {
             return null;
         }
 

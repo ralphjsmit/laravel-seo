@@ -19,7 +19,7 @@ class TitleTag extends Tag
     {
         $title = $SEOData?->title;
 
-        if (!$title) {
+        if (! $title) {
             return null;
         }
 

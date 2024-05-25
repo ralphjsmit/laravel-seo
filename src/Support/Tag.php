@@ -27,7 +27,7 @@ abstract class Tag implements Renderable
     /**
      * The content of the tag
      */
-    public null|string|HtmlString $inner = null;
+    public null | string | HtmlString $inner = null;
 
     public array $attributesPipeline = [];
 

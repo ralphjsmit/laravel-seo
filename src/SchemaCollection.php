@@ -13,7 +13,7 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 /**
  * @template TKey of array-key
- * 
+ *
  * @extends Collection<TKey, iterable|Arrayable|(Closure(SEOData $SEOData):iterable|Arrayable)>
  */
 class SchemaCollection extends Collection
@@ -44,9 +44,9 @@ class SchemaCollection extends Collection
     }
 
     /**
-     * @param null|(Closure(SEOData $SEOData, Collection $article): Collection) $builder
+     * @param  null|(Closure(SEOData $SEOData, Collection $article): Collection)  $builder
      */
-    function withArticle(null|array|Closure $builder = null): static
+    public function withArticle(null | array | Closure $builder = null): static
     {
         return $this->add(function (SEOData $SEOData) use ($builder) {
             $schema = collect([
@@ -75,9 +75,9 @@ class SchemaCollection extends Collection
     }
 
     /**
-     * @param null|(Closure(SEOData $SEOData, Collection $breadcrumbList): Collection) $builder
+     * @param  null|(Closure(SEOData $SEOData, Collection $breadcrumbList): Collection)  $builder
      */
-    function withBreadcrumbList(null|array|Closure $builder = null): static
+    public function withBreadcrumbList(null | array | Closure $builder = null): static
     {
         return $this->add(function (SEOData $SEOData) use ($builder) {
             $schema = collect([
@@ -89,7 +89,7 @@ class SchemaCollection extends Collection
                         'name' => $SEOData->title,
                         'item' => $SEOData->url,
                         'position' => 1,
-                    ]
+                    ],
                 ]),
             ]);
 
@@ -106,7 +106,6 @@ class SchemaCollection extends Collection
                         ->map(fn (array $item, int $key) => [...$item, 'position' => $key + 1])
                 );
             }
-
 
             return $schema->filter();
         });

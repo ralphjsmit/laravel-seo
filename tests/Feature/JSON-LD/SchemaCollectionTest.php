@@ -48,7 +48,7 @@ it('can correctly render a custom JSON-LD Schemas markup from a function', funct
                     [
                         '@type' => 'Person',
                         'name' => $SEOData->author,
-                    ]
+                    ],
                 ],
             ]),
     ];
@@ -70,7 +70,7 @@ it('can correctly render a custom JSON-LD Schemas markup from a function', funct
                     [
                         '@type' => 'Person',
                         'name' => 'Ralph J. Smit',
-                    ]
+                    ],
                 ],
             ]) . '</script>',
             false
@@ -97,8 +97,8 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
                     [
                         '@type' => 'Person',
                         'name' => 'Second author',
-                    ]
-                ]
+                    ],
+                ],
             ]);
         }),
     ];
@@ -134,7 +134,6 @@ it('can correctly render the JSON-LD Schema markup: Article', function () {
         );
 });
 
-
 it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function () {
     config()->set('seo.title.suffix', ' | Laravel SEO');
 
@@ -165,7 +164,7 @@ it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function ()
                         '@type' => 'ListItem',
                         'name' => 'Subarticle',
                         'item' => 'https://example.com/test/article/2',
-                    ]
+                    ],
                 ],
             );
 
@@ -241,7 +240,7 @@ it('can correctly render multiple custom JSON-LD Schemas markup', function () {
                     [
                         '@type' => 'Person',
                         'name' => $SEOData->author,
-                    ]
+                    ],
                 ],
             ]),
     ];
@@ -264,7 +263,7 @@ it('can correctly render multiple custom JSON-LD Schemas markup', function () {
                     [
                         '@type' => 'Person',
                         'name' => 'Ralph J. Smit',
-                    ]
+                    ],
                 ],
             ]) . '</script>',
             false

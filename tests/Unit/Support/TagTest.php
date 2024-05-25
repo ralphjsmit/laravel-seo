@@ -1,26 +1,24 @@
 <?php
 
-use RalphJSmit\Laravel\SEO\Support\LinkTag;
-use RalphJSmit\Laravel\SEO\Support\MetaTag;
 use RalphJSmit\Laravel\SEO\Support\Tag;
 
 it('orders tag attributes', function () {
     $tag = new class extends Tag
     {
-        public string $tag = "link";
+        public string $tag = 'link';
     };
 
     $tag->attributes = [
-        'hreflang' => "hreflang",
-        'description' => "description",
+        'hreflang' => 'hreflang',
+        'description' => 'description',
         'title' => 'title',
-        'content' => "content",
+        'content' => 'content',
         'name' => 'name',
         'href' => 'href',
-        'foo' => "foo",
-        'property' => "property",
-        'bar' => "bar",
-        'rel' => "rel",
+        'foo' => 'foo',
+        'property' => 'property',
+        'bar' => 'bar',
+        'rel' => 'rel',
     ];
 
     expect((string) $tag->render())

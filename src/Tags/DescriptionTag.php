@@ -11,7 +11,7 @@ class DescriptionTag extends MetaTag
     {
         $description = $SEOData?->description;
 
-        if (!$description) {
+        if (! $description) {
             return null;
         }
 

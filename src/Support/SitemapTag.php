@@ -10,7 +10,6 @@ class SitemapTag extends LinkTag
         'title' => 'Sitemap',
     ];
 
-
     public function __construct(
         string $href
     ) {

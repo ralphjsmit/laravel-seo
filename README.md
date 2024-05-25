@@ -4,13 +4,13 @@
 
 Currently there aren't that many SEO-packages for Laravel and the available ones are quite complex to set up and very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically and they almost do not work out of the box.
 
-This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with. It can generate:
+This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, while still providing a simple, but powerful API to work with. It can generate:
 
 1. Title tag (with sitewide suffix)
 2. Meta tags (author, description, image, robots, etc.)
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
-5. Structured data (Article, Breadcrumbs and FAQPage)
+5. Structured data (Article, Breadcrumbs, FAQPage or any custom schema)
 6. Favicon
 7. Robots tag
 8. Alternates links tag
@@ -329,19 +329,55 @@ class Homepage extends Controller
 
 ## Generating JSON-LD structured data
 
-This package can also **generate structured data** for you (also called schema markup). At the moment we support the following types:
+This package can also **generate any structured data** for you (also called schema markup).
+Structered data is a very vast subject so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
+
+### Adding your first schema
+
+Let's add the FAQPage schema markup to our website as an example:
+
+```php
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+
+public function getDynamicSEOData(): SEOData
+{
+    return new SEOData(
+        // ...
+        schema: SchemaCollection::make()->add(fn(SEOData $SEOData) => [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => [
+                '@type' => 'Question',
+                'name' => 'Your question goes here',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Your answer goes here',
+                ],
+            ],
+        ]),
+    );
+}
+```
+
+> [!TIP]
+> When adding a new schema, you can check the [documentation here](https://developers.google.com/search/docs/appearance/structured-data/faqpage) to know what keys to add.
+
+> [!TIP]
+> After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
+
+### Pre-configured Schema: Article and BreadcrumbList
+
+To help you getting started with structured data, we added 2 preconfigured schema:
 
 1. `Article`
 2. `BreadcrumbList`
-3. `FAQPage`
-
-After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
-
-However, you can easily send me a (draft) PR with your requested types and I'll (most probably) add them to the package.
 
 ### Article schema markup
 
-To enable structured data, you need to use the `schema` property of the `SEOData` class. To generate `Article` schema markup, use the `->addArticle()` method:
+You can add a pre-configured article with the `withArticle` method, this will generate a fully filled Article JSON schema using the values from your `SEOData` instance.
+
+> [!NOTE]
+> Check the Google documentation about [Article](https://developers.google.com/search/docs/appearance/structured-data/article)
 
 ```php
 
@@ -351,51 +387,76 @@ public function getDynamicSEOData(): SEOData
 {
     return new SEOData(
         // ...
-        schema: SchemaCollection::initialize()->addArticle(),
+        schema: SchemaCollection::make()->withArticle(),
     );
 }
 ```
 
-You can pass a closure the the `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of `ArticleSchema` as its argument. You can an additional author by using the `->addAuthor()` method:
+You can also pass a closure to the `->withArticle()` method to customize the individual schema markup.
 
 ```php
-SchemaCollection::initialize()->addArticle(
-    fn (ArticleSchema $article): ArticleSchema => $article->addAuthor('Second author')
-);
-```
-
-You can completely customize the schema markup by using the `->markup()` method on the `ArticleSchema` instance:
-
-```php
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Support\Collection;
 
-SchemaCollection::initialize()->addArticle(function (ArticleSchema $article): ArticleSchema {
-    return $article->markup(function(Collection $markup): Collection {
-        return $markup->put('alternativeHeadline', $this->tagline);
-    });
-});
+public function getDynamicSEOData(): SEOData
+{
+    return new SEOData(
+        // ...
+        title: "A boring title"
+        schema: SchemaCollection::make()->withArticle(function(SEOData $SEOData, Collection $article){
+            return $article->mergeRecursive([
+                'alternativeHeadline' => "Not {$SEOData->title}", // will be "Not A boring title"
+                'author' => [
+                    [
+                        '@type' => 'Person',
+                        'name' => $this->moderator,
+                    ]
+                ]
+            ]);
+        }),
+    );
+}
 ```
-
-At this point, I'm just unable to fluently support every possible version of the structured, so this is the perfect way to add an additional property to the output!
 
 ### BreadcrumbList schema markup
 
-You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbs()` function on the `SchemaCollection`:
+You can also add `BreadcrumbList` schema markup by using the `->withBreadcrumbList()` function on the `SchemaCollection`.
+
+By default the schema will only contain the current url from `$SEOData->url`.
 
 ```php
-SchemaCollection::initialize()
-   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
-        return $breadcrumbs
-            ->prependBreadcrumbs([
-               'Homepage' => 'https://example.com',
-               'Category' => 'https://example.com/test',
-            ])
-            ->appendBreadcrumbs([
-                'Subarticle' => 'https://example.com/test/article/2',
-            ])
-            ->markup(function(Collection $markup): Collection {
-               // ...
-            });
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
+use Illuminate\Support\Collection;
+
+SchemaCollection::make()
+   ->withBreadcrumbList(function (SEOData $SEOData, Collection $breadcrumbs) {
+        $items = $breadcrumb->get('itemListElement', []);
+
+        $breadcrumb->put(
+            'itemListElement',
+            [
+                [
+                    '@type' => 'ListItem',
+                    'name' => 'Homepage',
+                    'item' => 'https://example.com',
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'name' => 'Category',
+                    'item' => 'https://example.com/test',
+                ],
+                ...$items,
+                [
+                    '@type' => 'ListItem',
+                    'name' => 'Subarticle',
+                    'item' => 'https://example.com/test/article/2',
+                ]
+            ],
+        );
+
+        return $breadcrumb;
     });
 ```
 
@@ -405,22 +466,6 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 2. Category
 3. [Current page]
 4. Subarticle
-
-### FAQPage schema markup
-
-You can also add `FAQPage` schema markup by using the `->addFaqPage()` function on the `SchemaCollection`:
-
-```php
-use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
-use RalphJSmit\Laravel\SEO\SchemaCollection;
-
-SchemaCollection::initialize()
-    ->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
-        return $faqPage
-           ->addQuestion(name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!")
-           ->addQuestion(name: "Does it support multiple questions?", acceptedAnswer: "Of course.");
-   });
-```
 
 ## Advanced usage
 

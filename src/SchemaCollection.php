@@ -43,13 +43,6 @@ class SchemaCollection extends Collection
         return $this;
     }
 
-    public function addFaqPage(?Closure $builder = null): static
-    {
-        $this->markup[$this->dictionary['faqPage']][] = $builder ?: fn (Schema $schema): Schema => $schema;
-
-        return $this;
-    }
-
     /**
      * @param null|(Closure(SEOData $SEOData, Collection $article): Collection) $builder
      */

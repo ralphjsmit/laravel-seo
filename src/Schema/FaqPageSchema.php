@@ -41,7 +41,6 @@ class FaqPageSchema extends CustomPreDefinedSchema
             '@type' => $this->type,
             'mainEntity' => $this->questions,
         ])
-            ->pipeThrough($this->markupTransformers)
-            ->toJson();
+            ->pipeThrough($this->markupTransformers);
     }
 }

@@ -44,8 +44,7 @@ class BreadcrumbListSchema extends CustomPreDefinedSchema
                     ]);
                 }, new Collection()),
         ])
-            ->pipeThrough($this->markupTransformers)
-            ->toJson();
+            ->pipeThrough($this->markupTransformers);
     }
 
     public function prependBreadcrumbs(array $breadcrumbs): static

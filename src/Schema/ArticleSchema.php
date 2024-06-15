@@ -93,7 +93,6 @@ class ArticleSchema extends CustomPreDefinedSchema
             ->when($this->description, fn (Collection $collection): Collection => $collection->put('description', $this->description))
             ->when($this->image, fn (Collection $collection): Collection => $collection->put('image', $this->image))
             ->when($this->articleBody, fn (Collection $collection): Collection => $collection->put('articleBody', $this->articleBody))
-            ->pipeThrough($this->markupTransformers)
-            ->toJson();
+            ->pipeThrough($this->markupTransformers);
     }
 }

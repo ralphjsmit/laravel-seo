@@ -59,7 +59,7 @@ class TagManager implements Renderable
             $SEOData->image = secure_url($SEOData->image);
         }
 
-        if ($SEOData->favicon && ! filter_var($SEOData->favicon, FILTER_VALIDATE_URL)) {
+        if ($SEOData->favicon && filter_var($SEOData->favicon, FILTER_VALIDATE_URL) === false) {
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
 

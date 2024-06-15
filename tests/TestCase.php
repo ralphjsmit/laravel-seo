@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RalphJSmit\Laravel\SEO\LaravelSEOServiceProvider;
@@ -16,6 +17,9 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'RalphJSmit\\Laravel\\SEO\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
+
+        // Freeze the time across entire testsuite...
+        Carbon::setTestNow(now());
     }
 
     protected function getPackageProviders($app)

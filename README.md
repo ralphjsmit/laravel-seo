@@ -332,6 +332,10 @@ class Homepage extends Controller
 This package can also **generate any structured data** for you (also called schema markup).
 Structured data is a very vast subject, so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
 
+Structured data can be added in two ways:
+- Construct custom arrays of the structured data format, which is then rendered in JSON with the correct tags on the right place by the package.
+- Use one of the 2 pre-defined templates (`Article` and `BreadcrumbList`). 
+
 ### Adding your first schema
 
 Let's add the FAQPage schema markup to our website as an example:
@@ -343,18 +347,21 @@ public function getDynamicSEOData(): SEOData
 {
     return new SEOData(
         // ...
-        schema: SchemaCollection::make()->add(fn(SEOData $SEOData) => [
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => [
-                '@type' => 'Question',
-                'name' => 'Your question goes here',
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => 'Your answer goes here',
+        schema: SchemaCollection::make()
+            ->add(fn (SEOData $SEOData) => [
+                // You could use the `$SEOData` to dynamically
+                // use any data about the current page.
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => [
+                    '@type' => 'Question',
+                    'name' => 'Your question goes here',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Your answer goes here',
+                    ],
                 ],
-            ],
-        ]),
+            ]),
     );
 }
 ```
@@ -362,22 +369,17 @@ public function getDynamicSEOData(): SEOData
 > [!TIP]
 > When adding a new schema, you can check the [documentation here](https://developers.google.com/search/docs/appearance/structured-data/faqpage) to know what keys to add.
 
-> [!TIP]
-> After generating the structured data, it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
-
 ### Pre-configured Schema: Article and BreadcrumbList
 
-To help you get started with structured data, we added 2 preconfigured schema:
+To help you get started with structured data, we added 3 preconfigured schema that you can modify using fluent methods. The following types are available:
 
 1. `Article`
 2. `BreadcrumbList`
+3. `FAQPage`
 
 ### Article schema markup
 
-You can add a pre-configured article with the `withArticle` method, this will generate a fully filled Article JSON schema using the values from your `SEOData` instance.
-
-> [!NOTE]
-> Check the Google documentation about [Article](https://developers.google.com/search/docs/appearance/structured-data/article)
+To enable structured data, you need to use the schema property of the SEOData class. To automatically generate `Article` schema markup, use the `->addArticle()` method:
 
 ```php
 
@@ -387,14 +389,16 @@ public function getDynamicSEOData(): SEOData
 {
     return new SEOData(
         // ...
-        schema: SchemaCollection::make()->withArticle(),
+        schema: SchemaCollection::make()
+            ->addArticle(),
     );
 }
 ```
 
-You can also pass a closure to the `->withArticle()` method to customize the individual schema markup.
+You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method:
 
 ```php
+use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
 use RalphJSmit\Laravel\SEO\SchemaCollection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Support\Collection;
@@ -404,20 +408,24 @@ public function getDynamicSEOData(): SEOData
     return new SEOData(
         // ...
         title: "A boring title"
-        schema: SchemaCollection::make()->withArticle(function(SEOData $SEOData, Collection $article){
-            return $article->mergeRecursive([
-                'alternativeHeadline' => "Not {$SEOData->title}", // will be "Not A boring title"
-                'author' => [
-                    [
-                        '@type' => 'Person',
-                        'name' => $this->moderator,
-                    ]
-                ]
-            ]);
-        }),
+        schema: SchemaCollection::make()
+            ->addArticle(function (ArticleSchema $article, SEOData $SEOData): ArticleSchema {
+                return $article
+                    ->addAuthor($this->moderator)
+                    ->markup(function (Collection $markup) use ($SEOData) : Collection {
+                        return $markup
+                            ->put('alternativeHeadline', "Not {$SEOData->title}") // Set/overwrite alternative headline property to `Will be "Not A boring title"` :)
+                            ->mergeRecursive([
+                                //...
+                            ]);
+                    });
+            }),
     );
 }
 ```
+
+> [!TIP]
+> Check the Google documentation about [Article](https://developers.google.com/search/docs/appearance/structured-data/article) for more information.
 
 ### BreadcrumbList schema markup
 
@@ -430,33 +438,19 @@ use RalphJSmit\Laravel\SEO\SchemaCollection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Support\Collection;
 
-SchemaCollection::make()
-   ->withBreadcrumbList(function (SEOData $SEOData, Collection $breadcrumbs) {
-        $items = $breadcrumb->get('itemListElement', []);
-
-        $breadcrumb->put(
-            'itemListElement',
-            [
-                [
-                    '@type' => 'ListItem',
-                    'name' => 'Homepage',
-                    'item' => 'https://example.com',
-                ],
-                [
-                    '@type' => 'ListItem',
-                    'name' => 'Category',
-                    'item' => 'https://example.com/test',
-                ],
-                ...$items,
-                [
-                    '@type' => 'ListItem',
-                    'name' => 'Subarticle',
-                    'item' => 'https://example.com/test/article/2',
-                ]
-            ],
-        );
-
-        return $breadcrumb;
+SchemaCollection::initialize()
+   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs, SEOData $SEOData): BreadcrumbListSchema {
+        return $breadcrumbs
+            ->prependBreadcrumbs([
+               'Homepage' => 'https://example.com',
+               'Category' => 'https://example.com/test',
+            ])
+            ->appendBreadcrumbs([
+                'Subarticle' => 'https://example.com/test/article/2',
+            ])
+            ->markup(function (Collection $markup): Collection {
+               // ...
+            });
     });
 ```
 
@@ -466,6 +460,31 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 2. Category
 3. [Current page]
 4. Subarticle
+
+> [!TIP]
+> Check the Google documentation about [BreadcrumbList](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb) for more information.
+
+### FAQPage schema markup
+
+You can also add FAQPage schema markup by using the ->addFaqPage() function on the SchemaCollection:
+
+```php
+use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;use RalphJSmit\Laravel\SEO\Support\SEOData;
+
+SchemaCollection::initialize()
+    ->addFaqPage(function (FaqPageSchema $faqPage, SEOData $SEOData): FaqPageSchema {
+        return $faqPage
+           ->addQuestion(name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!")
+           ->addQuestion(name: "Does it support multiple questions?", acceptedAnswer: "Of course.");
+   });
+```
+
+> [!TIP]
+> Check the Google documentation about [Faq Page](https://developers.google.com/search/docs/appearance/structured-data/faqpage) for more information.
+
+> [!TIP]
+> After generating the structured data, it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
 
 ## Advanced usage
 

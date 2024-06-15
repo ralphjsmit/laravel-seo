@@ -2,14 +2,12 @@
 
 namespace RalphJSmit\Laravel\SEO\Schema;
 
+use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-/**
- * @deprecated Use CustomSchema paradigm
- */
-class BreadcrumbListSchema extends Schema
+class BreadcrumbListSchema extends CustomPreDefinedSchema
 {
     public Collection $breadcrumbs;
 
@@ -24,16 +22,16 @@ class BreadcrumbListSchema extends Schema
         return $this;
     }
 
-    public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
+    public function initializeMarkup(SEOData $SEOData): void
     {
         $this->breadcrumbs = collect([
             $SEOData->title => $SEOData->url,
         ]);
     }
 
-    public function generateInner(): HtmlString
+    public function generateInner(): Collection
     {
-        $inner = collect([
+        return collect([
             '@context' => 'https://schema.org',
             '@type' => $this->type,
             'itemListElement' => $this->breadcrumbs
@@ -48,8 +46,6 @@ class BreadcrumbListSchema extends Schema
         ])
             ->pipeThrough($this->markupTransformers)
             ->toJson();
-
-        return new HtmlString($inner);
     }
 
     public function prependBreadcrumbs(array $breadcrumbs): static

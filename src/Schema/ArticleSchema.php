@@ -3,14 +3,11 @@
 namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Carbon\CarbonInterface;
+use Closure;
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-/**
- * @deprecated Use CustomSchema paradigm
- */
-class ArticleSchema extends Schema
+class ArticleSchema extends CustomPreDefinedSchema
 {
     public array $authors = [];
 
@@ -32,7 +29,7 @@ class ArticleSchema extends Schema
 
     public function addAuthor(string $authorName): static
     {
-        if (empty($this->authors)) {
+        if ( ! $this->authors) {
             $this->authors = [
                 '@type' => 'Person',
                 'name' => $authorName,
@@ -52,7 +49,7 @@ class ArticleSchema extends Schema
         return $this;
     }
 
-    public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
+    public function initializeMarkup(SEOData $SEOData): void
     {
         $this->url = $SEOData->url;
 
@@ -66,12 +63,12 @@ class ArticleSchema extends Schema
         ];
 
         foreach ($properties as $markupProperty => $SEODataProperty) {
-            if ($SEOData->{$SEODataProperty}) {
+            if ( $SEOData->{$SEODataProperty} ) {
                 $this->{$markupProperty} = $SEOData->{$SEODataProperty};
             }
         }
 
-        if ($SEOData->author) {
+        if ( $SEOData->author ) {
             $this->authors = [
                 '@type' => 'Person',
                 'name' => $SEOData->author,
@@ -79,9 +76,9 @@ class ArticleSchema extends Schema
         }
     }
 
-    public function generateInner(): HtmlString
+    public function generateInner(): Collection
     {
-        $inner = collect([
+        return collect([
             '@context' => 'https://schema.org',
             '@type' => $this->type,
             'mainEntityOfPage' => [
@@ -98,7 +95,5 @@ class ArticleSchema extends Schema
             ->when($this->articleBody, fn (Collection $collection): Collection => $collection->put('articleBody', $this->articleBody))
             ->pipeThrough($this->markupTransformers)
             ->toJson();
-
-        return new HtmlString($inner);
     }
 }

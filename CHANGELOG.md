@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.2 - 2024-06-15
+
+- Fix: do also not escape image URLs for OpenGraph and Twitter.
+
 ## 1.6.1 - 2024-06-15
 
 - Fix: duplicate Twitter cards issue (#83).

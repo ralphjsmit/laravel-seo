@@ -3,7 +3,6 @@
 namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 /**

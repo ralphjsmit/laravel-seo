@@ -2,9 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Schema;
 
-use Closure;
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class BreadcrumbListSchema extends CustomPreDefinedSchema

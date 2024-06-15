@@ -27,7 +27,7 @@ abstract class Tag implements Renderable
     /**
      * The content of the tag
      */
-    public null|string|HtmlString $inner = null;
+    public null | string | HtmlString $inner = null;
 
     public array $attributesPipeline = [];
 
@@ -48,7 +48,7 @@ abstract class Tag implements Renderable
                 $indexA = array_search($a, static::ATTRIBUTES_ORDER);
                 $indexB = array_search($b, static::ATTRIBUTES_ORDER);
 
-                return match ( true ) {
+                return match (true) {
                     $indexB === $indexA => 0, // keep the order defined in $attributes if neither $a or $b are in ATTRIBUTES_ORDER
                     $indexA === false => 1,
                     $indexB === false => -1,
@@ -58,7 +58,7 @@ abstract class Tag implements Renderable
             ->pipeThrough($this->attributesPipeline);
     }
 
-    public function getInner(): null|string|HtmlString
+    public function getInner(): null | string | HtmlString
     {
         return $this->inner;
     }

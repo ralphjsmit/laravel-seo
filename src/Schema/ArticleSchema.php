@@ -4,10 +4,9 @@ namespace RalphJSmit\Laravel\SEO\Schema;
 
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-class ArticleSchema extends Schema
+class ArticleSchema extends CustomSchemaFluent
 {
     public array $authors = [];
 
@@ -29,7 +28,7 @@ class ArticleSchema extends Schema
 
     public function addAuthor(string $authorName): static
     {
-        if (empty($this->authors)) {
+        if (! $this->authors) {
             $this->authors = [
                 '@type' => 'Person',
                 'name' => $authorName,
@@ -49,7 +48,7 @@ class ArticleSchema extends Schema
         return $this;
     }
 
-    public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
+    public function initializeMarkup(SEOData $SEOData): void
     {
         $this->url = $SEOData->url;
 
@@ -76,9 +75,9 @@ class ArticleSchema extends Schema
         }
     }
 
-    public function generateInner(): HtmlString
+    public function generateInner(): Collection
     {
-        $inner = collect([
+        return collect([
             '@context' => 'https://schema.org',
             '@type' => $this->type,
             'mainEntityOfPage' => [
@@ -93,9 +92,6 @@ class ArticleSchema extends Schema
             ->when($this->description, fn (Collection $collection): Collection => $collection->put('description', $this->description))
             ->when($this->image, fn (Collection $collection): Collection => $collection->put('image', $this->image))
             ->when($this->articleBody, fn (Collection $collection): Collection => $collection->put('articleBody', $this->articleBody))
-            ->pipeThrough($this->markupTransformers)
-            ->toJson();
-
-        return new HtmlString($inner);
+            ->pipeThrough($this->markupTransformers);
     }
 }

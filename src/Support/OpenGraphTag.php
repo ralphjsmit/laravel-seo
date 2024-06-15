@@ -9,9 +9,12 @@ class OpenGraphTag extends Tag
     public string $tag = 'meta';
 
     public function __construct(
-        public string $property,
-        public string $content,
+        string $property,
+        string $content,
     ) {
+        $this->attributes['property'] = $property;
+        $this->attributes['content'] = $content;
+
         $this->attributesPipeline[] = function (Collection $collection) {
             return $collection->mapWithKeys(function ($value, $key) {
                 if ($key === 'property') {

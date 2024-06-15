@@ -32,28 +32,28 @@ it('can correctly render the JSON-LD Schema markup: FaqPageTest', function () {
         ->assertSee('"application/ld+json"', false)
         ->assertSee(
             '<script type="application/ld+json">' .
-                json_encode([
-                    '@context' => 'https://schema.org',
-                    '@type' => 'FAQPage',
-                    'mainEntity' => [
-                        [
-                            '@type' => 'Question',
-                            'name' => 'Can this package add FaqPage to the schema?',
-                            'acceptedAnswer' => [
-                                '@type' => 'Answer',
-                                'text' => 'Yes!',
-                            ],
-                        ],
-                        [
-                            '@type' => 'Question',
-                            'name' => 'Does it support multiple questions?',
-                            'acceptedAnswer' => [
-                                '@type' => 'Answer',
-                                'text' => 'Of course.',
-                            ],
+            json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => [
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Can this package add FaqPage to the schema?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Yes!',
                         ],
                     ],
-                ]) . '</script>',
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Does it support multiple questions?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Of course.',
+                        ],
+                    ],
+                ],
+            ]) . '</script>',
             false
         );
 });

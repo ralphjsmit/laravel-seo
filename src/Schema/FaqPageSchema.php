@@ -2,22 +2,20 @@
 
 namespace RalphJSmit\Laravel\SEO\Schema;
 
-use Illuminate\Support\HtmlString;
+use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 /**
  * @see https://developers.google.com/search/docs/appearance/structured-data/faqpage
  */
-class FaqPageSchema extends Schema
+class FaqPageSchema extends CustomSchemaFluent
 {
+    public Collection $questions;
+
     public string $type = 'FAQPage';
 
-    public array $questions = [];
-
-    public function addQuestion(
-        string $name,
-        string $acceptedAnswer
-    ): static {
+    public function addQuestion(string $name, string $acceptedAnswer): static
+    {
         $this->questions[] = [
             '@type' => 'Question',
             'name' => $name,
@@ -30,21 +28,18 @@ class FaqPageSchema extends Schema
         return $this;
     }
 
-    public function initializeMarkup(SEOData $SEOData, array $markupBuilders): void
+    public function initializeMarkup(SEOData $SEOData): void
     {
-        //
+        $this->questions = new Collection();
     }
 
-    public function generateInner(): HtmlString
+    public function generateInner(): Collection
     {
-        $inner = collect([
+        return collect([
             '@context' => 'https://schema.org',
             '@type' => $this->type,
             'mainEntity' => $this->questions,
         ])
-            ->pipeThrough($this->markupTransformers)
-            ->toJson();
-
-        return new HtmlString($inner);
+            ->pipeThrough($this->markupTransformers);
     }
 }

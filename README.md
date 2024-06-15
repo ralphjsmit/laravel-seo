@@ -4,13 +4,13 @@
 
 Currently there aren't that many SEO-packages for Laravel and the available ones are quite complex to set up and very decoupled from the database. They only provided you with helpers to generate the tags, but you still had to use those helpers: nothing was generated automatically and they almost do not work out of the box.
 
-This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, whilst still providing a simple, but powerful API to work with. It can generate:
+This package generates **valid and useful meta tags straight out-of-the-box**, with limited initial configuration, while still providing a simple, but powerful API to work with. It can generate:
 
 1. Title tag (with sitewide suffix)
 2. Meta tags (author, description, image, robots, etc.)
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
-5. Structured data (Article, Breadcrumbs and FAQPage)
+5. Structured data (Article, Breadcrumbs, FAQPage, or any custom schema)
 6. Favicon
 7. Robots tag
 8. Alternates links tag
@@ -100,7 +100,7 @@ return [
 
     /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
-     * be added to the head of every page. There has been some debate whether this a good practice, but experts
+     * be added to the head of every page. There has been some debate whether this is a good practice, but experts
      * from Google and Yoast say that this is the best strategy.
      * See https://yoast.com/rel-canonical/.
      */
@@ -128,7 +128,7 @@ return [
 
     /**
      * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
-     * so make sure to make the favicon accessibly from the `public` folder.
+     * so make sure to make the favicon accessible from the `public` folder.
      *
      * You can use the following filetypes: ico, png, gif, jpeg, svg.
      */
@@ -140,7 +140,7 @@ return [
          * was given. This will be very useful on pages where you don't have an Eloquent model for, or where you
          * don't want to hardcode the title.
          *
-         * For example, if you have a with the url '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
+         * For example, if you have an url with the path '/foo/about-me', we'll automatically set the title to 'About me' and append the site suffix.
          */
         'infer_title_from_url' => true,
 
@@ -277,12 +277,12 @@ You are allowed to only override the properties you want and omit the other prop
 5. `url` (by default it will be `url()->current()`)
 6. `enableTitleSuffix` (should be `true` or `false`, this allows you to set a suffix in the `config/seo.php` file, which will be appended to every title)
 7. `site_name`
-8. `published_time` (should be a `Carbon` instance with the published time. By default this will be the `created_at` property of your model)
-9. `modified_time` (should be a `Carbon` instance with the published time. By default this will be the `updated_at` property of your model)
+8. `published_time` (should be a `Carbon` instance with the published time. By default, this will be the `created_at` property of your model)
+9. `modified_time` (should be a `Carbon` instance with the published time. By default, this will be the `updated_at` property of your model)
 10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
 12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
-13. `locale` (this should be the locale of the page. By default this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
+13. `locale` (this should be the locale of the page. By default, this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
 14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
 15. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
 
@@ -329,19 +329,57 @@ class Homepage extends Controller
 
 ## Generating JSON-LD structured data
 
-This package can also **generate structured data** for you (also called schema markup). At the moment we support the following types:
+This package can also **generate any structured data** for you (also called schema markup).
+Structured data is a very vast subject, so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
+
+Structured data can be added in two ways:
+- Construct custom arrays of the structured data format, which is then rendered by the package in JSON on the correct place.
+- Use one of the 3 pre-defined templates to fluently build your structured data (`Article`, `BreadcrumbList`, `FaqPage`). 
+
+### Adding your first schema
+
+Let's add the FAQPage schema markup to our website as an example:
+
+```php
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+
+public function getDynamicSEOData(): SEOData
+{
+    return new SEOData(
+        // ...
+        schema: SchemaCollection::make()
+            ->add(fn (SEOData $SEOData) => [
+                // You could use the `$SEOData` to dynamically
+                // fetch any data about the current page.
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => [
+                    '@type' => 'Question',
+                    'name' => 'Your question goes here',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Your answer goes here',
+                    ],
+                ],
+            ]),
+    );
+}
+```
+
+> [!TIP]
+> When adding a new schema, you can check the [documentation here](https://developers.google.com/search/docs/appearance/structured-data/faqpage) to know what keys to add.
+
+### Pre-configured Schema: Article and BreadcrumbList
+
+To help you get started with structured data, we added 3 preconfigured schema that you can construct using fluent methods. The following types are available:
 
 1. `Article`
 2. `BreadcrumbList`
 3. `FAQPage`
 
-After generating the structured data it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
-
-However, you can easily send me a (draft) PR with your requested types and I'll (most probably) add them to the package.
-
 ### Article schema markup
 
-To enable structured data, you need to use the `schema` property of the `SEOData` class. To generate `Article` schema markup, use the `->addArticle()` method:
+In order to automatically and fluently generate `Article` schema markup, use the `->addArticle()` method:
 
 ```php
 
@@ -351,40 +389,54 @@ public function getDynamicSEOData(): SEOData
 {
     return new SEOData(
         // ...
-        schema: SchemaCollection::initialize()->addArticle(),
+        schema: SchemaCollection::make()->addArticle(),
     );
 }
 ```
-
-You can pass a closure the the `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of `ArticleSchema` as its argument. You can an additional author by using the `->addAuthor()` method:
+          
+This will construct an article schema using all data provided by the `SEOData` object. You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method. 
 
 ```php
-SchemaCollection::initialize()->addArticle(
-    fn (ArticleSchema $article): ArticleSchema => $article->addAuthor('Second author')
-);
+use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
+use Illuminate\Support\Collection;
+
+public function getDynamicSEOData(): SEOData
+{
+    return new SEOData(
+        // ...
+        title: "A boring title"
+        schema: SchemaCollection::make()
+            ->addArticle(function (ArticleSchema $article, SEOData $SEOData): ArticleSchema {
+                return $article->addAuthor($this->moderator);
+            }),
+    );
+}
 ```
 
 You can completely customize the schema markup by using the `->markup()` method on the `ArticleSchema` instance:
 
 ```php
-use Illuminate\Support\Collection;
-
-SchemaCollection::initialize()->addArticle(function (ArticleSchema $article): ArticleSchema {
-    return $article->markup(function(Collection $markup): Collection {
-        return $markup->put('alternativeHeadline', $this->tagline);
+SchemaCollection::initialize()->addArticle(function (ArticleSchema $article, SEOData $SEOData): ArticleSchema {
+    return $article->markup(function (Collection $markup) use ($SEOData): Collection {
+        return $markup->put('alternativeHeadline', "Not {$SEOData->title}"); // Set/overwrite alternative headline property to `Will be "Not A boring title"` :)
     });
 });
 ```
 
-At this point, I'm just unable to fluently support every possible version of the structured, so this is the perfect way to add an additional property to the output!
+> [!TIP]
+> Check the Google documentation about [Article](https://developers.google.com/search/docs/appearance/structured-data/article) for more information.
 
 ### BreadcrumbList schema markup
 
-You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbs()` function on the `SchemaCollection`:
+You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbList()` function on the `SchemaCollection`.
+
+By default, the schema will only contain the current url from `$SEOData->url`.
 
 ```php
 SchemaCollection::initialize()
-   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema {
+   ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs, SEOData $SEOData): BreadcrumbListSchema {
         return $breadcrumbs
             ->prependBreadcrumbs([
                'Homepage' => 'https://example.com',
@@ -393,7 +445,7 @@ SchemaCollection::initialize()
             ->appendBreadcrumbs([
                 'Subarticle' => 'https://example.com/test/article/2',
             ])
-            ->markup(function(Collection $markup): Collection {
+            ->markup(function (Collection $markup): Collection {
                // ...
             });
     });
@@ -406,25 +458,31 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 3. [Current page]
 4. Subarticle
 
+> [!TIP]
+> Check the Google documentation about [BreadcrumbList](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb) for more information.
+
 ### FAQPage schema markup
 
-You can also add `FAQPage` schema markup by using the `->addFaqPage()` function on the `SchemaCollection`:
+You can also add FAQPage schema markup by using the ->addFaqPage() function on the SchemaCollection:
 
 ```php
-use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
-use RalphJSmit\Laravel\SEO\SchemaCollection;
-
 SchemaCollection::initialize()
-    ->addFaqPage(function (FaqPageSchema $faqPage): FaqPageSchema {
+    ->addFaqPage(function (FaqPageSchema $faqPage, SEOData $SEOData): FaqPageSchema {
         return $faqPage
            ->addQuestion(name: "Can this package add FaqPage to the schema?", acceptedAnswer: "Yes!")
            ->addQuestion(name: "Does it support multiple questions?", acceptedAnswer: "Of course.");
    });
 ```
 
+> [!TIP]
+> Check the Google documentation about [Faq Page](https://developers.google.com/search/docs/appearance/structured-data/faqpage) for more information.
+
+> [!TIP]
+> After generating the structured data, it is always a good idea to [test your website with Google's rich result validator](https://search.google.com/test/rich-results).
+
 ## Advanced usage
 
-Sometimes you may have advanced needs, that require you to apply your own logic to the `SEOData` class, just before it is used to generate the tags.
+Sometimes you may have advanced needs that require you to apply your own logic to the `SEOData` class, just before it is used to generate the tags.
 
 To accomplish this, you can use the `SEODataTransformer()` function on the `SEOManager` facade to register one or multiple closures that will be able to modify the `SEOData` instance at the last moment:
 
@@ -444,7 +502,7 @@ SEOManager::SEODataTransformer(function (SEOData $SEOData): SEOData {
 
 ### Modifying tags before they are rendered
 
-You can also **register closures that can modify the final collection of generated tags**, right before they are rendered. This is useful if you want to add custom tags to the output, or if you want to modify the output of the tags.
+You can also **register closures that can modify the final collection of generated tags**, right before they are rendered. This is useful if you want to add custom tags to the output or if you want to modify the output of the tags.
 
 ```php
 SEOManager::tagTransformer(function (TagCollection $tags): TagCollection {

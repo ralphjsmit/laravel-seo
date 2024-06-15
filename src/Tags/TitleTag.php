@@ -10,8 +10,9 @@ class TitleTag extends Tag
     public string $tag = 'title';
 
     public function __construct(
-        public string $inner,
+        string $inner,
     ) {
+        $this->inner = trim($inner);
     }
 
     public static function initialize(?SEOData $SEOData): ?Tag
@@ -23,7 +24,7 @@ class TitleTag extends Tag
         }
 
         return new static(
-            inner: trim($title),
+            inner: $title,
         );
     }
 }

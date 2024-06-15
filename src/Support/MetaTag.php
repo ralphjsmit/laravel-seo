@@ -7,8 +7,10 @@ class MetaTag extends Tag
     public string $tag = 'meta';
 
     public function __construct(
-        public string $name,
-        public string $content,
+        string $name,
+        string $content,
     ) {
+        $this->attributes['name'] = $name;
+        $this->attributes['content'] = $content;
     }
 }

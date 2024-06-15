@@ -17,7 +17,7 @@ class DescriptionTag extends MetaTag
 
         return new MetaTag(
             name: 'description',
-            content: trim($description)
+            content: $description
         );
     }
 }

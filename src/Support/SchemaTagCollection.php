@@ -4,22 +4,28 @@ namespace RalphJSmit\Laravel\SEO\Support;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
-use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Schema\CustomSchema;
 
 class SchemaTagCollection extends Collection implements Renderable
 {
     use RenderableCollection;
 
-    public static function initialize(SEOData $SEOData, ?SchemaCollection $schema = null): ?static
+    public static function initialize(?SEOData $SEOData = null): ?static
     {
-        $collection = new static();
+        $schemas = $SEOData?->schema;
 
-        if (! $schema) {
+        if (! $schemas) {
             return null;
         }
 
-        foreach ($schema->markup as $markupClass => $markupBuilders) {
-            $collection = $collection->push(new $markupClass($SEOData, $markupBuilders));
+        $collection = new static();
+
+        foreach ($schemas as $schema) {
+            $collection->push(new CustomSchema(value($schema, $SEOData)));
+        }
+
+        foreach ($schemas->markup as $markupClass => $markupBuilders) {
+            $collection->push(new $markupClass($SEOData, $markupBuilders));
         }
 
         return $collection;

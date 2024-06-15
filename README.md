@@ -435,10 +435,6 @@ You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbLis
 By default, the schema will only contain the current url from `$SEOData->url`.
 
 ```php
-use RalphJSmit\Laravel\SEO\SchemaCollection;
-use RalphJSmit\Laravel\SEO\Support\SEOData;
-use Illuminate\Support\Collection;
-
 SchemaCollection::initialize()
    ->addBreadcrumbs(function (BreadcrumbListSchema $breadcrumbs, SEOData $SEOData): BreadcrumbListSchema {
         return $breadcrumbs
@@ -470,9 +466,6 @@ This code will generate `BreadcrumbList` JSON-LD structured data with the follow
 You can also add FAQPage schema markup by using the ->addFaqPage() function on the SchemaCollection:
 
 ```php
-use RalphJSmit\Laravel\SEO\Schema\FaqPageSchema;
-use RalphJSmit\Laravel\SEO\SchemaCollection;use RalphJSmit\Laravel\SEO\Support\SEOData;
-
 SchemaCollection::initialize()
     ->addFaqPage(function (FaqPageSchema $faqPage, SEOData $SEOData): FaqPageSchema {
         return $faqPage

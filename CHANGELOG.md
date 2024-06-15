@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.0 - 2024-06-15
+
+- Feat: add support for alternate links in (#78)
+- Feat: fluent support for FaqPage schema (#77)
+- Feat: refactor JSON+LD schema & allow any type of custom schema (#81)
+
 ## 1.5.1 - 2024-05-04
 
 - Fix: inconsistency with escaping.

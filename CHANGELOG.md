@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.1 - 2024-06-15
+
+- Fix: duplicate Twitter cards issue (#83).
+- Fix: image URL escaping (#84).
+
 ## 1.6.0 - 2024-06-15
 
 - Feat: add support for alternate links in (#78)

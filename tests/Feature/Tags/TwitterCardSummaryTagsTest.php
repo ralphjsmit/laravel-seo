@@ -70,12 +70,12 @@ it('will not include the widths and heights of Twitter images if the image was o
         ->assertSee('<meta name="twitter:title" content="Test Page | Laravel SEO">', false)
         ->assertSee('<meta name="twitter:description" content="Fallback description">', false)
         ->assertSee('<meta name="twitter:image" content="' . secure_url($imagePath) . '">', false)
-        ->assertDontSee('<meta name="twitter:image:width" content="' . $expectedWidth . '">', false)
-        ->assertDontSee('<meta name="twitter:image:height" content="' . $expectedHeight . '">', false)
+        ->assertDontSee('<meta name="twitter:image:width"', false)
+        ->assertDontSee('<meta name="twitter:image:height"', false)
         ->assertDontSee('twitter:site'); // We should not display an empty '@' username.
 })->with([
     ['summary', 'images/twitter-1743x1743.jpg', '1743', '1743'],
-    ['summary_large_image', 'images/twitter-3597x1799.jpg', '3597', '1799'],
+    ['summary', 'images/twitter-3597x1799.jpg', '3597', '1799'],
 ]);
 
 it('will not render the Twitter Card summary_large_image for too large or small images', function (string $imagePath) {

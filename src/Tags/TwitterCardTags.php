@@ -19,16 +19,24 @@ class TwitterCardTags extends Collection implements Renderable
         $collection = new static();
 
         // No generic image that spans multiple pages
-        if ($SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback'))) {
-            if ($SEOData->imageMeta?->width - $SEOData->imageMeta?->height - 20 < 0) {
+        if ($SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback')) && $SEOData->imageMeta) {
+            // Only one Twitter card can be pushed. The `summary_large_image` card
+            // is tried first, then it falls back to the normal `summary` card.
+            $imageMetaWidthDividedByHeight = $SEOData->imageMeta->width / $SEOData->imageMeta->height;
+
+            if ($imageMetaWidthDividedByHeight >= 1.5) {
+                // Summary large card has aspect ratio of 2:1. Aspect ratios of >= 1.5 are closed to 2:1 then they are to 1:1
+                $collection->push(SummaryLargeImage::initialize($SEOData));
+            } else {
                 $collection->push(Summary::initialize($SEOData));
             }
-
-            if ($SEOData->imageMeta?->width - 2 * $SEOData->imageMeta?->height - 20 < 0) {
-                $collection->push(SummaryLargeImage::initialize($SEOData));
-            }
         } else {
-            $collection->push(new TwitterCardTag('card', 'summary'));
+            if ($SEOData->image && ! $SEOData->imageMeta) {
+                // Image external URL...
+                $collection->push(Summary::initialize($SEOData));
+            } else {
+                $collection->push(new TwitterCardTag('card', 'summary'));
+            }
         }
 
         if ($SEOData->openGraphTitle) {

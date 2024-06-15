@@ -350,7 +350,7 @@ public function getDynamicSEOData(): SEOData
         schema: SchemaCollection::make()
             ->add(fn (SEOData $SEOData) => [
                 // You could use the `$SEOData` to dynamically
-                // use any data about the current page.
+                // fetch any data about the current page.
                 '@context' => 'https://schema.org',
                 '@type' => 'FAQPage',
                 'mainEntity' => [
@@ -371,7 +371,7 @@ public function getDynamicSEOData(): SEOData
 
 ### Pre-configured Schema: Article and BreadcrumbList
 
-To help you get started with structured data, we added 3 preconfigured schema that you can modify using fluent methods. The following types are available:
+To help you get started with structured data, we added 3 preconfigured schema that you can construct using fluent methods. The following types are available:
 
 1. `Article`
 2. `BreadcrumbList`
@@ -379,7 +379,7 @@ To help you get started with structured data, we added 3 preconfigured schema th
 
 ### Article schema markup
 
-To enable structured data, you need to use the schema property of the SEOData class. To automatically generate `Article` schema markup, use the `->addArticle()` method:
+In order to automatically and fluently generate `Article` schema markup, use the `->addArticle()` method:
 
 ```php
 
@@ -389,13 +389,12 @@ public function getDynamicSEOData(): SEOData
 {
     return new SEOData(
         // ...
-        schema: SchemaCollection::make()
-            ->addArticle(),
+        schema: SchemaCollection::make()->addArticle(),
     );
 }
 ```
-
-You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method:
+          
+This will construct an article schema using all data provided by the `SEOData` object. You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method. 
 
 ```php
 use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;
@@ -410,18 +409,20 @@ public function getDynamicSEOData(): SEOData
         title: "A boring title"
         schema: SchemaCollection::make()
             ->addArticle(function (ArticleSchema $article, SEOData $SEOData): ArticleSchema {
-                return $article
-                    ->addAuthor($this->moderator)
-                    ->markup(function (Collection $markup) use ($SEOData) : Collection {
-                        return $markup
-                            ->put('alternativeHeadline', "Not {$SEOData->title}") // Set/overwrite alternative headline property to `Will be "Not A boring title"` :)
-                            ->mergeRecursive([
-                                //...
-                            ]);
-                    });
+                return $article->addAuthor($this->moderator);
             }),
     );
 }
+```
+
+You can completely customize the schema markup by using the `->markup()` method on the `ArticleSchema` instance:
+
+```php
+SchemaCollection::initialize()->addArticle(function (ArticleSchema $article, SEOData $SEOData): ArticleSchema {
+    return $article->markup(function (Collection $markup) use ($SEOData): Collection {
+        return $markup->put('alternativeHeadline', "Not {$SEOData->title}"); // Set/overwrite alternative headline property to `Will be "Not A boring title"` :)
+    });
+});
 ```
 
 > [!TIP]
@@ -429,7 +430,7 @@ public function getDynamicSEOData(): SEOData
 
 ### BreadcrumbList schema markup
 
-You can also add `BreadcrumbList` schema markup by using the `->withBreadcrumbList()` function on the `SchemaCollection`.
+You can also add `BreadcrumbList` schema markup by using the `->addBreadcrumbList()` function on the `SchemaCollection`.
 
 By default, the schema will only contain the current url from `$SEOData->url`.
 

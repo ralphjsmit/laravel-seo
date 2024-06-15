@@ -24,11 +24,12 @@ class TwitterCardTags extends Collection implements Renderable
             // is tried first, then it falls back to the normal `summary` card.
             $imageMetaWidthDividedByHeight = $SEOData->imageMeta->width / $SEOData->imageMeta->height;
 
-            if ($imageMetaWidthDividedByHeight >= 1.5) {
-                // Summary large card has aspect ratio of 2:1. Aspect ratios of >= 1.5 are closed to 2:1 then they are to 1:1
-                $collection->push(SummaryLargeImage::initialize($SEOData));
-            } else {
+            if ($imageMetaWidthDividedByHeight < 1.5) {
+                // Summary large card has aspect ratio of 2:1. Aspect ratios of < 1 are closer to 1:1
+                // then they are to 2:1. Assuming most images are landscape, so fallback to 2:1.
                 $collection->push(Summary::initialize($SEOData));
+            } else {
+                $collection->push(SummaryLargeImage::initialize($SEOData));
             }
         } else {
             if ($SEOData->image && ! $SEOData->imageMeta) {

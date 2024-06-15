@@ -33,7 +33,7 @@ class TwitterCardTags extends Collection implements Renderable
         } else {
             if ($SEOData->image && ! $SEOData->imageMeta) {
                 // Image external URL...
-                $collection->push(Summary::initialize($SEOData));
+                $collection->push(SummaryLargeImage::initialize($SEOData));
             } else {
                 $collection->push(new TwitterCardTag('card', 'summary'));
             }

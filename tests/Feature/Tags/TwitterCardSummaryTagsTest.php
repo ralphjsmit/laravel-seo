@@ -74,8 +74,9 @@ it('will not include the widths and heights of Twitter images if the image was o
         ->assertDontSee('<meta name="twitter:image:height"', false)
         ->assertDontSee('twitter:site'); // We should not display an empty '@' username.
 })->with([
-    ['summary', 'images/twitter-1743x1743.jpg', '1743', '1743'],
-    ['summary', 'images/twitter-3597x1799.jpg', '3597', '1799'],
+    // Defaulting all images to summary_large_image, since external image URL cannot do aspect ratio check and most images are landscape (assumption)
+    ['summary_large_image', 'images/twitter-1743x1743.jpg', '1743', '1743'],
+    ['summary_large_image', 'images/twitter-3597x1799.jpg', '3597', '1799'],
 ]);
 
 it('will not render the Twitter Card summary_large_image for too large or small images', function (string $imagePath) {

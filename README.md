@@ -333,8 +333,8 @@ This package can also **generate any structured data** for you (also called sche
 Structured data is a very vast subject, so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
 
 Structured data can be added in two ways:
-- Construct custom arrays of the structured data format, which is then rendered in JSON with the correct tags on the right place by the package.
-- Use one of the 2 pre-defined templates (`Article` and `BreadcrumbList`). 
+- Construct custom arrays of the structured data format, which is then rendered by the package in JSON on the correct place.
+- Use one of the 3 pre-defined templates to fluently build your structured data (`Article`, `BreadcrumbList`, `FaqPage`). 
 
 ### Adding your first schema
 

@@ -7,9 +7,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
-/**
- * A representation of a HTML tag
- */
 abstract class Tag implements Renderable
 {
     const ATTRIBUTES_ORDER = ['rel', 'hreflang', 'title', 'name', 'href', 'property', 'description', 'content'];

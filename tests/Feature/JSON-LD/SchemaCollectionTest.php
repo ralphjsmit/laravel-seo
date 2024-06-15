@@ -13,7 +13,26 @@ use function Pest\Laravel\get;
 it('can correctly render a custom JSON-LD Schemas markup', function () {
     $page = Page::create([]);
 
-    $faqPageSchema = $this->faqTestSchema;
+    $faqPageSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            '@type' => 'Question',
+            'name' => 'Can this package add FaqPage to the schema?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Yes!',
+            ],
+        ],
+        [
+            '@type' => 'Question',
+            'name' => 'Does it support multiple questions?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Of course.',
+            ],
+        ],
+    ];
 
     $page::$overrides = [
         'schema' => SchemaCollection::make()->add($faqPageSchema),
@@ -246,7 +265,26 @@ it('can correctly render the JSON-LD Schema markup: FaqPage', function () {
 it('can correctly render multiple custom JSON-LD Schemas markup', function () {
     $page = Page::create([]);
 
-    $faqPageSchema = $this->faqTestSchema;
+    $faqPageSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            '@type' => 'Question',
+            'name' => 'Can this package add FaqPage to the schema?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Yes!',
+            ],
+        ],
+        [
+            '@type' => 'Question',
+            'name' => 'Does it support multiple questions?',
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => 'Of course.',
+            ],
+        ],
+    ];
 
     $now = now();
     $yesterday = now()->yesterday();

@@ -21,9 +21,7 @@ class SchemaTagCollection extends Collection implements Renderable
         $collection = new static();
 
         foreach ($schemas as $schema) {
-            $collection->push(
-                new CustomSchema(value($schema, $SEOData))
-            );
+            $collection->push(new CustomSchema(value($schema, $SEOData)));
         }
 
         foreach ($schemas->markup as $markupClass => $markupBuilders) {

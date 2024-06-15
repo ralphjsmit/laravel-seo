@@ -9,6 +9,7 @@ class AlternateTag extends LinkTag
         string $href,
     ) {
         parent::__construct('alternate', $href);
+
         $this->attributes['hreflang'] = $hreflang;
     }
 }

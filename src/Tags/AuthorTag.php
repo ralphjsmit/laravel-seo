@@ -17,7 +17,7 @@ class AuthorTag extends MetaTag
 
         return new MetaTag(
             name: 'author',
-            content: trim($author)
+            content: $author
         );
     }
 }

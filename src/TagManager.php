@@ -2,6 +2,8 @@
 
 namespace RalphJSmit\Laravel\SEO;
 
+use const FILTER_VALIDATE_URL;
+
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -51,7 +53,7 @@ class TagManager implements Renderable
             }
         }
 
-        if ($SEOData->image && ! filter_var($SEOData->image, FILTER_VALIDATE_URL)) {
+        if ($SEOData->image && filter_var($SEOData->image, FILTER_VALIDATE_URL) === false) {
             $SEOData->imageMeta();
 
             $SEOData->image = secure_url($SEOData->image);

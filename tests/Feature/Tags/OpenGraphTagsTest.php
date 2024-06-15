@@ -153,3 +153,21 @@ it('will escape the title', function () {
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<meta property="og:title" content="My page title - A &amp; B">', false);
 });
+
+it('will not escape the image URL query parameters', function () {
+    config()->set('seo.title.suffix', ' | Laravel SEO');
+    config()->set('seo.description.fallback', 'Fallback description');
+
+    $page = Page::create();
+
+    $page::$overrides = [
+        'title' => 'Test Page',
+        'image' => $url = 'https://website.test/images/xSVtl6ZF7fNuZIoXkZbzI2EzoAD.jpg?h=800&fit=contain&q=80&fm=webp',
+    ];
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta property="og:image" content="' . $url . '">', false)
+        ->assertDontSee('<meta property="og:image:width"', false)
+        ->assertDontSee('<meta property="og:image:height"', false)
+        ->assertDontSee('twitter:site'); // We should not display an empty '@' username.
+});

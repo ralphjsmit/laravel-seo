@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Support;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class OpenGraphTag extends Tag
 {
@@ -10,13 +11,13 @@ class OpenGraphTag extends Tag
 
     public function __construct(
         string $property,
-        string $content,
+        string | HtmlString $content,
     ) {
         $this->attributes['property'] = $property;
         $this->attributes['content'] = $content;
 
         $this->attributesPipeline[] = function (Collection $collection) {
-            return $collection->mapWithKeys(function ($value, $key) {
+            return $collection->mapWithKeys(function (mixed $value, string $key) {
                 if ($key === 'property') {
                     $value = 'og:' . $value;
                 }

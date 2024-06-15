@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Support;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class TwitterCardTag extends Tag
 {
@@ -10,13 +11,13 @@ class TwitterCardTag extends Tag
 
     public function __construct(
         string $name,
-        string $content,
+        string | HtmlString $content,
     ) {
         $this->attributes['name'] = $name;
         $this->attributes['content'] = $content;
 
         $this->attributesPipeline[] = function (Collection $collection) {
-            return $collection->mapWithKeys(function ($value, $key) {
+            return $collection->mapWithKeys(function (mixed $value, string $key) {
                 if ($key === 'name') {
                     $value = 'twitter:' . $value;
                 }

@@ -4,6 +4,7 @@ namespace RalphJSmit\Laravel\SEO\Tags\TwitterCard;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\RenderableCollection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\TwitterCardTag;
@@ -37,7 +38,7 @@ class SummaryLargeImage extends Collection implements Renderable
         $collection->push(new TwitterCardTag('card', 'summary_large_image'));
 
         if ($SEOData->image) {
-            $collection->push(new TwitterCardTag('image', $SEOData->image));
+            $collection->push(new TwitterCardTag('image', new HtmlString($SEOData->image)));
 
             if ($SEOData->imageMeta) {
                 $collection

@@ -2,6 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Tags;
 
+use Illuminate\Support\HtmlString;
 use RalphJSmit\Laravel\SEO\Support\MetaTag;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
@@ -17,7 +18,7 @@ class ImageTag extends MetaTag
 
         return new MetaTag(
             name: 'image',
-            content: trim($image)
+            content: new HtmlString($image),
         );
     }
 }

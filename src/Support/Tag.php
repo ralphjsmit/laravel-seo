@@ -40,7 +40,7 @@ abstract class Tag implements Renderable
     public function collectAttributes(): Collection
     {
         return collect($this->attributes)
-            ->map(fn ($attribute) => trim($attribute))
+            ->map(fn (string | HtmlString $attribute) => is_string($attribute) ? trim($attribute) : $attribute)
             ->sortKeysUsing(function ($a, $b) {
                 $indexA = array_search($a, static::ATTRIBUTES_ORDER);
                 $indexB = array_search($b, static::ATTRIBUTES_ORDER);

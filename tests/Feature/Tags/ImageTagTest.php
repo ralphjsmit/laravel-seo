@@ -55,3 +55,14 @@ it('will display the image url if it came from a model', function () {
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<meta name="image" content="' . secure_url('test/image.jpg') . '">', false);
 });
+
+it('will not change query parameters on an image URL', function () {
+    $page = Page::create();
+
+    $page->seo->update([
+        'image' => $url = 'https://website.test/images/xSVtl6ZF7fNuZIoXkZbzI2EzoAD.jpg?h=800&fit=contain&q=80&fm=webp',
+    ]);
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta name="image" content="' . $url . '">', false);
+});

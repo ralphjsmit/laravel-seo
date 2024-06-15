@@ -8,7 +8,7 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 /**
  * @see https://developers.google.com/search/docs/appearance/structured-data/faqpage
  */
-class FaqPageSchema extends CustomPreDefinedSchema
+class FaqPageSchema extends CustomSchemaFluent
 {
     public Collection $questions;
 

@@ -5,7 +5,7 @@ namespace RalphJSmit\Laravel\SEO\Schema;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-class BreadcrumbListSchema extends CustomPreDefinedSchema
+class BreadcrumbListSchema extends CustomSchemaFluent
 {
     public Collection $breadcrumbs;
 

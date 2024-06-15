@@ -6,7 +6,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-class ArticleSchema extends CustomPreDefinedSchema
+class ArticleSchema extends CustomSchemaFluent
 {
     public array $authors = [];
 

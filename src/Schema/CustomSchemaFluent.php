@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Collection;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
-abstract class CustomPreDefinedSchema extends CustomSchema
+abstract class CustomSchemaFluent extends CustomSchema
 {
     public array $markupTransformers = [];
 

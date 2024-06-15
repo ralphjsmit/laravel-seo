@@ -14,7 +14,7 @@ abstract class CustomSchemaFluent extends CustomSchema
     {
         $this->initializeMarkup($SEOData);
 
-        // `$markupBuilders` are closures that modify this schema
+        // `$markupBuilders` are closures that modify this fluent schema
         // tag object and can call methods on it to change items...
         foreach ($markupBuilders as $markupBuilder) {
             $markupBuilder($this, $SEOData);

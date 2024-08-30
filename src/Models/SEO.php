@@ -45,10 +45,11 @@ class SEO extends Model
             schema: $overrides->schema ?? null,
             type: $overrides->type ?? null,
             locale: $overrides->locale ?? null,
-            robots: $overrides->robots ?? $this->robots,
-            canonical_url: $overrides->canonical_url ?? $this->canonical_url,
+            // Cannot directly access the `$this->robots` attribute, since that could potentially trigger a `Model::preventAccessingMissingAttributes()` exception.
+            robots: $overrides->robots ?? $this->getAttributes()['robots'] ?? null,
+            // Cannot directly access the `$this->canonical_url` attribute, since that could potentially trigger a `Model::preventAccessingMissingAttributes()` exception.
+            canonical_url: $overrides->canonical_url ?? $this->getAttributes()['canonical_url'] ?? null,
             openGraphTitle: $overrides->openGraphTitle ?? null,
-            alternates: $overrides->alternates ?? null,
         );
     }
 }

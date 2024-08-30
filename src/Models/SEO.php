@@ -50,6 +50,7 @@ class SEO extends Model
             // Cannot directly access the `$this->canonical_url` attribute, since that could potentially trigger a `Model::preventAccessingMissingAttributes()` exception.
             canonical_url: $overrides->canonical_url ?? $this->getAttributes()['canonical_url'] ?? null,
             openGraphTitle: $overrides->openGraphTitle ?? null,
+            alternates: $overrides->alternates ?? null,
         );
     }
 }

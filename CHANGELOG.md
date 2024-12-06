@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.4 - 2024-12-06
+
+- Fix: do not check for image file existence if path is url.
+
 ## 1.6.3 - 2024-08-30
 
 - Fix: potential preventAccessingMissingAttributes() exception if someone had old database migration.

@@ -40,7 +40,7 @@ class TitleTag extends Tag
         }
 
         return collect(Route::gatherRouteMiddleware($currentRoute))->contains(function (string $middleware) {
-            return is_subclass_of($middleware, 'Inertia\Middleware');
+            return is_subclass_of($middleware, \Inertia\Middleware::class);
         });
     }
 }

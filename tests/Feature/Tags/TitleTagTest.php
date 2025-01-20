@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
+use RalphJSmit\Laravel\SEO\Tags\TitleTag;
+use RalphJSmit\Laravel\SEO\Tests\Fixtures\Http\Middleware\DummyInertiaMiddleware;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
 use function Pest\Laravel\get;
@@ -52,4 +57,65 @@ it('will escape the title', function () {
 
     get(route('seo.test-plain'))
         ->assertSee('<title>Test Plain - A &amp; B</title>', false);
+});
+
+it('will not include the `inertia` attribute by default', function () {
+    config()->set('seo.title.infer_title_from_url', true);
+    config()->set('seo.title.suffix', ' - A & B');
+
+    $titleTag = new TitleTag('X');
+
+    expect($titleTag)
+        ->collectAttributes()->all()->toBeEmpty();
+
+    $route = Arr::random(Route::getRoutes()->getRoutes());
+
+    Route::partialMock()
+        ->shouldReceive('current')
+        ->andReturn($route);
+
+    Route::partialMock()
+        ->shouldReceive('gatherRouteMiddleware')
+        ->withAnyArgs()
+        ->andReturn([
+            StartSession::class,
+        ]);
+
+    $titleTag = new TitleTag('X');
+
+    expect($titleTag)
+        ->collectAttributes()->all()->toBeEmpty()
+        ->render()->__toString()->toBe('<title>X</title>');
+});
+
+it('will include the `inertia` attribute', function () {
+    config()->set('seo.title.infer_title_from_url', true);
+    config()->set('seo.title.suffix', ' - A & B');
+
+    $titleTag = new TitleTag('X');
+
+    expect($titleTag)
+        ->collectAttributes()->all()->toBeEmpty();
+
+    $route = Arr::random(Route::getRoutes()->getRoutes());
+
+    Route::partialMock()
+        ->shouldReceive('current')
+        ->andReturn($route);
+
+    Route::partialMock()
+        ->shouldReceive('gatherRouteMiddleware')
+        ->withAnyArgs()
+        ->andReturn([
+            StartSession::class,
+            DummyInertiaMiddleware::class,
+        ]);
+
+    $titleTag = new TitleTag('X');
+
+    expect($titleTag)
+        ->collectAttributes()->all()->toBe([
+            'inertia' => true,
+        ])
+        ->render()->__toString()->toBe('<title inertia>X</title>');
 });

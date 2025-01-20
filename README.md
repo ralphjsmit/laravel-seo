@@ -200,7 +200,7 @@ Now, add the following **Blade-code on every page** where you want your SEO-tags
 {!! seo() !!}
 ```
 
-This will render a **lot of sensible tags by default**, already **greatly improving your SEO**. It will also render things like the `<title>` tag, so you don't have to render that manually.
+This will render a **lot of sensible tags by default**, already **greatly improving your SEO**. It will also render things like the `<title>` tag, so you don't have to render that manually. Additionally, it takes care of things automatically adding the `inertia` attribute to your `<title>` tag, allowing it to dynamically update whenever the user navigates to a different route on the frontend.
 
 To really profit from this package, you can **associate an Eloquent model with a SEO-model**. This will allow you to **dynamically fetch SEO data from your model** and this package will generate as much tags as possible for you, based on that data.
 
@@ -333,8 +333,8 @@ This package can also **generate any structured data** for you (also called sche
 Structured data is a very vast subject, so we highly recommend you to check the [Google documentation dedicated to it](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
 
 Structured data can be added in two ways:
-- Construct custom arrays of the structured data format, which is then rendered by the package in JSON on the correct place.
-- Use one of the 3 pre-defined templates to fluently build your structured data (`Article`, `BreadcrumbList`, `FaqPage`). 
+-   Construct custom arrays of the structured data format, which is then rendered by the package in JSON on the correct place.
+-   Use one of the 3 pre-defined templates to fluently build your structured data (`Article`, `BreadcrumbList`, `FaqPage`).
 
 ### Adding your first schema
 
@@ -393,8 +393,8 @@ public function getDynamicSEOData(): SEOData
     );
 }
 ```
-          
-This will construct an article schema using all data provided by the `SEOData` object. You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method. 
+
+This will construct an article schema using all data provided by the `SEOData` object. You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method.
 
 ```php
 use RalphJSmit\Laravel\SEO\Schema\ArticleSchema;

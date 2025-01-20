@@ -40,7 +40,7 @@ class BreadcrumbListSchema extends CustomSchemaFluent
                         'name' => $pagename,
                         'item' => $url,
                     ]);
-                }, new Collection()),
+                }, new Collection),
         ])
             ->pipeThrough($this->markupTransformers);
     }

@@ -16,7 +16,7 @@ class TwitterCardTags extends Collection implements Renderable
 
     public static function initialize(SEOData $SEOData): ?static
     {
-        $collection = new static();
+        $collection = new static;
 
         // No generic image that spans multiple pages
         if ($SEOData->image && $SEOData->image !== secure_url(config('seo.image.fallback')) && $SEOData->imageMeta?->height > 0) {

@@ -3,8 +3,6 @@
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use Mockery\MockInterface;
-use PHPStan\Reflection\Dummy\DummyMethodReflection;
 use RalphJSmit\Laravel\SEO\Tags\TitleTag;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Http\Middleware\DummyInertiaMiddleware;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
@@ -110,7 +108,7 @@ it('will include the `inertia` attribute', function () {
         ->withAnyArgs()
         ->andReturn([
             StartSession::class,
-        DummyInertiaMiddleware::class,
+            DummyInertiaMiddleware::class,
         ]);
 
     $titleTag = new TitleTag('X');

@@ -15,7 +15,7 @@ class TitleTag extends Tag
     ) {
         $this->inner = trim($inner);
 
-        if ( $this->isCurrentRouteInertiaRoute() ) {
+        if ($this->isCurrentRouteInertiaRoute()) {
             $this->attributes['inertia'] = true;
         }
     }
@@ -24,7 +24,7 @@ class TitleTag extends Tag
     {
         $title = $SEOData?->title;
 
-        if ( ! $title ) {
+        if (! $title) {
             return null;
         }
 
@@ -35,7 +35,9 @@ class TitleTag extends Tag
 
     protected function isCurrentRouteInertiaRoute(): bool
     {
-        if ( ! ( $currentRoute = Route::current() ) ) {
+        $currentRoute = Route::current();
+
+        if (! $currentRoute) {
             return false;
         }
 

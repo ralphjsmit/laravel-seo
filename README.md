@@ -200,7 +200,7 @@ Now, add the following **Blade-code on every page** where you want your SEO-tags
 {!! seo() !!}
 ```
 
-This will automatically generate a **variety of sensible tags by default**, significantly **enhancing your SEO**. It will also handle the rendering of the `<title>` tag for you, so there’s no need to do that manually. Additionally, if you are using Inertia.js, it will automatically add the Inertia attribute to the `<title>` tag, allowing it to dynamically update whenever the user navigates to a different route on the frontend.
+This will render a **lot of sensible tags by default**, already **greatly improving your SEO**. It will also render things like the `<title>` tag, so you don't have to render that manually. Additionally, if you are using Inertia.js, it will automatically add the Inertia attribute to the `<title>` tag, allowing it to dynamically update whenever the user navigates to a different route on the frontend.
 
 To really profit from this package, you can **associate an Eloquent model with a SEO-model**. This will allow you to **dynamically fetch SEO data from your model** and this package will generate as much tags as possible for you, based on that data.
 

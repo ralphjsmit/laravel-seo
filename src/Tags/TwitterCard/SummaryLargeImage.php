@@ -15,7 +15,7 @@ class SummaryLargeImage extends Collection implements Renderable
 
     public static function initialize(SEOData $SEOData): static
     {
-        $collection = new static();
+        $collection = new static;
 
         if ($SEOData->imageMeta) {
             if ($SEOData->imageMeta->width < 300) {

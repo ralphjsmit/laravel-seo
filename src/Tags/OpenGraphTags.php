@@ -16,7 +16,7 @@ class OpenGraphTags extends Collection implements Renderable
 
     public static function initialize(SEOData $SEOData): static
     {
-        $collection = new static();
+        $collection = new static;
 
         if ($SEOData->openGraphTitle) {
             $collection->push(new OpenGraphTag('title', $SEOData->openGraphTitle));

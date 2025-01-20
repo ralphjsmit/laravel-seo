@@ -22,7 +22,7 @@ class TagCollection extends Collection
 {
     public static function initialize(?SEOData $SEOData = null): static
     {
-        $collection = new static();
+        $collection = new static;
 
         $tags = collect([
             RobotsTag::initialize($SEOData),

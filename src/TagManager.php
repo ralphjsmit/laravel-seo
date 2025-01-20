@@ -27,7 +27,7 @@ class TagManager implements Renderable
 
     public function fillSEOData(?SEOData $SEOData = null): SEOData
     {
-        $SEOData ??= new SEOData();
+        $SEOData ??= new SEOData;
 
         $defaults = [
             'title' => config('seo.title.infer_title_from_url') ? $this->inferTitleFromUrl() : null,
@@ -95,7 +95,7 @@ class TagManager implements Renderable
             : $this->SEOData;
 
         $this->tags = TagCollection::initialize(
-            $this->fillSEOData($SEOData ?? new SEOData())
+            $this->fillSEOData($SEOData ?? new SEOData)
         );
 
         return $this;

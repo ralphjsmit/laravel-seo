@@ -30,7 +30,7 @@ class FaqPageSchema extends CustomSchemaFluent
 
     public function initializeMarkup(SEOData $SEOData): void
     {
-        $this->questions = new Collection();
+        $this->questions = new Collection;
     }
 
     public function generateInner(): Collection

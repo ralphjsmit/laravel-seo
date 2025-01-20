@@ -14,7 +14,7 @@ class SitemapTag extends Collection implements Renderable
 
     public static function initialize(?SEOData $SEOData = null): static
     {
-        $collection = new static();
+        $collection = new static;
 
         if ($sitemap = config('seo.sitemap')) {
             $collection->push(new SitemapTagSupport($sitemap));

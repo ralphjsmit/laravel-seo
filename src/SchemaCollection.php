@@ -48,6 +48,6 @@ class SchemaCollection extends Collection
 
     public static function initialize(): static
     {
-        return new static();
+        return new static;
     }
 }

@@ -1,1 +1,1 @@
-<{{ $tag }}<?php foreach($attributes as $name => $value) : ?> {{ $name }}@unless(is_bool($value))="{{ $value }}"@endunless<?php endforeach ?>><?php if ($inner) : ?>{{ $inner }}</{{ $tag }}><?php endif ?>
+<{{ $tag }}<?php foreach($attributes as $name => $value) : ?> {{ $name }}<?php if(! is_bool($value)) : ?>="{{ $value }}"<?php endif ?><?php endforeach ?>><?php if ($inner) : ?>{{ $inner }}</{{ $tag }}><?php endif ?>

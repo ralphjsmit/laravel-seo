@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.6 - 2025-01-22
+
+- Fix: incorrect Blade closing `@unless` tag.
+
 ## 1.6.5 - 2025-01-20
 
 - Feat: automatic detection of Inertia routes and addition of `inertia` attribute to `<title>` tag in #89by @touqeershafi.

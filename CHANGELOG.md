@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.6.7 - 2025-01-22
+
+- Fix: prevent Livewire from injecting morph markers into tag view.
+
 ## 1.6.6 - 2025-01-22
 
 - Fix: incorrect Blade closing `@unless` tag.

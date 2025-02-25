@@ -7,10 +7,10 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 it('does not render by default the JSON-LD Schema markup: BreadcrumbList', function () {
-    get(route('seo.test-plain'))
-        ->assertDontSee('"application/ld+json"')
-        ->assertDontSee('"@type": "BreadcrumbList"');
-});
+get(route('seo.test-plain'))
+->assertDontSee('"application/ld+json"')
+->assertDontSee('"@type": "BreadcrumbList"');
+    });
 
 it('can correctly render the JSON-LD Schema markup: BreadcrumbList', function () {
     config()->set('seo.title.suffix', ' | Laravel SEO');

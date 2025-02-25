@@ -24,11 +24,11 @@
     "require-dev": {
         "laravel/pint": "^1.16",
         "nesbot/carbon": "^2.66|^3.0",
-        "nunomaduro/collision": "^6.0|^7.0|^8.0|^9.0",
-        "orchestra/testbench": "^8.0|^9.0|^10.0",
-        "pestphp/pest": "^1.21|^2.0",
-        "pestphp/pest-plugin-laravel": "^1.1|^2.0",
-        "phpunit/phpunit": "^9.5|^10.5|^11.5",
+        "nunomaduro/collision": "^7.0|^8.0|^9.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "phpunit/phpunit": "^10.5|^11.5",
         "spatie/laravel-ray": "^1.26",
         "spatie/pest-plugin-test-time": "^1.0|^2.0"
     },

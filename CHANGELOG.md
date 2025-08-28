@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.7.1 - 2025-08-28
+
+- Fix: instantiating TwitterCardTags with image and no fallback image specified in #100 by @SOD96.
+
 ## 1.7.0 - 2025-02-25
 
 - Feat: Laravel 12 support

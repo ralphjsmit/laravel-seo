@@ -7,10 +7,10 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 it('does not render by default the JSON-LD Schema markup: FaqPageTest', function () {
-get(route('seo.test-plain'))
-->assertDontSee('"application/ld+json"')
-->assertDontSee('"@type": "FAQPage"');
-    });
+    get(route('seo.test-plain'))
+        ->assertDontSee('"application/ld+json"')
+        ->assertDontSee('"@type": "FAQPage"');
+});
 
 it('can correctly render the JSON-LD Schema markup: FaqPageTest', function () {
     config()->set('seo.title.suffix', ' | Laravel SEO');

@@ -18,10 +18,10 @@ beforeEach(function () {
 });
 
 it('does not render by default the JSON-LD Schema markup: Article', function () {
-get(route('seo.test-plain'))
-->assertDontSee('"application/ld+json"')
-->assertDontSee('"@type": "Article"');
-    });
+    get(route('seo.test-plain'))
+        ->assertDontSee('"application/ld+json"')
+        ->assertDontSee('"@type": "Article"');
+});
 
 it('can correctly render the JSON-LD Schema markup: Article', function () {
     $page = Page::create([

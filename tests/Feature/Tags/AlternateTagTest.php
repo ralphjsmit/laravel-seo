@@ -6,9 +6,9 @@ use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 use function Pest\Laravel\get;
 
 it('will not display the aternates tags if there isn\'t any alternate', function () {
-get(route('seo.test-plain'))
-->assertDontSee('alternate');
-    });
+    get(route('seo.test-plain'))
+        ->assertDontSee('alternate');
+});
 
 it('will display the alternates links if the associated SEO model has alternates links', function () {
     $page = Page::create();

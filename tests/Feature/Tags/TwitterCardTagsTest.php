@@ -1,14 +1,18 @@
 <?php
 
 use RalphJSmit\Laravel\SEO\Support\SEOData;
+use RalphJSmit\Laravel\SEO\Tags\TwitterCardTags;
 
-test('Can init the TwitterCardTags class', function () {
+it('can instantiate the `TwitterCardTags` class when no fallback image has been specified in config', function () {
+    config()->set('seo.image.fallback', null);
+
     $SEOData = new SEOData(
         title: 'Unique Title',
         image: '/default/image.jpg',
     );
 
-    $collection = \RalphJSmit\Laravel\SEO\Tags\TwitterCardTags::initialize($SEOData);
+    $twitterCardTags = TwitterCardTags::initialize($SEOData);
 
-    expect($collection)->toBeInstanceOf(\RalphJSmit\Laravel\SEO\Tags\TwitterCardTags::class);
+    expect($twitterCardTags)
+        ->toBeInstanceOf(TwitterCardTags::class);
 });

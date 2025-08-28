@@ -19,8 +19,19 @@ class TwitterCardTags extends Collection implements Renderable
         $collection = new static;
 
         // No generic image that spans multiple pages
-        $fallbackUrl = config('seo.image.fallback') ? secure_url(config('seo.image.fallback')) : null;
-        if ($SEOData->image && $SEOData->image !== $fallbackUrl && $SEOData->imageMeta?->height !== null && $SEOData->imageMeta->height > 0) {
+        $imageFallback = config('seo.image.fallback');
+
+        if (
+            $SEOData->image
+            && (
+                // If no fallback specified, then the image is not the fallback.
+                ! $imageFallback
+                // If fallback image specified, then verify if the image is not the fallback.
+                || $SEOData->image !== secure_url($imageFallback)
+            )
+            && $SEOData->imageMeta?->height !== null
+            && $SEOData->imageMeta->height > 0
+        ) {
             // Only one Twitter card can be pushed. The `summary_large_image` card
             // is tried first, then it falls back to the normal `summary` card.
             $imageMetaWidthDividedByHeight = $SEOData->imageMeta->width / $SEOData->imageMeta->height;

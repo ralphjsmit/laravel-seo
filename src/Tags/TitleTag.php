@@ -2,6 +2,7 @@
 
 namespace RalphJSmit\Laravel\SEO\Tags;
 
+use Closure;
 use Illuminate\Support\Facades\Route;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
@@ -41,7 +42,11 @@ class TitleTag extends Tag
             return false;
         }
 
-        return collect(Route::gatherRouteMiddleware($currentRoute))->contains(function (string $middleware) {
+        return collect(Route::gatherRouteMiddleware($currentRoute))->contains(function (string | Closure $middleware) {
+            if ($middleware instanceof Closure) {
+                return false;
+            }
+
             return is_subclass_of($middleware, \Inertia\Middleware::class);
         });
     }

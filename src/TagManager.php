@@ -64,7 +64,7 @@ class TagManager implements Renderable
         }
 
         if (! $SEOData->url) {
-            $SEOData->url = url()->current();
+            $SEOData->url = rtrim(rtrim(config('app.url'), '/') . request()->getRequestUri(), '/');
         }
 
         if ($SEOData->url === url('/') && ($homepageTitle = config('seo.title.homepage_title'))) {

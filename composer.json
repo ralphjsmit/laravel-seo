@@ -25,7 +25,7 @@
         "laravel/pint": "^1.16",
         "nesbot/carbon": "^2.66|^3.0",
         "nunomaduro/collision": "^7.0|^8.0|^9.0",
-        "orchestra/testbench": "^9.11.0|^10.0",
+        "orchestra/testbench": "^9.16|^10.0",
         "pestphp/pest": "^2.0|^3.0",
         "pestphp/pest-plugin-laravel": "^2.0|^3.0",
         "phpunit/phpunit": "^10.5|^11.5",

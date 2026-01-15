@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.7.3 - 2026-01-15
+
+- Fix: encode spaces in image URLs before FILTER_VALIDATE_URL check by @mauricekindermann
+
 ## 1.7.2 - 2025-09-22
 
 - Fix: support closure-based middleware

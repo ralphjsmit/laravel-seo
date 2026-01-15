@@ -14,18 +14,13 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         php: [ 8.2, 8.3, 8.4 ]
-        laravel: [ 10.*, 11.*, 12.* ]
+        laravel: [ 11.*, 12.* ]
         stability: [ prefer-lowest, prefer-stable ]
         include:
-          - laravel: 10.*
-            testbench: ^8.0
           - laravel: 11.*
             testbench: ^9.0
           - laravel: 12.*
             testbench: ^10.0
-        exclude:
-          - php: 8.1
-            laravel: 11.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -49,6 +44,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer show
 
       - name: Execute tests
         run: vendor/bin/pest

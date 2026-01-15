@@ -16,7 +16,7 @@ class ImageMeta
     {
         $publicPath = public_path($path);
 
-        if (filter_var($path, FILTER_VALIDATE_URL)) {
+        if (filter_var(str_replace(' ', '%20', $path), FILTER_VALIDATE_URL)) {
             return;
         }
 

@@ -53,13 +53,13 @@ class TagManager implements Renderable
             }
         }
 
-        if ($SEOData->image && filter_var($SEOData->image, FILTER_VALIDATE_URL) === false) {
+        if ($SEOData->image && filter_var(str_replace(' ', '%20', $SEOData->image), FILTER_VALIDATE_URL) === false) {
             $SEOData->imageMeta();
 
             $SEOData->image = secure_url($SEOData->image);
         }
 
-        if ($SEOData->favicon && filter_var($SEOData->favicon, FILTER_VALIDATE_URL) === false) {
+        if ($SEOData->favicon && filter_var(str_replace(' ', '%20', $SEOData->favicon), FILTER_VALIDATE_URL) === false) {
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
 

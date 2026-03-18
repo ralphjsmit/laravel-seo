@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.8.0 - 2026-03-18
+
+- Feat: Laravel 13 support by @colinmackinlay
+
 ## 1.7.3 - 2026-01-15
 
 - Fix: encode spaces in image URLs before FILTER_VALIDATE_URL check by @mauricekindermann

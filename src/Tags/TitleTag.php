@@ -3,6 +3,7 @@
 namespace RalphJSmit\Laravel\SEO\Tags;
 
 use Closure;
+use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
@@ -17,7 +18,8 @@ class TitleTag extends Tag
         $this->inner = trim($inner);
 
         if ($this->isCurrentRouteInertiaRoute()) {
-            $this->attributes['inertia'] = true;
+            $attribute = $this->resolveInertiaHeadAttribute();
+            $this->attributes[$attribute] = true;
         }
     }
 
@@ -49,5 +51,16 @@ class TitleTag extends Tag
 
             return is_subclass_of($middleware, \Inertia\Middleware::class);
         });
+    }
+
+    private function resolveInertiaHeadAttribute(): string
+    {
+        $version = InstalledVersions::getVersion('inertiajs/inertia-laravel');
+
+        if ($version && version_compare($version, '3.0.0', '>=')) {
+            return 'data-inertia';
+        }
+
+        return 'inertia';
     }
 }

@@ -54,6 +54,11 @@ class TitleTag extends Tag
 
     protected function getInertiaTitleAttributeName(): string
     {
+        if (! InstalledVersions::isInstalled('inertiajs/inertia-laravel')) {
+            // @TODO: Upgrade to `data-inertia` in next major-version of package + tests.
+            return 'inertia';
+        }
+
         $version = InstalledVersions::getVersion('inertiajs/inertia-laravel');
 
         if ($version && version_compare($version, '3.0.0', '>=')) {

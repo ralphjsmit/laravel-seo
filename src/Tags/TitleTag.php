@@ -52,7 +52,7 @@ class TitleTag extends Tag
         });
     }
 
-    private function getInertiaTitleAttributeName(): string
+    protected function getInertiaTitleAttributeName(): string
     {
         $version = InstalledVersions::getVersion('inertiajs/inertia-laravel');
 

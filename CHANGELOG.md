@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.8.1 - 2026-03-26
+
+- Feat: Inertia V3 support by @Pr4w in #111.
+
 ## 1.8.0 - 2026-03-18
 
 - Feat: Laravel 13 support by @colinmackinlay

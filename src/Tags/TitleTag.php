@@ -18,8 +18,7 @@ class TitleTag extends Tag
         $this->inner = trim($inner);
 
         if ($this->isCurrentRouteInertiaRoute()) {
-            $attribute = $this->resolveInertiaHeadAttribute();
-            $this->attributes[$attribute] = true;
+            $this->attributes[$this->getInertiaTitleAttributeName()] = true;
         }
     }
 
@@ -53,7 +52,7 @@ class TitleTag extends Tag
         });
     }
 
-    private function resolveInertiaHeadAttribute(): string
+    private function getInertiaTitleAttributeName(): string
     {
         $version = InstalledVersions::getVersion('inertiajs/inertia-laravel');
 

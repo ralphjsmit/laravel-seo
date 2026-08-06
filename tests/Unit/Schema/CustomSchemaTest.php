@@ -48,3 +48,33 @@ it('can construct a custom faq schema', function () {
             ]) . '</script>'
         );
 });
+
+it('escapes html tags in the rendered json to prevent breaking out of the script element', function () {
+    $schema = new CustomSchema([
+        '@context' => 'https://schema.org',
+        '@type' => 'Article',
+        'headline' => 'Widget <!--<script>',
+    ]);
+
+    $rendered = (string) $schema->render();
+
+    expect($rendered)
+        ->not->toContain('<!--')
+        ->not->toContain('<script>')
+        ->toBe(
+            '<script type="application/ld+json">' . json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'Article',
+                'headline' => 'Widget <!--<script>',
+            ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>'
+        );
+
+    expect(json_decode(
+        str($rendered)->after('<script type="application/ld+json">')->before('</script>')->toString(),
+        true
+    ))->toBe([
+        '@context' => 'https://schema.org',
+        '@type' => 'Article',
+        'headline' => 'Widget <!--<script>',
+    ]);
+});

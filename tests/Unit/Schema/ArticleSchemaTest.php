@@ -40,7 +40,7 @@ it('can construct Schema Markup: Article', function () {
                     'description' => 'Description',
                     'image' => 'https://example.com/image.jpg',
                     'articleBody' => '<p>Test</p>',
-                ]) . '</script>'
+                ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>'
         );
 });
 
@@ -79,6 +79,6 @@ it('can add multiple authors to Schema Markup: Article', function () {
                 'image' => 'https://example.com/image.jpg',
                 'articleBody' => '<p>Test</p>',
                 'alternativeHeadline' => 'My alternative headline',
-            ]) . '</script>'
+            ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>'
     );
 });

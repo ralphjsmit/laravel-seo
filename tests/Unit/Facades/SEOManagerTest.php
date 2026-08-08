@@ -11,7 +11,7 @@ test('the SEOManager facade works as expected', function () {
     $managerC = SEOManager::getFacadeRoot();
     $managerD = SEOManager::getFacadeRoot();
 
-    $managerE = app(\RalphJSmit\Laravel\SEO\SEOManager::class);
+    $managerE = app(RalphJSmit\Laravel\SEO\SEOManager::class);
 
     expect($managerA)
         ->toBe($managerB)

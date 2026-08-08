@@ -5,6 +5,7 @@ namespace RalphJSmit\Laravel\SEO\Tags;
 use Closure;
 use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;
+use Inertia\Middleware;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use RalphJSmit\Laravel\SEO\Support\Tag;
 
@@ -48,7 +49,7 @@ class TitleTag extends Tag
                 return false;
             }
 
-            return is_subclass_of($middleware, \Inertia\Middleware::class);
+            return is_subclass_of($middleware, Middleware::class);
         });
     }
 

@@ -20,7 +20,7 @@ class CustomSchema extends Tag
     public function __construct(iterable | Arrayable $inner)
     {
         $this->inner = new HtmlString(
-            collect($inner)->toJson()
+            collect($inner)->toJson(JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT)
         );
     }
 }

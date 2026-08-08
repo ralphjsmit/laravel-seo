@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
@@ -73,4 +74,4 @@ it('will not break if no canonical_url column exists in seo table', function () 
         ->assertOk();
 })
     // Skip tests on Laravel 9, so we don't need to install Doctrine for this test only.
-    ->skip(version_compare(Illuminate\Foundation\Application::VERSION, '10', 'lt'));
+    ->skip(version_compare(Application::VERSION, '10', 'lt'));

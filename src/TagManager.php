@@ -2,13 +2,12 @@
 
 namespace RalphJSmit\Laravel\SEO;
 
-use const FILTER_VALIDATE_URL;
-
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Facades\SEOManager;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
+use RalphJSmit\Laravel\SEO\Support\Url;
 
 class TagManager implements Renderable
 {
@@ -53,13 +52,13 @@ class TagManager implements Renderable
             }
         }
 
-        if ($SEOData->image && filter_var(str_replace(' ', '%20', $SEOData->image), FILTER_VALIDATE_URL) === false) {
+        if ($SEOData->image && ! Url::isAbsolute($SEOData->image)) {
             $SEOData->imageMeta();
 
             $SEOData->image = secure_url($SEOData->image);
         }
 
-        if ($SEOData->favicon && filter_var(str_replace(' ', '%20', $SEOData->favicon), FILTER_VALIDATE_URL) === false) {
+        if ($SEOData->favicon && ! Url::isAbsolute($SEOData->favicon)) {
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
 

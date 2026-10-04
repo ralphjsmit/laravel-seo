@@ -2,8 +2,6 @@
 
 namespace RalphJSmit\Laravel\SEO\Support;
 
-use const FILTER_VALIDATE_URL;
-
 use Exception;
 
 class ImageMeta
@@ -16,7 +14,7 @@ class ImageMeta
     {
         $publicPath = public_path($path);
 
-        if (filter_var(str_replace(' ', '%20', $path), FILTER_VALIDATE_URL)) {
+        if (Url::isAbsolute($path)) {
             return;
         }
 

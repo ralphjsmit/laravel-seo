@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Exceptions;
 use RalphJSmit\Laravel\SEO\Tests\Fixtures\Page;
 
 use function Pest\Laravel\get;
@@ -66,3 +67,23 @@ it('will not change query parameters on an image URL', function () {
     get(route('seo.test-page', ['page' => $page]))
         ->assertSee('<meta name="image" content="' . $url . '">', false);
 });
+
+it('will not change an image URL that contains non-ASCII characters', function (string $url) {
+    Exceptions::fake();
+
+    $page = Page::create();
+
+    $page->seo->update([
+        'image' => $url,
+    ]);
+
+    get(route('seo.test-page', ['page' => $page]))
+        ->assertSee('<meta name="image" content="' . $url . '">', false)
+        ->assertSee('<meta property="og:image" content="' . $url . '">', false)
+        ->assertSee('<meta name="twitter:image" content="' . $url . '">', false);
+
+    Exceptions::assertNothingReported();
+})->with([
+    ["https://cdn.example.com/542/Screenshot-2024-08-07-at-5.37.46\u{202F}PM.png"],
+    ['https://cdn.example.com/301/屏幕截图_20230218_174340.png'],
+]);

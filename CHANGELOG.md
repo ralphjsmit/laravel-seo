@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-seo` will be documented in this file.
 
+## 1.8.3 - 2026-10-05
+
+- Fix: treat absolute image URLs with non-ASCII characters as URLs by @chengkangzai
+
 ## 1.8.1 - 2026-03-26
 
 - Feat: Inertia V3 support by @Pr4w in #111.
